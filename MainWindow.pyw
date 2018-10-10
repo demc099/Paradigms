@@ -126,7 +126,8 @@ class Ventana(QMainWindow):
 
 # Declaración funciones algoritmo
  def aplicarAlgoritmo(self):
-    funcionesAlgoritmo.algoritmo(self)
+    linea= self.lineEdit.text()
+    funcionesAlgoritmo.algoritmo(self, linea)
      
 #-----------------------------------------------------------------------------------------------------------------
 
