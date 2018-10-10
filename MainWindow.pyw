@@ -12,6 +12,8 @@ class Ventana(QMainWindow):
   QMainWindow.__init__(self)
   uic.loadUi("MainWindowInterfaz.ui", self)
   self.setWindowTitle("Traductor")
+  self.setWindowIcon(QIcon('image/compiler.png'))
+  
 
   #Poner imagenes a los botones
   self.putButton.setIcon(QIcon('image/plus.png'))

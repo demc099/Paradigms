@@ -21,10 +21,13 @@ class Caracteres(QDialog):
         self.setGeometry(self.left, self.top, self.width, self.height)
         self.setWindowFlags(Qt.WindowCloseButtonHint | Qt.MSWindowsFixedSizeDialogHint)
         self.setMaximumSize(self.width, self.height)
+        self.setWindowIcon(QIcon('image/caracter.png'))
+
         self.createGridLayout()
-        
+
     def createGridLayout(self):    
         horizontalGroupBox = QGroupBox()
+
         layout = QGridLayout()
         layout.setColumnStretch(1, 4)
         layout.setColumnStretch(2, 4)
@@ -33,108 +36,111 @@ class Caracteres(QDialog):
         button = QPushButton('α', self)
         #button.setStyleSheet("font-size: 14px; color: black; background: white; border: 1px solid black; border-radius: 10px;")
         button.setStyleSheet("font-size: 14px; color: black;")
-        button.clicked.connect(lambda:self.on_click(self.button))
-
+        button.clicked.connect(lambda:self.on_click(button))
 
         button1 = QPushButton('β', self)
         button1.setStyleSheet("font-size: 14px; color: black;")
-        # button1.clicked.connect(self.on_click)
+        button1.clicked.connect(lambda:self.on_click(button1))
 
         button2 = QPushButton('γ', self)
         button2.setStyleSheet("font-size: 14px; color: black;")
-        # button2.clicked.connect(self.on_click)
+        button2.clicked.connect(lambda:self.on_click(button2))
         
         button3 = QPushButton('δ', self)
         button3.setStyleSheet("font-size: 14px; color: black;")
-        # button3.clicked.connect(self.on_click)
+        button3.clicked.connect(lambda:self.on_click(button3))
         
         button4 = QPushButton('ε', self)
         button4.setStyleSheet("font-size: 14px; color: black;")
-        # button4.clicked.connect(self.on_click)
+        button4.clicked.connect(lambda:self.on_click(button4))
         
         button5 = QPushButton('ζ', self)
         button5.setStyleSheet("font-size: 14px; color: black;")
-        # button5.clicked.connect(self.on_click)
+        button5.clicked.connect(lambda:self.on_click(button5))
         
         button6 = QPushButton('η', self)
         button6.setStyleSheet("font-size: 14px; color: black;")
-        # button6.clicked.connect(self.on_click)
+        button6.clicked.connect(lambda:self.on_click(button6))
         
         button7 = QPushButton('θ', self)
         button7.setStyleSheet("font-size: 14px; color: black;")
-        # button7.clicked.connect(self.on_click)
+        button7.clicked.connect(lambda:self.on_click(button7))
         
         button8 = QPushButton('ι', self)
         button8.setStyleSheet("font-size: 14px; color: black;")
-        # button8.clicked.connect(self.on_click)
+        button8.clicked.connect(lambda:self.on_click(button8))
         
         button9 = QPushButton('κ', self)
         button9.setStyleSheet("font-size: 14px; color: black;")
-        # button9.clicked.connect(self.on_click)
+        button9.clicked.connect(lambda:self.on_click(button9))
         
         button10 = QPushButton('λ', self)
         button10.setStyleSheet("font-size: 14px; color: black;")
-        # button10.clicked.connect(self.on_click)
+        button10.clicked.connect(lambda:self.on_click(button10))
         
         button11 = QPushButton('μ', self)
         button11.setStyleSheet("font-size: 14px; color: black;")
-        # button11.clicked.connect(self.on_click)
+        button11.clicked.connect(lambda:self.on_click(button11))
         
         button12 = QPushButton('ν', self)
         button12.setStyleSheet("font-size: 14px; color: black;")
-        # button12.clicked.connect(self.on_click)
+        button12.clicked.connect(lambda:self.on_click(button12))
         
         button13 = QPushButton('ξ', self)
         button13.setStyleSheet("font-size: 14px; color: black;")
-        # button13.clicked.connect(self.on_click)
+        button13.clicked.connect(lambda:self.on_click(button13))
         
         button14 = QPushButton('ο', self)
         button14.setStyleSheet("font-size: 14px; color: black;")
-        # button14.clicked.connect(self.on_click)
+        button14.clicked.connect(lambda:self.on_click(button14))
         
         button15 = QPushButton('π', self)
         button15.setStyleSheet("font-size: 14px; color: black;")
-        # button15.clicked.connect(self.on_click)
+        button15.clicked.connect(lambda:self.on_click(button15))
         
         button16 = QPushButton('ρ', self)
         button16.setStyleSheet("font-size: 14px; color: black;")
-        # button16.clicked.connect(self.on_click)
+        button16.clicked.connect(lambda:self.on_click(button16))
         
-        button17 = QPushButton('σς', self)
+        button17 = QPushButton('σ', self)
         button17.setStyleSheet("font-size: 14px; color: black;")
-        # button17.clicked.connect(self.on_click)
+        button17.clicked.connect(lambda:self.on_click(button17))
 
-        button18 = QPushButton('τ', self)
+        button18 = QPushButton('ς', self)
         button18.setStyleSheet("font-size: 14px; color: black;")
-        # button18.clicked.connect(self.on_click)
-        
-        button19 = QPushButton('υ', self)
+        button18.clicked.connect(lambda:self.on_click(button18))
+
+        button19 = QPushButton('τ', self)
         button19.setStyleSheet("font-size: 14px; color: black;")
-        # button19.clicked.connect(self.on_click)
+        button19.clicked.connect(lambda:self.on_click(button19))
         
-        button20 = QPushButton('φ', self)
+        button20 = QPushButton('υ', self)
         button20.setStyleSheet("font-size: 14px; color: black;")
-        # button20.clicked.connect(self.on_click)
-        
-        button21 = QPushButton('χ', self)
+        button20.clicked.connect(lambda:self.on_click(button20))
+
+        button21 = QPushButton('φ', self)
         button21.setStyleSheet("font-size: 14px; color: black;")
-        # button21.clicked.connect(self.on_click)
+        button21.clicked.connect(lambda:self.on_click(button21))
         
-        button22 = QPushButton('ψ', self)
+        button22 = QPushButton('χ', self)
         button22.setStyleSheet("font-size: 14px; color: black;")
-        # button22.clicked.connect(self.on_click)
-        
-        button23 = QPushButton('ω', self)
+        button22.clicked.connect(lambda:self.on_click(button22))
+
+        button23 = QPushButton('ψ', self)
         button23.setStyleSheet("font-size: 14px; color: black;")
-        # button23.clicked.connect(self.on_click)
+        button23.clicked.connect(lambda:self.on_click(button23))
         
-        button24 = QPushButton('Λ', self)
+        button24 = QPushButton('ω', self)
         button24.setStyleSheet("font-size: 14px; color: black;")
-        # button24.clicked.connect(self.on_click)
+        button24.clicked.connect(lambda:self.on_click(button24))
         
-        button25 = QPushButton('->', self)
+        button25 = QPushButton('Λ', self)
         button25.setStyleSheet("font-size: 14px; color: black;")
-        # button25.clicked.connect(self.on_click)
+        button25.clicked.connect(lambda:self.on_click(button25))
+        
+        button26 = QPushButton('->', self)
+        button26.setStyleSheet("font-size: 14px; color: black;")
+        button26.clicked.connect(lambda:self.on_click(button26))
 
         layout.addWidget(button,0,0) 
         layout.addWidget(button1,0,1) 
@@ -161,16 +167,16 @@ class Caracteres(QDialog):
         layout.addWidget(button22,7,1) 
         layout.addWidget(button23,7,2)
         layout.addWidget(button24,8,0) 
-        layout.addWidget(button25,8,1) 
+        layout.addWidget(button25,8,1)
+        layout.addWidget(button26,8,2)  
 
- 
         horizontalGroupBox.setLayout(layout)
-
 
         windowLayout = QVBoxLayout()
         windowLayout.addWidget(horizontalGroupBox)
         self.setLayout(windowLayout)
 
     def on_click(self, caracter):
-        texto = caracter.text()
-        self.parent.markersEdit.setText(texto)
+        texto = self.parent.markersEdit.text()
+        nuevoTexto = texto + caracter.text()
+        self.parent.markersEdit.setText(nuevoTexto)
