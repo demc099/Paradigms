@@ -1,8 +1,11 @@
 import sys
 
 from PyQt5.QtGui import QIcon, QPixmap, QStandardItemModel
-from PyQt5.QtWidgets import QApplication, QMainWindow, QAction, QMessageBox
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMessageBox, QDialog, QWidget,
+                               QGroupBox, QGridLayout, QVBoxLayout, QLineEdit, QPushButton, QLabel)
 from PyQt5 import uic
+
+from paletaCaracteres import *
 
 class Ventana(QMainWindow):   
  def __init__(self):
@@ -41,6 +44,7 @@ class Ventana(QMainWindow):
   menuH_paleta = QAction(QIcon(), "Paleta de caracteres", self)
   menuH_paleta.setShortcut("Ctrl+p")
   menuH_paleta.setStatusTip("Abrir la paleta de caracteres")
+  menuH_paleta.triggered.connect(self.abrirPaleta)
   menuHerramientas.addAction(menuH_paleta)
 
   menuH_cargarArchivo = QAction(QIcon(), "Cargar archivo de prueba", self)
@@ -92,6 +96,12 @@ class Ventana(QMainWindow):
 
  def prueba(self):
   self.printText.setText("Prueba #1"+ self.symbolsEdit.text())
+ 
+ def abrirPaleta(self):
+  #sel.pale = paletaCaracteres.Caracteres()
+  Caracteres(self).exec_()
+
+
 
 app = QApplication(sys.argv)
 _ventana = Ventana()
