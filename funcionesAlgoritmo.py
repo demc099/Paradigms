@@ -1,4 +1,4 @@
-def box(self):
+def algoritmo(self):
     print("Hola")
 
 
@@ -138,3 +138,5 @@ def box(self):
 #            == '11111111111111111111'
 #     assert replace(text4, extractreplacements(grammar5)) \
 #            == '00011H1111000'
+
+

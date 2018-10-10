@@ -8,6 +8,10 @@ from PyQt5 import uic
 from paletaCaracteres import *
 import funcionesAlgoritmo
 
+from paletaCaracteres import *
+import funcionesAlgoritmo
+
+
 class Ventana(QMainWindow):   
  def __init__(self):
   QMainWindow.__init__(self)
@@ -93,11 +97,13 @@ class Ventana(QMainWindow):
 
 
   #invocacion funciones para el algoritmo
-  self.runButton.clicked.connect(self.box)
+  self.runButton.clicked.connect(self.aplicarAlgoritmo)
 
 
 #-----------------------------------------------------------------------------------------------------------------
 #FuncionesTabla
+ 
+
  def agregarFila(self):
      self.tableWidget.insertRow(self.tableWidget.rowCount())
 
@@ -119,11 +125,9 @@ class Ventana(QMainWindow):
 
 
 # Declaración funciones algoritmo
- def box(self):
-    funcionesAlgoritmo.box(self)
-
-
-
+ def aplicarAlgoritmo(self):
+    funcionesAlgoritmo.algoritmo(self)
+     
 #-----------------------------------------------------------------------------------------------------------------
 
 
