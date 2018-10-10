@@ -40,13 +40,11 @@ class Ventana(QMainWindow):
   menuArchivo.addAction(menuA_guardar)
 
   menuA_salir = QAction(QIcon(), "Salir", self)
-  menuA_salir.triggered.connect(self.menuArchivoSalir)
   menuArchivo.addAction(menuA_salir)
 
   menuH_paleta = QAction(QIcon(), "Paleta de caracteres", self)
   menuH_paleta.setShortcut("Ctrl+p")
   menuH_paleta.setStatusTip("Abrir la paleta de caracteres")
-  menuH_paleta.triggered.connect(self.abrirPaleta)
   menuHerramientas.addAction(menuH_paleta)
 
   menuH_cargarArchivo = QAction(QIcon(), "Cargar archivo de prueba", self)
@@ -81,27 +79,50 @@ class Ventana(QMainWindow):
   self.tableWidget.setColumnWidth(1, 155)
   self.tableWidget.setHorizontalHeaderLabels(("Reglas de producción","Reglas de sustitución"))
 
-  #quitar y poner filas
+  #----------------------------------------------------------------------------------------------------------------
+  #invocacion funciones para la tabla
   self.putButton.clicked.connect(self.agregarFila)
   self.removeButton.clicked.connect(self.quitarFila)
 
- def menuArchivoSalir(self):
-   QMessageBox.question(self, "Mensaje", "Seguro quiere salir", QMessageBox.Yes, QMessageBox.No)
+  #invocacion funciones para el menu
+  menuA_salir.triggered.connect(self.menuArchivoSalir)
+  menuH_paleta.triggered.connect(self.abrirPaleta)
 
+  #invocacion funciones para guardar y cargar
+
+
+  #invocacion funciones para el algoritmo
+
+
+
+
+#-----------------------------------------------------------------------------------------------------------------
+#FuncionesTabla
  def agregarFila(self):
-  self.tableWidget.insertRow(self.tableWidget.rowCount())
+     self.tableWidget.insertRow(self.tableWidget.rowCount())
 
  def quitarFila(self):
-  indices = self.tableWidget.selectionModel().selectedRows()
-  for index in sorted(indices):
-   self.tableWidget.removeRow(index.row())
+     indices = self.tableWidget.selectionModel().selectedRows()
+     for index in sorted(indices):
+         self.tableWidget.removeRow(index.row())
 
- def prueba(self):
-  self.printText.setText("Prueba #1"+ self.symbolsEdit.text())
- 
+
+ def menuArchivoSalir(self):
+     QMessageBox.question(self, "Mensaje", "Seguro quiere salir", QMessageBox.Yes, QMessageBox.No)
+
+
  def abrirPaleta(self):
-  #sel.pale = paletaCaracteres.Caracteres()
-  Caracteres(self).exec_()
+     Caracteres(self).exec_()
+
+
+# Declaración funciones guardar y cargar
+
+
+# Declaración funciones algoritmo
+
+
+
+#-----------------------------------------------------------------------------------------------------------------
 
 
 
