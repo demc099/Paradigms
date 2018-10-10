@@ -14,6 +14,7 @@ class Caracteres(QDialog):
         self.top = 90
         self.width = 220
         self.height = 100
+        
         self.initUI()
  
     def initUI(self):
@@ -32,9 +33,7 @@ class Caracteres(QDialog):
         layout.setColumnStretch(1, 4)
         layout.setColumnStretch(2, 4)
  
-
         button = QPushButton('α', self)
-        #button.setStyleSheet("font-size: 14px; color: black; background: white; border: 1px solid black; border-radius: 10px;")
         button.setStyleSheet("font-size: 14px; color: black;")
         button.clicked.connect(lambda:self.on_click(button))
 
@@ -138,10 +137,6 @@ class Caracteres(QDialog):
         button25.setStyleSheet("font-size: 14px; color: black;")
         button25.clicked.connect(lambda:self.on_click(button25))
         
-        button26 = QPushButton('->', self)
-        button26.setStyleSheet("font-size: 14px; color: black;")
-        button26.clicked.connect(lambda:self.on_click(button26))
-
         layout.addWidget(button,0,0) 
         layout.addWidget(button1,0,1) 
         layout.addWidget(button2,0,2) 
@@ -167,8 +162,7 @@ class Caracteres(QDialog):
         layout.addWidget(button22,7,1) 
         layout.addWidget(button23,7,2)
         layout.addWidget(button24,8,0) 
-        layout.addWidget(button25,8,1)
-        layout.addWidget(button26,8,2)  
+        layout.addWidget(button25,8,1) 
 
         horizontalGroupBox.setLayout(layout)
 
