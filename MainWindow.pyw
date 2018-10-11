@@ -16,12 +16,14 @@ class Ventana(QMainWindow):
   uic.loadUi("MainWindowInterfaz.ui", self)
   self.setWindowTitle("Traductor")
   self.setWindowIcon(QIcon('image/compiler.png'))
-  
+
+  #Datos default
+  self.symbolsEdit.setText("abcdefghijklmnopqrstuvwxyz0123456789")
+  self.varsEdit.setText("wxyz")
+  self.markersEdit.setText("αβγδ")
 
   #Poner imagenes a los botones
-  self.putButton.setIcon(QIcon('image/plus.png'))
-  self.removeButton.setIcon( QIcon('image/remove.png'))
-  self.cancelButton.setIcon(QIcon('image/cancelar.png'))
+  self.clearButton.setIcon(QIcon('image/cancelar.png'))
   self.saveButton.setIcon(QIcon('image/guardar.png'))
   self.runButton.setIcon(QIcon('image/run.png'))
   self.nextButton.setIcon(QIcon('image/siguiente.png'))
@@ -75,18 +77,17 @@ class Ventana(QMainWindow):
   menuP_10 = QAction(QIcon(), "Paréntesis balanceados", self)
   menuPrueba.addAction(menuP_10)
 
-  # Creacion de la tabla
-  self.tableWidget.setColumnCount(2)
-  self.tableWidget.setRowCount(1)
-  self.tableWidget.setColumnWidth(0, 140)
-  self.tableWidget.setColumnWidth(1, 155)
-  self.tableWidget.setHorizontalHeaderLabels(("Reglas de producción","Reglas de sustitución"))
+ # #Enable campos
+ #  self.symbolsEdit.setEnabled(False)
+ #  self.varsEdit.setEnabled(False)
+ #  self.markersEdit.setEnabled(False)
+ #  self.tableWidget.setEnabled(False)
+ #  self.saveButton.setEnabled(False)
+ #  self.clearButton.setEnabled(False)
+ #  self.putButton.setEnabled(False)
+ #  self.removeButton.setEnabled(False)
 
   #----------------------------------------------------------------------------------------------------------------
-  #invocacion funciones para la tabla
-  self.putButton.clicked.connect(self.agregarFila)
-  self.removeButton.clicked.connect(self.quitarFila)
-
   #invocacion funciones para el menu
   menuA_salir.triggered.connect(self.menuArchivoSalir)
   menuH_paleta.triggered.connect(self.abrirPaleta)
@@ -97,20 +98,15 @@ class Ventana(QMainWindow):
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.aplicarAlgoritmo)
 
+  #Input
+  self.clearButton.clicked.connect(self.markersEdit.clear)
+  self.clearButton.clicked.connect(self.varsEdit.clear)
+  self.clearButton.clicked.connect(self.symbolsEdit.clear)
+  self.clearButton.clicked.connect(self.grammarEdit.clear)
 
-#-----------------------------------------------------------------------------------------------------------------
-#FuncionesTabla
- 
+ #----------------------------------------------------------------------------------------------------------------
 
- def agregarFila(self):
-     self.tableWidget.insertRow(self.tableWidget.rowCount())
-
- def quitarFila(self):
-     indices = self.tableWidget.selectionModel().selectedRows()
-     for index in sorted(indices):
-         self.tableWidget.removeRow(index.row())
-
-
+ #Funciones del menu
  def menuArchivoSalir(self):
      QMessageBox.question(self, "Mensaje", "Seguro quiere salir", QMessageBox.Yes, QMessageBox.No)
 
@@ -128,7 +124,9 @@ class Ventana(QMainWindow):
  def aplicarAlgoritmo(self):
     linea= self.lineEdit.text()
     funcionesAlgoritmo.algoritmo(self, linea)
-     
+
+
+
 #-----------------------------------------------------------------------------------------------------------------
 
 
