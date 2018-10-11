@@ -109,6 +109,8 @@ class Ventana(QMainWindow):
   #output
   self.debugButton.clicked.connect(self.habilitarDebug)
 
+  #Ventana Hija "Caraacteres"
+  self.children = []
  #----------------------------------------------------------------------------------------------------------------
 
  #Funciones del menu
@@ -117,7 +119,9 @@ class Ventana(QMainWindow):
 
 
  def abrirPaleta(self):
-     Caracteres(self).exec_()
+     #Caracteres(self).exec_()
+     child = Caracteres(self)
+     self.children.append(child)
 
 
 # Declaración funciones guardar y cargar
