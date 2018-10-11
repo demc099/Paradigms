@@ -9,4 +9,3 @@ def algoritmo(self, linea):
 def leng(cadena):
     lenguaje= {'ab':'cd'}
 
-    

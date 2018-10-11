@@ -76,15 +76,7 @@ class Ventana(QMainWindow):
   menuP_10 = QAction(QIcon(), "Paréntesis balanceados", self)
   menuPrueba.addAction(menuP_10)
 
- # #Enable campos
- #  self.symbolsEdit.setEnabled(False)
- #  self.varsEdit.setEnabled(False)
- #  self.markersEdit.setEnabled(False)
- #  self.tableWidget.setEnabled(False)
- #  self.saveButton.setEnabled(False)
- #  self.clearButton.setEnabled(False)
- #  self.putButton.setEnabled(False)
- #  self.removeButton.setEnabled(False)
+
 
   #----------------------------------------------------------------------------------------------------------------
   #invocacion funciones para el menu
@@ -97,11 +89,24 @@ class Ventana(QMainWindow):
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.aplicarAlgoritmo)
 
+  # Enable campos
+  self.ruleLabel.setEnabled(False)
+  self.afterLabel.setEnabled(False)
+  self.beforeLabel.setEnabled(False)
+  self.ruleEdit.setEnabled(False)
+  self.afterEdit.setEnabled(False)
+  self.beforeEdit.setEnabled(False)
+  self.nextButton.setEnabled(False)
+
   #Input
   self.clearButton.clicked.connect(self.markersEdit.clear)
   self.clearButton.clicked.connect(self.varsEdit.clear)
   self.clearButton.clicked.connect(self.symbolsEdit.clear)
   self.clearButton.clicked.connect(self.grammarEdit.clear)
+  self.saveButton.clicked.connect(self.validar)
+
+  #output
+  self.debugButton.clicked.connect(self.habilitarDebug)
 
  #----------------------------------------------------------------------------------------------------------------
 
@@ -122,7 +127,19 @@ class Ventana(QMainWindow):
     linea= self.lineEdit.text()
     funcionesAlgoritmo.algoritmo(self, linea)
 
+#Debug
+ def habilitarDebug(self):
+  self.ruleLabel.setEnabled(True)
+  self.afterLabel.setEnabled(True)
+  self.beforeLabel.setEnabled(True)
+  self.ruleEdit.setEnabled(True)
+  self.afterEdit.setEnabled(True)
+  self.beforeEdit.setEnabled(True)
+  self.nextButton.setEnabled(True)
 
+#Validar
+ def validar(self):
+  print("Hola")
 
 #-----------------------------------------------------------------------------------------------------------------
 
