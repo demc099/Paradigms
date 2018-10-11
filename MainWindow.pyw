@@ -2,11 +2,12 @@ import sys
 
 from PyQt5.QtGui import QIcon, QPixmap, QStandardItemModel
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMessageBox, QDialog, QWidget,
-                               QGroupBox, QGridLayout, QVBoxLayout, QLineEdit, QPushButton, QLabel)
+                               QGroupBox, QGridLayout, QVBoxLayout, QLineEdit, QPushButton, QLabel, QInputDialog)
 from PyQt5 import uic
 
 from paletaCaracteres import *
 import funcionesAlgoritmo
+import inoutFile
 
 
 class Ventana(QMainWindow):   
@@ -84,7 +85,7 @@ class Ventana(QMainWindow):
   menuH_paleta.triggered.connect(self.abrirPaleta)
 
   #invocacion funciones para guardar y cargar
-
+  self.saveButton.clicked.connect(self.guardarTxt)
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.aplicarAlgoritmo)
@@ -120,6 +121,8 @@ class Ventana(QMainWindow):
 
 
 # Declaración funciones guardar y cargar
+ def guardarTxt(self):
+     inoutFile.guardarTxt(self)
 
 
 # Declaración funciones algoritmo
