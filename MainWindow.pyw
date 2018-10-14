@@ -39,6 +39,7 @@ class Ventana(QMainWindow):
   menuArchivo.addAction(menuA_nuevo)
 
   menuA_abrir = QAction(QIcon(), "Abrir", self)
+  menuA_abrir.setShortcut("Ctrl+a")
   menuArchivo.addAction(menuA_abrir)
 
   menuA_guardar = QAction(QIcon(), "Guardar", self)
@@ -83,9 +84,11 @@ class Ventana(QMainWindow):
   #invocacion funciones para el menu
   menuA_salir.triggered.connect(self.menuArchivoSalir)
   menuH_paleta.triggered.connect(self.abrirPaleta)
+  menuA_abrir.triggered.connect(self.cargar)
 
-  #invocacion funciones para guardar y cargar
-  self.saveButton.clicked.connect(self.guardarTxt)
+  #invocacion funciones para guardar
+  self.saveButton.clicked.connect(self.guardar)
+
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.aplicarAlgoritmo)
@@ -104,7 +107,6 @@ class Ventana(QMainWindow):
   self.clearButton.clicked.connect(self.varsEdit.clear)
   self.clearButton.clicked.connect(self.symbolsEdit.clear)
   self.clearButton.clicked.connect(self.grammarEdit.clear)
-  self.saveButton.clicked.connect(self.validar)
 
   #output
   self.debugButton.clicked.connect(self.habilitarDebug)
@@ -121,8 +123,11 @@ class Ventana(QMainWindow):
 
 
 # Declaración funciones guardar y cargar
- def guardarTxt(self):
-     inoutFile.guardarTxt(self)
+ def guardar(self):
+     inoutFile.guardar(self)
+
+ def cargar(self):
+     inoutFile.cargar(self)
 
 
 # Declaración funciones algoritmo
