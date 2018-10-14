@@ -1,3 +1,4 @@
+import re
 import sys
 
 from PyQt5.QtGui import QIcon, QPixmap, QStandardItemModel
@@ -8,6 +9,7 @@ from PyQt5 import uic
 from paletaCaracteres import *
 import funcionesAlgoritmo
 import inoutFile
+import validaciones
 
 
 class Ventana(QMainWindow):   
@@ -85,7 +87,8 @@ class Ventana(QMainWindow):
   menuH_paleta.triggered.connect(self.abrirPaleta)
 
   #invocacion funciones para guardar y cargar
-  self.saveButton.clicked.connect(self.guardarTxt)
+  #self.saveButton.clicked.connect(self.guardarTxt)
+  self.saveButton.clicked.connect(self.validarGramatica)
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.aplicarAlgoritmo)
@@ -104,7 +107,10 @@ class Ventana(QMainWindow):
   self.clearButton.clicked.connect(self.varsEdit.clear)
   self.clearButton.clicked.connect(self.symbolsEdit.clear)
   self.clearButton.clicked.connect(self.grammarEdit.clear)
-  self.saveButton.clicked.connect(self.validar)
+  #self.saveButton.clicked.connect(self.validar)
+  self.symbolsEdit.textChanged.connect(self.validarSim)
+  self.varsEdit.textChanged.connect(self.validarVars)
+  self.markersEdit.textChanged.connect(self.validarMark)
 
   #output
   self.debugButton.clicked.connect(self.habilitarDebug)
@@ -141,12 +147,26 @@ class Ventana(QMainWindow):
   self.nextButton.setEnabled(True)
 
 #Validar
- def validar(self):
-  print("Hola")
+ def validarSim(self):
+  validaciones.validarSim(self)
 
-#-----------------------------------------------------------------------------------------------------------------
+ def validarVars(self):
+  validaciones.validarVars(self)
+
+ def validarMark(self):
+  validaciones.validarMark(self)
+
+ def validarIgualdad(self):
+  validaciones.validarIgualdad(self)
+
+ def validarGramatica(self):
+  validaciones.validarGramatica(self)
+
+ def busqueda(self,linea):
+  validaciones.busqueda(self)
 
 
+ #-----------------------------------------------------------------------------------------------------------------
 
 app = QApplication(sys.argv)
 _ventana = Ventana()

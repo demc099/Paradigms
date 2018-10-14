@@ -5,10 +5,8 @@ def guardarTxt(self):
             'Digite el nombre del archivo donde desea guardar:')
      if ok:
             file = "./algoritmos/"+(str(text))+".txt"
-            fo = open(file, "w")
+            fo = open(file, "w",encoding='utf-8')
      fo.write("#symbols "+self.symbolsEdit.text()+"\n")
      fo.write("#vars "+self.varsEdit.text()+"\n")
      fo.write("#markers "+self.markersEdit.text()+"\n")
      fo.close()
-
-        
