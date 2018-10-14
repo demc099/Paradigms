@@ -113,6 +113,6 @@ def conjuntodevalidaciones(self):
         if validarIgualdad(self) == True:
             #if validarGramatica(self) == True:
             self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
-            inoutFile.guardarTxt(self)
+            inoutFile.guardar(self)
     else:
         print("noo")

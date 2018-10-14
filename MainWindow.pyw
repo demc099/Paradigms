@@ -89,10 +89,7 @@ class Ventana(QMainWindow):
   menuA_abrir.triggered.connect(self.cargar)
 
   #invocacion funciones para guardar
-  self.saveButton.clicked.connect(self.guardar)
-
-  #invocacion funciones para guardar y cargar
-  #self.saveButton.clicked.connect(self.guardarTxt)
+  #self.saveButton.clicked.connect(self.guardar)
   self.saveButton.clicked.connect(self.conjuntodevalidaciones)
 
   #invocacion funciones para el algoritmo
