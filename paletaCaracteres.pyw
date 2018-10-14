@@ -260,6 +260,9 @@ class Caracteres(QWidget):
         self.setLayout(windowLayout)
 
 
+    #Estos tres metodos se combretirian en uno solo 
+
+
     #----- Funcion para los Botones de -----
     def on_click(self, caracter):
         text = self.parent.markersEdit.text()

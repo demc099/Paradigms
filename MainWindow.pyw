@@ -125,7 +125,11 @@ class Ventana(QMainWindow):
 
 
  def abrirPaleta(self):
-     #Caracteres(self).exec_()
+
+    # wfocus = focusWidget() # supuestamente esto manda el nombre del widget que tiene el focus pero no me funciona se cae"
+    # Si funciona se lo paso por parametros a la clase caracteres.
+    
+    
      child = Caracteres(self)
      self.children.append(child)
 
