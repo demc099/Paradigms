@@ -1,3 +1,4 @@
+import re
 import sys
 
 from PyQt5.QtGui import QIcon, QPixmap, QStandardItemModel
@@ -8,6 +9,7 @@ from PyQt5 import uic
 from paletaCaracteres import *
 import funcionesAlgoritmo
 import inoutFile
+import validaciones
 
 
 class Ventana(QMainWindow):   
@@ -89,6 +91,9 @@ class Ventana(QMainWindow):
   #invocacion funciones para guardar
   self.saveButton.clicked.connect(self.guardar)
 
+  #invocacion funciones para guardar y cargar
+  #self.saveButton.clicked.connect(self.guardarTxt)
+  self.saveButton.clicked.connect(self.conjuntodevalidaciones)
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.aplicarAlgoritmo)
@@ -108,9 +113,16 @@ class Ventana(QMainWindow):
   self.clearButton.clicked.connect(self.symbolsEdit.clear)
   self.clearButton.clicked.connect(self.grammarEdit.clear)
 
+  #self.saveButton.clicked.connect(self.validar)
+  self.symbolsEdit.textChanged.connect(self.validarSim)
+  self.varsEdit.textChanged.connect(self.validarVars)
+  self.markersEdit.textChanged.connect(self.validarMark)
+
   #output
   self.debugButton.clicked.connect(self.habilitarDebug)
 
+  #Ventana Hija "Caraacteres"
+  self.children = []
  #----------------------------------------------------------------------------------------------------------------
 
  #Funciones del menu
@@ -119,7 +131,13 @@ class Ventana(QMainWindow):
 
 
  def abrirPaleta(self):
-     Caracteres(self).exec_()
+
+    # wfocus = focusWidget() # supuestamente esto manda el nombre del widget que tiene el focus pero no me funciona se cae"
+    # Si funciona se lo paso por parametros a la clase caracteres.
+    
+    
+     child = Caracteres(self)
+     self.children.append(child)
 
 
 # Declaración funciones guardar y cargar
@@ -133,7 +151,9 @@ class Ventana(QMainWindow):
 # Declaración funciones algoritmo
  def aplicarAlgoritmo(self):
     linea= self.lineEdit.text()
-    funcionesAlgoritmo.algoritmo(self, linea)
+    simbaceptados= self.symbolsEdit.text()
+    variables= self.varsEdit.text()
+    funcionesAlgoritmo.algoritmo(self, linea, variables)
 
 #Debug
  def habilitarDebug(self):
@@ -146,12 +166,29 @@ class Ventana(QMainWindow):
   self.nextButton.setEnabled(True)
 
 #Validar
- def validar(self):
-  print("Hola")
+ def validarSim(self):
+  validaciones.validarSim(self)
 
-#-----------------------------------------------------------------------------------------------------------------
+ def validarVars(self):
+  validaciones.validarVars(self)
+
+ def validarMark(self):
+  validaciones.validarMark(self)
+
+ def validarIgualdad(self):
+  validaciones.validarIgualdad(self)
+
+ def validarGramatica(self):
+  validaciones.validarGramatica(self)
+
+ def busqueda(self,linea):
+  validaciones.busqueda(self)
+
+ def conjuntodevalidaciones(self):
+  validaciones.conjuntodevalidaciones(self)
 
 
+ #-----------------------------------------------------------------------------------------------------------------
 
 app = QApplication(sys.argv)
 _ventana = Ventana()

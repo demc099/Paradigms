@@ -82,12 +82,3 @@ def cargarXml(self, fileName):
                 self.grammarEdit.setText(self.grammarEdit.toPlainText()+objRul.group()+"\n")
 
 
-
-
-
-
-
-
-
-
-
