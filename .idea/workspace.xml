@@ -60,28 +60,28 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="67" />
-          <entry key="pyw" value="4150" />
+          <entry key="py" value="69" />
+          <entry key="pyw" value="4151" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="4217" />
+          <entry key="Python" value="4220" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MainWindow.pyw">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="137">
-              <caret line="174" selection-start-line="174" selection-end-line="174" />
+            <state relative-caret-position="158">
+              <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
-                <marker date="1539491706021" expanded="true" signature="5013:5014" ph="..." />
-                <marker date="1539491706021" expanded="true" signature="5317:5378" ph="..." />
+                <marker date="1539492072536" expanded="true" signature="5103:5104" ph="..." />
+                <marker date="1539492072536" expanded="true" signature="5407:5469" ph="..." />
               </folding>
             </state>
           </provider>
@@ -90,17 +90,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/validaciones.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="112">
-              <caret line="76" selection-start-line="76" selection-end-line="76" />
+            <state relative-caret-position="-526">
+              <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/funcionesAlgoritmo.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
+            <state relative-caret-position="153">
+              <caret line="9" column="32" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -142,8 +142,8 @@
         <option value="$PROJECT_DIR$/funcionesAlgoritmo.py" />
         <option value="$PROJECT_DIR$/inoutFile.py" />
         <option value="$PROJECT_DIR$/test_ventana.py" />
-        <option value="$PROJECT_DIR$/MainWindow.pyw" />
         <option value="$PROJECT_DIR$/validaciones.py" />
+        <option value="$PROJECT_DIR$/MainWindow.pyw" />
       </list>
     </option>
   </component>
@@ -256,14 +256,15 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="804" height="735" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24934725" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24934725" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33887044" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3986711" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.33887044" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3986711" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -278,40 +279,6 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/validaciones.py</url>
-          <line>76</line>
-          <option name="timeStamp" value="68" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/validaciones.py</url>
-          <line>77</line>
-          <option name="timeStamp" value="69" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/validaciones.py</url>
-          <line>78</line>
-          <option name="timeStamp" value="70" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/validaciones.py</url>
-          <line>81</line>
-          <option name="timeStamp" value="71" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/validaciones.py</url>
-          <line>71</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-      </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/paletaCaracteres.pyw">
@@ -359,13 +326,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/funcionesAlgoritmo.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="8" lean-forward="true" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/inoutFile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -373,22 +333,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/validaciones.py">
+    <entry file="file://$PROJECT_DIR$/MainWindow.pyw">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="76" selection-start-line="76" selection-end-line="76" />
+        <state relative-caret-position="158">
+          <caret line="169" lean-forward="true" selection-start-line="169" selection-end-line="169" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+            <marker date="1539492072536" expanded="true" signature="5103:5104" ph="..." />
+            <marker date="1539492072536" expanded="true" signature="5407:5469" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MainWindow.pyw">
+    <entry file="file://$PROJECT_DIR$/validaciones.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="137">
-          <caret line="174" selection-start-line="174" selection-end-line="174" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-            <marker date="1539491706021" expanded="true" signature="5013:5014" ph="..." />
-            <marker date="1539491706021" expanded="true" signature="5317:5378" ph="..." />
-          </folding>
+        <state relative-caret-position="-526">
+          <caret line="31" lean-forward="true" selection-start-line="31" selection-end-line="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/funcionesAlgoritmo.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="32" selection-start-line="9" selection-start-column="16" selection-end-line="9" selection-end-column="32" />
         </state>
       </provider>
     </entry>

@@ -134,7 +134,9 @@ class Ventana(QMainWindow):
 # Declaración funciones algoritmo
  def aplicarAlgoritmo(self):
     linea= self.lineEdit.text()
-    funcionesAlgoritmo.algoritmo(self, linea)
+    simbaceptados= self.symbolsEdit.text()
+    variables= self.varsEdit.text()
+    funcionesAlgoritmo.algoritmo(self, linea, variables)
 
 #Debug
  def habilitarDebug(self):
