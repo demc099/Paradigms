@@ -4,7 +4,7 @@ import re
 
 def validarSim(self):
   symbols= self.symbolsEdit.text()
-  validar = re.match('^[a-z\sáéíóúàèìòùäëïöü]+$', symbols, re.I)
+  validar = re.match('^[a-z0-9\sáéíóúàèìòùäëïöü]+$', symbols, re.I)
   if symbols == "   ":
    self.symbolsEdit.setText("abcdefghijklmnopqrstuvwxyz0123456789")
    self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
@@ -18,7 +18,7 @@ def validarSim(self):
 
 def validarVars(self):
   vars = self.varsEdit.text()
-  validar = re.match('^[a-z\sáéíóúàèìòùäëïöü]+$', vars, re.I)
+  validar = re.match('^[a-z0-9\sáéíóúàèìòùäëïöü]+$', vars, re.I)
   if vars == "   ":
    self.varsEdit.setText("wxyz")
    self.varsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
@@ -32,7 +32,7 @@ def validarVars(self):
 
 def validarMark(self):
   markers = self.markersEdit.text()
-  validar = re.match('^[a-z\sáéíóúàèìòùäëïöüαβγδ]+$', markers, re.I)
+  validar = re.match('^[a-z0-9\sáéíóúàèìòùäëïöüαβγδ]+$', markers, re.I)
   if markers == "   ":
    self.markersEdit.setText("αβγδ")
    self.markersEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
