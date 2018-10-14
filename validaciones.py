@@ -1,6 +1,8 @@
 #Validar
 import re
 
+import inoutFile
+
 
 def validarSim(self):
   symbols= self.symbolsEdit.text()
@@ -56,7 +58,6 @@ def validarIgualdad(self):
   comparacion = [item for item in listaSim if item in listaMar]
   if len(comparacion) > 0:
    for item in comparacion:
-
     print('I=> '+ '%s' % item)
     self.markersEdit.setStyleSheet("color: blue; border: 1px solid red;")
     return False
@@ -70,28 +71,48 @@ def validarGramatica(self):
   linea = str(self.grammarEdit.toPlainText()).split('\n')
   print(linea)
   nuevaLinea= busqueda(linea)
-  print(nuevaLinea)
+  return nuevaLinea
   #print(len(linea))
   #print(linea[0])
 
 def busqueda(linea):
   caracter ='->'
-  cont=0
   i = 0
   while i < len(linea):
-   dato=linea[i]
-   print(dato)
-   if caracter in dato:
-    posflecha=dato.index(caracter)
-    if posflecha == 0 or posflecha == len(dato)-1:
-     print(posflecha)
-     cont+=1
-   else:
-    print("Linea errornea")
-   i += 1
-  if cont == len(linea)-1:
-   print(cont)
-   return True
-  else:
-   print(cont)
-   return False
+      dato=linea[i]
+      print(dato)
+      if caracter in dato:
+          posflecha=dato.index(caracter)
+          print (posflecha)
+          #pos=posicion(dato,posflecha)
+      #elif pos == False:
+        #print("Existe datos erroneos")
+
+      else:
+          print("Linea errornea")
+          i += 1
+
+# def posicion(dato,posflecha):
+#     if posflecha == 0 or posflecha == len(dato) - 1:
+#         print(posflecha)
+#         return False
+#     else:
+#         return True
+#
+#     if cont == len(linea)-1:
+#       print(cont)
+#       if bool == True:
+#           return True
+#       else:
+#           print(cont)
+#           return False
+
+
+def conjuntodevalidaciones(self):
+    if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
+        if validarIgualdad(self) == True:
+            #if validarGramatica(self) == True:
+            self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
+            inoutFile.guardarTxt(self)
+    else:
+        print("noo")

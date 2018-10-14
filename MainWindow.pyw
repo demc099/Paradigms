@@ -88,7 +88,7 @@ class Ventana(QMainWindow):
 
   #invocacion funciones para guardar y cargar
   #self.saveButton.clicked.connect(self.guardarTxt)
-  self.saveButton.clicked.connect(self.validarGramatica)
+  self.saveButton.clicked.connect(self.conjuntodevalidaciones)
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.aplicarAlgoritmo)
@@ -174,6 +174,9 @@ class Ventana(QMainWindow):
 
  def busqueda(self,linea):
   validaciones.busqueda(self)
+
+ def conjuntodevalidaciones(self):
+  validaciones.conjuntodevalidaciones(self)
 
 
  #-----------------------------------------------------------------------------------------------------------------
