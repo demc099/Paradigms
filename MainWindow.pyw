@@ -91,7 +91,7 @@ class Ventana(QMainWindow):
   self.saveButton.clicked.connect(self.conjuntodevalidaciones)
 
   #invocacion funciones para el algoritmo
-  self.runButton.clicked.connect(self.aplicarAlgoritmo)
+  self.runButton.clicked.connect(self.correrAlgoritmo)
 
   # Enable campos
   self.ruleLabel.setEnabled(False)
@@ -145,6 +145,9 @@ class Ventana(QMainWindow):
     simbaceptados= self.symbolsEdit.text()
     variables= self.varsEdit.text()
     funcionesAlgoritmo.algoritmo(self, linea, variables)
+
+ def correrAlgoritmo(self):
+  funcionesAlgoritmo.correrAlgoritmo(self)
 
 #Debug
  def habilitarDebug(self):

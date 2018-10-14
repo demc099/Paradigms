@@ -53,7 +53,8 @@ class Caracteres(QWidget):
         #----- Botones Para los Caracteres Especiales de los Marcadores -----
         button = QPushButton('α', self)
         button.setStyleSheet("font-size: 14px; color: black;")
-        button.clicked.connect(lambda:self.on_click_marker(button))
+        #button.clicked.connect(lambda:self.on_click_marker(button))
+        button.clicked.connect(lambda:self.agregarCaracter(button))
 
         button1 = QPushButton('β', self)
         button1.setStyleSheet("font-size: 14px; color: black;")
@@ -282,3 +283,7 @@ class Caracteres(QWidget):
         text = self.parent.varsEdit.text()
         newText = text + caracter.text()
         self.parent.varsEdit.setText(newText)
+
+    # def agregarCaracter(self,caracter):
+    #     self.symbols.append
+
