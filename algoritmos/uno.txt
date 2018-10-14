@@ -1,0 +1,4 @@
+#symbols abcdefghijklmnopqrstuvwxyz0123456789
+#vars wxyz
+#markers αβγδ
+
