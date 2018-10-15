@@ -57,7 +57,7 @@ grammar1 = """\
 % This rules file is extracted from Wikipedia:
 % http://en.wikipedia.org/wiki/Markov_Algorithm
 
-A-> "apple"
+A->apple
 B->bag
 S->shop 
 T->the

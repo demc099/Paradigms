@@ -30,6 +30,8 @@ class Ventana(QMainWindow):
   self.saveButton.setIcon(QIcon('image/guardar.png'))
   self.runButton.setIcon(QIcon('image/run.png'))
   self.nextButton.setIcon(QIcon('image/siguiente.png'))
+  self.saveFileButton.setIcon(QIcon('image/guardar.png'))
+  self.saveRegistryButton.setIcon(QIcon('image/guardar.png'))
 
   #Creacion del menu de la ventana
   menu= self.menuBar()
@@ -97,13 +99,10 @@ class Ventana(QMainWindow):
   self.runButton.clicked.connect(self.correrAlgoritmo)
 
   # Enable campos
-  self.ruleLabel.setEnabled(False)
-  self.afterLabel.setEnabled(False)
-  self.beforeLabel.setEnabled(False)
-  self.ruleEdit.setEnabled(False)
-  self.afterEdit.setEnabled(False)
-  self.beforeEdit.setEnabled(False)
+  self.fileEdit.setEnabled(False)
   self.nextButton.setEnabled(False)
+  self.saveFileButton.setEnabled(False)
+  self.saveRegistryButton.setEnabled(False)
 
   #Input
   self.clearButton.clicked.connect(self.markersEdit.clear)
