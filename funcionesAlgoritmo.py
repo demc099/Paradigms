@@ -12,7 +12,6 @@
 #                [])
 import re
 
-
 def potencia(c):
     """Calcula y devuelve el conjunto potencia del 
        conjunto c.
@@ -46,35 +45,11 @@ def leng(cadena):
 
 #Pruebas de Carolina-------------------------------------------------------------------------
 #prueba I bought a B of As W my Bgage from T S.
-def correrAlgoritmo(self):
-    stepNum=1
-    texto = self.lineEdit.text()
-    self.printText.append("STEP")
-    stepNum+=1
-    self.printText.append(texto)
-    self.printText.append(remplazarReglas(self,texto,extraerreglas(grammar1)))
-
-    # "x": ['']
-    # texto1 = []
-    # i=0
-    # while i < len(texto):
-    #     texto1.append("x")
-    #     i+=1
-    # else:
-    #     print(texto1)
-    #
-    # a="abcdefghijklmnopqrstuvwxyz0123456789"
-    # v="xyz"
-    # m="αβγδ"
-    # rBusqueda=["βx","xβ","x"]
-    # rSustitucion=["xβ","Λ.","βx"]
-    # listav= list(v)
-    # print(listav)
-    # listav[0]
-    # i = 0
-    # #while i < len(rBusqueda):
-#(?:(?P<rule>(?P<pat>.+?)->(?P<term>\.)?(?P<repl>.+))) |
 syntaxre = r"""(?mx)^(?:(?:(?P<comment>\%.*)) |
+(?:(?P<blank>\s*)(?:\n | $)) |
+(?:(?P<rule>(?P<pat>.+?)+->+(?P<term>\.)?(?P<repl>.+))))$"""
+
+syntaxre1 = r"""(?mx)^(?:(?:(?P<comment>\%.*)) |
 (?:(?P<blank>\s*)(?:\n | $)) |
 (?:(?P<rule>(?P<pat>.+?)\s+->\s+(?P<term>\.)?(?P<repl>.+))))$"""
 
@@ -82,27 +57,33 @@ grammar1 = """\
 % This rules file is extracted from Wikipedia:
 % http://en.wikipedia.org/wiki/Markov_Algorithm
 
-A -> apple
-B -> bag
-S -> shop 
-T -> the
-W -> HOla
+A-> "apple"
+B->bag
+S->shop 
+T->the
+W->HOla
 the shop -> my brother
 a never used -> .terminating rule
 
 """
+def correrAlgoritmo(self):
+    texto = self.lineEdit.text()
+    self.printText.append("#PRUEBA"+ "\n")
+    self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
+
+    self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,texto,extraerreglas(grammar1)))
 
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
-            for matchobj in re.finditer(syntaxre, grammar)
-            if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[(A,apple,False)]
-
+            for matchobj in re.finditer(syntaxre, grammar)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
+            if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
 def remplazarReglas(self,text, grammar):
     while True:
         for pat, repl, term in grammar:
             if pat in text:
+                self.printText.append(text+"  ->  ")
                 text = text.replace(pat, repl, 1)
-                self.printText.append(text)
+                self.printText.insertPlainText(text)
                 if term:
                     return text
                 break

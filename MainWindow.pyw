@@ -179,14 +179,8 @@ class Ventana(QMainWindow):
  def validarMark(self):
   validaciones.validarMark(self)
 
- def validarIgualdad(self):
-  validaciones.validarIgualdad(self)
-
  def validarGramatica(self):
   validaciones.validarGramatica(self)
-
- def busqueda(self,linea):
-  validaciones.busqueda(self)
 
  def conjuntodevalidaciones(self):
   validaciones.conjuntodevalidaciones(self)
