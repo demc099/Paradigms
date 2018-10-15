@@ -51,9 +51,31 @@ def validarFormatoCargar(self, fileName):
 
 def cargarTxt(self, fileName):
     file = open(fileName, 'r', encoding='utf-8')
-    text = file.read()
-    self.printText.setText(text)
+    lines = file.readlines()
+    for line in lines:
+        patronSym = re.search('^\#symbols\s[a-z0-9]+', line, re.I)
+        patronVars = re.search('^\#vars\s[a-z]+', line, re.I)
+        patronMark = re.match('^\#markers\s[α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|ο|π|ρ|σ|τ|ς|τ|υ|φ|χ|ψ|ω|Λ]+', line, re.I)
+        patronRules = re.match('^[\w\-\>]+', line, re.I)
+        print(patronSym)
+        if patronSym:
+            objSym = re.search('[^\#symbols][a-z0-9]+', patronSym.group(), re.I)
+            if objSym:
+                self.symbolsEdit.setText(objSym.group())
+        if patronVars:
+            objVar = re.search('[^\#vars][a-z]+', patronVars.group(), re.I)
+            if objVar:
+                self.varsEdit.setText(objVar.group())
+        if patronMark:
+            objMark = re.search('[^\#markers][α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|ο|π|ρ|σ|τ|ς|τ|υ|φ|χ|ψ|ω|Λ]+', patronMark.group(), re.I)
+            if objMark:
+                self.markersEdit.setText(objMark.group())
+        if patronRules:
+            objRul = re.search('[\w|\-\>]+', patronRules.group(), re.I)
+            if objRul:
+                self.grammarEdit.setText(self.grammarEdit.toPlainText()+objRul.group()+"\n")
     file.close()
+    
 
 def cargarXml(self, fileName):
     file = open(fileName, 'r', encoding='utf-8')
@@ -62,7 +84,7 @@ def cargarXml(self, fileName):
         #patronSym = re.match('^\<symbols\>[a-z0-9]+\<\/symbols\>', line, re.I)
         patronSym = re.search('^\<symbols\>[a-z0-9]+\<\/symbols\>', line, re.I)
         patronVars = re.search('^\<vars\>[a-z]+\<\/vars\>', line, re.I)
-        patronMark = re.match('^\<markers\>[α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|ο|π|ρ|σ|τ|ς|τ|υ|φ|χ|ψ|ω|Λ]+\<\/markers\>', line, re.UNICODE)
+        patronMark = re.match('^\<markers\>[α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|ο|π|ρ|σ|τ|ς|τ|υ|φ|χ|ψ|ω|Λ]+\<\/markers\>', line, re.I)
         patronRules = re.match('^\<rules\>[\w|\-\>]+\<\/rules\>', line, re.I)
         if patronSym:
             objSym = re.search('[^\<symbols\>][a-z0-9]+', patronSym.group(), re.I)
@@ -80,5 +102,5 @@ def cargarXml(self, fileName):
             objRul = re.search('[^\<rules\>][\w|\-\>]+', patronRules.group(), re.I)
             if objRul:
                 self.grammarEdit.setText(self.grammarEdit.toPlainText()+objRul.group()+"\n")
-
+    file.close()
 
