@@ -45,27 +45,34 @@ def leng(cadena):
 
 #Pruebas de Carolina-------------------------------------------------------------------------
 #prueba I bought a B of As W my Bgage from T S.
-syntaxre = r"""(?mx)^(?:(?:(?P<comment>\%.*)) |
+syntaxre2 = r"""(?mx)^(?:(?:(?P<comment>\%.*)) |
 (?:(?P<blank>\s*)(?:\n | $)) |
-(?:(?P<rule>(?P<pat>.+?)+->+(?P<term>\.)?(?P<repl>.+))))$"""
+(?:(?P<rule>(?P<pat>.+?)\s+->\s+(?P<term>\.)?(?P<repl>.+))))$"""
 
 syntaxre1 = r"""(?mx)^(?:(?:(?P<comment>\%.*)) |
 (?:(?P<blank>\s*)(?:\n | $)) |
 (?:(?P<rule>(?P<pat>.+?)\s+->\s+(?P<term>\.)?(?P<repl>.+))))$"""
 
-grammar1 = """\
-% This rules file is extracted from Wikipedia:
-% http://en.wikipedia.org/wiki/Markov_Algorithm
+syntaxre = r"""(?mx)
+^(?: 
+  (?: (?P<comment> \# .* ) ) |
+  (?: (?P<blank>   \s*  ) (?: \n | $ )  ) |
+  (?: (?P<rule>    (?P<pat> .+? ) \s+ -> \s+ (?P<term> \.)? (?P<repl> .+) ) )
+)$
+"""
 
-A->apple
-B->bag
-S->shop 
-T->the
-W->HOla
+grammar1 = """\
+# This rules file is extracted from Wikipedia:
+# http://en.wikipedia.org/wiki/Markov_Algorithm
+A -> apple
+B -> bag
+S -> shop
+T -> the
+W -> PRUE
 the shop -> my brother
 a never used -> .terminating rule
-
 """
+
 def correrAlgoritmo(self):
     texto = self.lineEdit.text()
     self.printText.append("#PRUEBA"+ "\n")
