@@ -73,12 +73,14 @@ the shop -> my brother
 a never used -> .terminating rule
 """
 
+
 def correrAlgoritmo(self):
     texto = self.lineEdit.text()
+    grammar= self.grammarEdit.toPlainText()
     self.printText.append("#PRUEBA"+ "\n")
     self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
 
-    self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,texto,extraerreglas(grammar1)))
+    self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,texto,extraerreglas(grammar)))
 
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
