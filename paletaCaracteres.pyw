@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
  
-class Caracteres(QWidget):
+class Caracteres(QDialog):
  
     def __init__(self, parent=None):
         super(Caracteres, self).__init__()
@@ -26,7 +26,7 @@ class Caracteres(QWidget):
 
         self.createGridLayout()
 
-        self.show()
+        #self.show()
 
 
     #----- Funcion para Crear los QGroupBox con los botones correspondientes -----
@@ -53,108 +53,107 @@ class Caracteres(QWidget):
         #----- Botones Para los Caracteres Especiales de los Marcadores -----
         button = QPushButton('α', self)
         button.setStyleSheet("font-size: 14px; color: black;")
-        #button.clicked.connect(lambda:self.on_click_marker(button))
-        button.clicked.connect(lambda:self.agregarCaracter(button))
+        button.clicked.connect(lambda:self.on_click(button))
 
         button1 = QPushButton('β', self)
         button1.setStyleSheet("font-size: 14px; color: black;")
-        button1.clicked.connect(lambda:self.on_click_marker(button1))
+        button1.clicked.connect(lambda:self.on_click(button1))
 
         button2 = QPushButton('γ', self)
         button2.setStyleSheet("font-size: 14px; color: black;")
-        button2.clicked.connect(lambda:self.on_click_marker(button2))
+        button2.clicked.connect(lambda:self.on_click(button2))
         
         button3 = QPushButton('δ', self)
         button3.setStyleSheet("font-size: 14px; color: black;")
-        button3.clicked.connect(lambda:self.on_click_marker(button3))
+        button3.clicked.connect(lambda:self.on_click(button3))
         
         button4 = QPushButton('ε', self)
         button4.setStyleSheet("font-size: 14px; color: black;")
-        button4.clicked.connect(lambda:self.on_click_marker(button4))
+        button4.clicked.connect(lambda:self.on_click(button4))
         
         button5 = QPushButton('ζ', self)
         button5.setStyleSheet("font-size: 14px; color: black;")
-        button5.clicked.connect(lambda:self.on_click_marker(button5))
+        button5.clicked.connect(lambda:self.on_click(button5))
         
         button6 = QPushButton('η', self)
         button6.setStyleSheet("font-size: 14px; color: black;")
-        button6.clicked.connect(lambda:self.on_click_marker(button6))
+        button6.clicked.connect(lambda:self.on_click(button6))
         
         button7 = QPushButton('θ', self)
         button7.setStyleSheet("font-size: 14px; color: black;")
-        button7.clicked.connect(lambda:self.on_click_marker(button7))
+        button7.clicked.connect(lambda:self.on_click(button7))
         
         button8 = QPushButton('ι', self)
         button8.setStyleSheet("font-size: 14px; color: black;")
-        button8.clicked.connect(lambda:self.on_click_marker(button8))
+        button8.clicked.connect(lambda:self.on_click(button8))
         
         button9 = QPushButton('κ', self)
         button9.setStyleSheet("font-size: 14px; color: black;")
-        button9.clicked.connect(lambda:self.on_click_marker(button9))
+        button9.clicked.connect(lambda:self.on_click(button9))
         
         button10 = QPushButton('λ', self)
         button10.setStyleSheet("font-size: 14px; color: black;")
-        button10.clicked.connect(lambda:self.on_click_marker(button10))
+        button10.clicked.connect(lambda:self.on_click(button10))
         
         button11 = QPushButton('μ', self)
         button11.setStyleSheet("font-size: 14px; color: black;")
-        button11.clicked.connect(lambda:self.on_click_marker(button11))
+        button11.clicked.connect(lambda:self.on_click(button11))
         
         button12 = QPushButton('ν', self)
         button12.setStyleSheet("font-size: 14px; color: black;")
-        button12.clicked.connect(lambda:self.on_click_marker(button12))
+        button12.clicked.connect(lambda:self.on_click(button12))
         
         button13 = QPushButton('ξ', self)
         button13.setStyleSheet("font-size: 14px; color: black;")
-        button13.clicked.connect(lambda:self.on_click_marker(button13))
+        button13.clicked.connect(lambda:self.on_click(button13))
         
         button14 = QPushButton('ο', self)
         button14.setStyleSheet("font-size: 14px; color: black;")
-        button14.clicked.connect(lambda:self.on_click_marker(button14))
+        button14.clicked.connect(lambda:self.on_click(button14))
         
         button15 = QPushButton('π', self)
         button15.setStyleSheet("font-size: 14px; color: black;")
-        button15.clicked.connect(lambda:self.on_click_marker(button15))
+        button15.clicked.connect(lambda:self.on_click(button15))
         
         button16 = QPushButton('ρ', self)
         button16.setStyleSheet("font-size: 14px; color: black;")
-        button16.clicked.connect(lambda:self.on_click_marker(button16))
+        button16.clicked.connect(lambda:self.on_click(button16))
         
         button17 = QPushButton('σ', self)
         button17.setStyleSheet("font-size: 14px; color: black;")
-        button17.clicked.connect(lambda:self.on_click_marker(button17))
+        button17.clicked.connect(lambda:self.on_click(button17))
 
         button18 = QPushButton('ς', self)
         button18.setStyleSheet("font-size: 14px; color: black;")
-        button18.clicked.connect(lambda:self.on_click_marker(button18))
+        button18.clicked.connect(lambda:self.on_click(button18))
 
         button19 = QPushButton('τ', self)
         button19.setStyleSheet("font-size: 14px; color: black;")
-        button19.clicked.connect(lambda:self.on_click_marker(button19))
+        button19.clicked.connect(lambda:self.on_click(button19))
         
         button20 = QPushButton('υ', self)
         button20.setStyleSheet("font-size: 14px; color: black;")
-        button20.clicked.connect(lambda:self.on_click_marker(button20))
+        button20.clicked.connect(lambda:self.on_click(button20))
 
         button21 = QPushButton('φ', self)
         button21.setStyleSheet("font-size: 14px; color: black;")
-        button21.clicked.connect(lambda:self.on_click_marker(button21))
+        button21.clicked.connect(lambda:self.on_click(button21))
         
         button22 = QPushButton('χ', self)
         button22.setStyleSheet("font-size: 14px; color: black;")
-        button22.clicked.connect(lambda:self.on_click_marker(button22))
+        button22.clicked.connect(lambda:self.on_click(button22))
 
         button23 = QPushButton('ψ', self)
         button23.setStyleSheet("font-size: 14px; color: black;")
-        button23.clicked.connect(lambda:self.on_click_marker(button23))
+        button23.clicked.connect(lambda:self.on_click(button23))
         
         button24 = QPushButton('ω', self)
         button24.setStyleSheet("font-size: 14px; color: black;")
-        button24.clicked.connect(lambda:self.on_click_marker(button24))
+        button24.clicked.connect(lambda:self.on_click(button24))
         
         button25 = QPushButton('Λ', self)
         button25.setStyleSheet("font-size: 14px; color: black;")
-        button25.clicked.connect(lambda:self.on_click_marker(button25))
+        button25.clicked.connect(lambda:self.on_click(button25))
 
 
         #----- Botones Para los Caracteres Especiales de las Variables -----
@@ -181,7 +180,7 @@ class Caracteres(QWidget):
         # Pertenece a las Variables 
         button31 = QPushButton('_', self)
         button31.setStyleSheet("font-size: 14px; color: black;")
-        button31.clicked.connect(lambda:self.on_click_var(button31))
+        button31.clicked.connect(lambda:self.on_click(button31))
 
         button32 = QPushButton('(', self)
         button32.setStyleSheet("font-size: 14px; color: black;")
@@ -205,7 +204,7 @@ class Caracteres(QWidget):
         
         button37 = QPushButton('->', self)
         button37.setStyleSheet("font-size: 14px; color: black;")
-        button37.clicked.connect(lambda:self.on_click_var(button37))
+        button37.clicked.connect(lambda:self.on_click(button37))
 
         #----- Agregar los Botones de los Caracteres Especiales de los Marcadores al Layout -----
         layoutMarker.addWidget(button,0,0) 
@@ -261,29 +260,16 @@ class Caracteres(QWidget):
         self.setLayout(windowLayout)
 
 
-    #Estos tres metodos se combretirian en uno solo 
-
-
-    #----- Funcion para los Botones de -----
+    #----- Funcion para los Botones de la Ventana Caracteres -----
     def on_click(self, caracter):
-        text = self.parent.markersEdit.text()
+
+        #Pregunta  el tipo del QWidget para realizae la extracion del texto de una forma correcta
+        if isinstance(self.parent.varQLineEdit, QLineEdit):
+            text = self.parent.varQLineEdit.text()
+        else:
+            if isinstance(self.parent.varQLineEdit, QTextEdit):
+                text = self.parent.varQLineEdit.toPlainText()
+
         newText = text + caracter.text()
-        self.parent.markersEdit.setText(newText)
-
-
-    #----- Funcion para los Botones de los Marcadores -----
-    def on_click_marker(self, caracter):
-        text = self.parent.markersEdit.text()
-        newText = text + caracter.text()
-        self.parent.markersEdit.setText(newText)
-
-
-    #----- Funcion para los Botones de las Variables -----
-    def on_click_var(self, caracter):
-        text = self.parent.varsEdit.text()
-        newText = text + caracter.text()
-        self.parent.varsEdit.setText(newText)
-
-    # def agregarCaracter(self,caracter):
-    #     self.symbols.append
+        self.parent.varQLineEdit.setText(newText)
 

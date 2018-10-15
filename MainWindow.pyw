@@ -23,6 +23,7 @@ class Ventana(QMainWindow):
   self.symbolsEdit.setText("abcdefghijklmnopqrstuvwxyz0123456789")
   self.varsEdit.setText("wxyz")
   self.markersEdit.setText("αβγδ")
+  self.grammarEdit.setText("")
 
   #Poner imagenes a los botones
   self.clearButton.setIcon(QIcon('image/cancelar.png'))
@@ -80,6 +81,8 @@ class Ventana(QMainWindow):
   menuP_10 = QAction(QIcon(), "Paréntesis balanceados", self)
   menuPrueba.addAction(menuP_10)
 
+
+
   #----------------------------------------------------------------------------------------------------------------
   #invocacion funciones para el menu
   menuA_salir.triggered.connect(self.menuArchivoSalir)
@@ -117,7 +120,11 @@ class Ventana(QMainWindow):
   self.debugButton.clicked.connect(self.habilitarDebug)
 
   #Ventana Hija "Caraacteres"
-  self.children = []
+  #self.children = []
+
+  #Variable para modificar el QLineEdit que tiene el focus "Cursor"
+  self.varQLineEdit = []
+  
  #----------------------------------------------------------------------------------------------------------------
 
  #Funciones del menu
@@ -126,13 +133,12 @@ class Ventana(QMainWindow):
 
 
  def abrirPaleta(self):
+     # Almacenaz el widget que tiene el focus
+     self.varQLineEdit = QApplication.focusWidget ()
 
-    # wfocus = focusWidget() # supuestamente esto manda el nombre del widget que tiene el focus pero no me funciona se cae"
-    # Si funciona se lo paso por parametros a la clase caracteres.
-    
-    
-     child = Caracteres(self)
-     self.children.append(child)
+     #child = Caracteres(self)
+     #self.children.append(child)
+     Caracteres(self).exec_()
 
 
 # Declaración funciones guardar y cargar
