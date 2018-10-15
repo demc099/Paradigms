@@ -80,8 +80,6 @@ class Ventana(QMainWindow):
   menuP_10 = QAction(QIcon(), "Paréntesis balanceados", self)
   menuPrueba.addAction(menuP_10)
 
-
-
   #----------------------------------------------------------------------------------------------------------------
   #invocacion funciones para el menu
   menuA_salir.triggered.connect(self.menuArchivoSalir)

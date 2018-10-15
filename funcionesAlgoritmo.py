@@ -52,7 +52,7 @@ def correrAlgoritmo(self):
     self.printText.append("STEP")
     stepNum+=1
     self.printText.append(texto)
-    self.printText.append(remplazarReglas(texto,extraerreglas(grammar1)))
+    self.printText.append(remplazarReglas(self,texto,extraerreglas(grammar1)))
 
     # "x": ['']
     # texto1 = []
@@ -73,14 +73,10 @@ def correrAlgoritmo(self):
     # listav[0]
     # i = 0
     # #while i < len(rBusqueda):
-
-syntaxre = r"""(?mx)
-^(?: 
-  (?: (?P<comment> \% .* ) ) |
-  (?: (?P<blank>   \s*  ) (?: \n | $ )  ) |
-  (?: (?P<rule>    (?P<pat>.+?) \s+ ->\s+(?P<term> \.)? (?P<repl> .+) ) )
-)$
-"""
+#(?:(?P<rule>(?P<pat>.+?)->(?P<term>\.)?(?P<repl>.+))) |
+syntaxre = r"""(?mx)^(?:(?:(?P<comment>\%.*)) |
+(?:(?P<blank>\s*)(?:\n | $)) |
+(?:(?P<rule>(?P<pat>.+?)\s+->\s+(?P<term>\.)?(?P<repl>.+))))$"""
 
 grammar1 = """\
 % This rules file is extracted from Wikipedia:
@@ -88,9 +84,9 @@ grammar1 = """\
 
 A -> apple
 B -> bag
-S -> shop
+S -> shop 
 T -> the
-W-> HOla
+W -> HOla
 the shop -> my brother
 a never used -> .terminating rule
 
@@ -99,13 +95,14 @@ a never used -> .terminating rule
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
             for matchobj in re.finditer(syntaxre, grammar)
-            if matchobj.group('rule')]
+            if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[(A,apple,False)]
 
-def remplazarReglas(text, grammar):
+def remplazarReglas(self,text, grammar):
     while True:
         for pat, repl, term in grammar:
             if pat in text:
                 text = text.replace(pat, repl, 1)
+                self.printText.append(text)
                 if term:
                     return text
                 break
