@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<algoritmo>
-<symbols>abcdefghijklmnopqrstuvwxyz0123456789</symbols>
-<vars>wxyz</vars>
-<markers>αβγδ</markers>
-<rules>a->b</rules>
-<rules>b->c</rules>
-</algoritmo>
