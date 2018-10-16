@@ -29,9 +29,8 @@ def guardarXml(self, fileName):
     file.write("<algoritmo>"+"\n")
     file.write("<symbols>"+self.symbolsEdit.text()+"</symbols>"+"\n")
     file.write("<vars>"+self.varsEdit.text()+"</vars>"+"\n")
-    file.write("<markers>"+self.markersEdit.text() + "</markers>" + "\n")
+    file.write("<markers>"+self.markersEdit.text() + "</markers>"+"\n")
     lines = str(self.grammarEdit.toPlainText()).split('\n')
-    num = len(lines)
     for line in lines:
         file.write("<rules>"+line+"</rules>"+"\n")
     file.write('</algoritmo>')
@@ -52,55 +51,51 @@ def validarFormatoCargar(self, fileName):
 def cargarTxt(self, fileName):
     file = open(fileName, 'r', encoding='utf-8')
     lines = file.readlines()
+    self.grammarEdit.setText("")
     for line in lines:
-        patronSym = re.search('^\#symbols\s[a-z0-9]+', line, re.I)
-        patronVars = re.search('^\#vars\s[a-z]+', line, re.I)
-        patronMark = re.match('^\#markers\s[α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|ο|π|ρ|σ|τ|ς|τ|υ|φ|χ|ψ|ω|Λ]+', line, re.I)
-        patronRules = re.match('^[\w\-\>]+', line, re.I)
+        patronSym = re.search('^\#symbols\s[a-z0-9]+', line, re.UNICODE)
+        patronVars = re.search('^\#vars\s[\w]+', line, re.UNICODE)
+        patronMark = re.search('^\#markers\s[a-zA-Z]+', line, re.UNICODE)
+        patronRules = re.search('^[\w+\-\>\w+]', line, re.UNICODE)
         print(patronSym)
         if patronSym:
-            objSym = re.search('[^\#symbols][a-z0-9]+', patronSym.group(), re.I)
-            if objSym:
-                self.symbolsEdit.setText(objSym.group())
+            pr = line.replace("#symbols ","")
+            self.symbolsEdit.setText(pr.rstrip())
         if patronVars:
-            objVar = re.search('[^\#vars][a-z]+', patronVars.group(), re.I)
-            if objVar:
-                self.varsEdit.setText(objVar.group())
+            pr = line.replace("#vars ","")
+            self.varsEdit.setText(pr.rstrip())
         if patronMark:
-            objMark = re.search('[^\#markers][α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|ο|π|ρ|σ|τ|ς|τ|υ|φ|χ|ψ|ω|Λ]+', patronMark.group(), re.I)
-            if objMark:
-                self.markersEdit.setText(objMark.group())
+            pr = line.replace("#markers ","")
+            self.markersEdit.setText(pr.rstrip())
         if patronRules:
-            objRul = re.search('[\w|\-\>]+', patronRules.group(), re.I)
-            if objRul:
-                self.grammarEdit.setText(self.grammarEdit.toPlainText()+objRul.group()+"\n")
+            self.grammarEdit.setText(self.grammarEdit.toPlainText()+line)
     file.close()
     
 
 def cargarXml(self, fileName):
     file = open(fileName, 'r', encoding='utf-8')
     lines = file.readlines()
+    self.grammarEdit.setText("")
     for line in lines:
-        #patronSym = re.match('^\<symbols\>[a-z0-9]+\<\/symbols\>', line, re.I)
-        patronSym = re.search('^\<symbols\>[a-z0-9]+\<\/symbols\>', line, re.I)
-        patronVars = re.search('^\<vars\>[a-z]+\<\/vars\>', line, re.I)
-        patronMark = re.match('^\<markers\>[α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|ο|π|ρ|σ|τ|ς|τ|υ|φ|χ|ψ|ω|Λ]+\<\/markers\>', line, re.I)
-        patronRules = re.match('^\<rules\>[\w|\-\>]+\<\/rules\>', line, re.I)
+        patronSym = re.search('^\<symbols\>[a-z0-9]+\<\/symbols\>', line, re.UNICODE)
+        patronVars = re.search('^\<vars\>[\w]+\<\/vars\>', line, re.UNICODE)
+        patronMark = re.search('^\<markers\>[\w]+\<\/markers\>', line, re.UNICODE)
+        patronRules = re.search('^\<rules\>[\w+\s\-\>]+\<\/rules\>', line,re.UNICODE)
         if patronSym:
-            objSym = re.search('[^\<symbols\>][a-z0-9]+', patronSym.group(), re.I)
-            if objSym:
-                self.symbolsEdit.setText(objSym.group())
+            pr1 = line.replace("<symbols>","")
+            pr = pr1.replace("</symbols>","")
+            self.symbolsEdit.setText(pr.rstrip())
         if patronVars:
-            objVar = re.search('[^\<vars\>][a-z]+', patronVars.group(), re.I)
-            if objVar:
-                self.varsEdit.setText(objVar.group())
+            pr2 = line.replace("<vars>","")
+            pr = pr2.replace("</vars>","")
+            self.varsEdit.setText(pr.rstrip())
         if patronMark:
-            objMark = re.search('[^\<markers\>][α|β|γ|δ|ε|ζ|η|θ|ι|κ|λ|μ|ν|ξ|ο|π|ρ|σ|τ|ς|τ|υ|φ|χ|ψ|ω|Λ]+', patronMark.group(), re.I)
-            if objMark:
-                self.markersEdit.setText(objMark.group())
+            pr3 = line.replace("<markers>","")
+            pr = pr3.replace("</markers>","")
+            self.markersEdit.setText(pr.rstrip())
         if patronRules:
-            objRul = re.search('[^\<rules\>][\w|\-\>]+', patronRules.group(), re.I)
-            if objRul:
-                self.grammarEdit.setText(self.grammarEdit.toPlainText()+objRul.group()+"\n")
+            pr4 = line.replace("<rules>","")
+            pr = pr4.replace("</rules>","")
+            self.grammarEdit.setText(self.grammarEdit.toPlainText()+pr4.replace("</rules>",""))
     file.close()
 

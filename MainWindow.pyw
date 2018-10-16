@@ -93,7 +93,7 @@ class Ventana(QMainWindow):
 
   #invocacion funciones para guardar
   #self.saveButton.clicked.connect(self.guardar)
-  self.saveButton.clicked.connect(self.conjuntodevalidaciones)
+  self.saveButton.clicked.connect(self.guardar)
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.correrAlgoritmo)

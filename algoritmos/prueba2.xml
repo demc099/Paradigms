@@ -1,8 +1,8 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <algoritmo>
 <symbols>abcdefghijklmnopqrstuvwxyz0123456789</symbols>
-<vars>bcrdD</vars>
-<markers>ABSTaθηκ</markers>
+<vars>abcda</vars>
+<markers>kbθηκaB</markers>
 <rules>A -> apple</rules>
 <rules>B -> bag</rules>
 <rules>S -> shop</rules>

@@ -3,5 +3,10 @@
 <symbols>abcdefghijklmnopqrstuvwxyz0123456789</symbols>
 <vars>wxyz</vars>
 <markers>αβγδ</markers>
-<rules>sdfsd->sedff</rules>
+<rules>A -> apple</rules>
+<rules>B -> bag</rules>
+<rules>S -> shop</rules>
+<rules>T -> the </rules>
+<rules>W -> prueba</rules>
+<rules>the shop -> my brother</rules>
 </algoritmo>
