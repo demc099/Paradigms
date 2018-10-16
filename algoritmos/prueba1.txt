@@ -1,0 +1,10 @@
+#symbols abcdefghijklmnopqrstuvwxyz0123456789
+#vars abcrd
+#markers aABSTWκνp
+A -> apple
+B -> bag
+S -> shop
+T -> the 
+W -> prueba
+the shop -> my brother
+
