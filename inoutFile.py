@@ -55,7 +55,7 @@ def cargarTxt(self, fileName):
     for line in lines:
         patronSym = re.search('^\#symbols\s[a-z0-9]+', line, re.UNICODE)
         patronVars = re.search('^\#vars\s[\w]+', line, re.UNICODE)
-        patronMark = re.search('^\#markers\s[a-zA-Z]+', line, re.UNICODE)
+        patronMark = re.search('^\#markers\s[\w]+', line, re.UNICODE)
         patronRules = re.search('^[\w+\-\>\w+]', line, re.UNICODE)
         print(patronSym)
         if patronSym:
@@ -98,4 +98,3 @@ def cargarXml(self, fileName):
             pr = pr4.replace("</rules>","")
             self.grammarEdit.setText(self.grammarEdit.toPlainText()+pr4.replace("</rules>",""))
     file.close()
-
