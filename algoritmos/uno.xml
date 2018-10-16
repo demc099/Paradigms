@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<algoritmo>
-<symbols>abcdf</symbols>
-<vars>pqrs</vars>
-<markers>θλκ</markers>
-<rules>ap->a</rules>
-<rules>pq->f</rules>
-</algoritmo>
