@@ -103,20 +103,28 @@ def extraerreglas(grammar):
             for matchobj in re.finditer(syntaxre, grammar)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
 def remplazarReglas(self,text, grammar):
+    listaSim = list(self.symbolsEdit.text())
+    listaMar = list(self.markersEdit.text())
     while True:
         for pat, repl, term in grammar:
-            if pat in text:
-                if repl == "Λ":
-                    self.printText.append(text + "  ->  ")
-                    text = text.replace(pat,"", 1)
-                    self.printText.insertPlainText(text)
-                else:
-                    self.printText.append(text+"  ->  ")
-                    text = text.replace(pat, repl, 1)
-                    self.printText.insertPlainText(text)
-                    if term:
-                        return text
-                    break
+            if pat == "Λ":
+                t = list(text)
+                self.printText.append(text + "  ->  ")
+                text = text.replace(t[0], repl, 1)
+                self.printText.insertPlainText(text)
+            else:
+                if pat in text:
+                    if repl == "Λ":
+                        self.printText.append(text + "  ->  ")
+                        text = text.replace(pat,"", 1)
+                        self.printText.insertPlainText(text)
+                    else:
+                        self.printText.append(text+"  ->  ")
+                        text = text.replace(pat, repl, 1)
+                        self.printText.insertPlainText(text)
+                        if term:
+                            return text
+                        break
         else:
             return text# y si recorre el for y el pat no esta en la gramatica
 

@@ -37,7 +37,7 @@ def validarVars(self):
 
 def validarMark(self):
   markers = self.markersEdit.text()
-  validar = re.match('^[a-z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+$', markers, re.I)
+  validar = re.match('^[a-z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψω]+$', markers, re.I)
   if markers == "   ":
    self.markersEdit.setText("αβγδ")
    self.markersEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
