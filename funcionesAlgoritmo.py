@@ -11,13 +11,19 @@
 #(?P<aaa>)nombrar grupos
 #prueba I bought a B of As W my Bgage from T S.
 #""" respetar lo de adentro
+#(?: (?P < rule > (?P < e1 >  \w+?:)? (?P < pat >.+?) \s + -> \s + (?P < repl >.* ?[^.])(?P < term > \.)? ([(](?P < e2 >  \w+?)[)])?))
+# def extraerreglas(grammar):
+#     return [(matchobj.group('e1'),matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')),matchobj.group('e2'))
+#             for matchobj in re.finditer(syntaxre, grammar)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
+#             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
+
 import re
 
 syntaxre = r"""(?mx)
 ^(?: 
   (?: (?P<comment> \% .* ) ) |
   (?: (?P<blank>   \s*  ) (?: \n | $ )  ) |
-  (?: (?P<rule> (?P<e1> \w+?:)? (?P<pat> .+? ) \s+ -> \s+ (?P<repl> .*?[^.] ) (?P<term> \.)? ([(](?P<e2> \w+?)[)])?))
+  (?: (?P<rule> (?P<pat> .+? ) \s+ -> \s+ (?P<repl> .*?[^.] ) (?P<term> \.)? ))
 )$
 """
 
@@ -57,7 +63,7 @@ def debug(self):
     self.printText.append(remplazarDebug(self, texto, extraerreglas(grammar)))
 
 def extraerreglas(grammar):
-    return [(matchobj.group('e1'),matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')),matchobj.group('e2'))
+    return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
             for matchobj in re.finditer(syntaxre, grammar)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
 def remplazarReglas(self,text, grammar):
