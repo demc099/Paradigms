@@ -98,3 +98,46 @@ def cargarXml(self, fileName):
             pr = pr4.replace("</rules>","")
             self.grammarEdit.setText(self.grammarEdit.toPlainText()+pr4.replace("</rules>",""))
     file.close()
+
+
+#-------------------- Funciones Cargar y  Guardar Archivo de Pruebas --------------------
+def guardarPrueba(self):
+    fileNamePrueba, _ = QFileDialog.getSaveFileName(self, "Guardar", "","Text Files (*.txt)")
+    if fileNamePrueba:
+        validarGuardarPrueba(self, fileNamePrueba)
+
+def validarGuardarPrueba(self, fileNamePrueba):
+    patronTxtPrueba = re.match('^(\w):\/[(\w+\s?\w+)(áéíóúñ\_\#\-)+\/?]+\.txt$', fileNamePrueba, re.I)
+    if (patronTxtPrueba):
+        guardarTxtPrueba(self, fileNamePrueba)
+
+
+def guardarTxtPrueba(self, fileNamePrueba):
+    file = open(fileNamePrueba, "w", encoding='utf-8')
+    file.write(self.fileEdit.toPlainText()+ "\n")
+    file.close()
+
+
+
+def cargarPrueba(self):
+    fileNamePrueba, _ = QFileDialog.getOpenFileName(self, "Abrir Documento de Pruebas", "","Text Files (*.txt)")
+    if fileNamePrueba:
+        validarCargarPrueba(self, fileNamePrueba)
+
+def validarCargarPrueba(self, fileNamePrueba):
+    patronTxtPrueba = re.match('^(\w):\/[(\w+\s?\w+)(áéíóúñ\_\#\-)+\/?]+\.txt$', fileNamePrueba, re.I)
+    if(patronTxtPrueba):
+        cargarTxtPrueba(self, fileNamePrueba)
+
+def cargarTxtPrueba(self, fileNamePrueba):
+    filePrueba = open(fileNamePrueba, 'r', encoding='utf-8')
+    linesPrueba = filePrueba.readlines()
+
+    self.fileEdit.setText("")
+
+    for linePrueba in linesPrueba:
+        patronPrueba = re.search('^[\w]+', linePrueba, re.UNICODE)
+        if patronPrueba:
+            self.fileEdit.setText(self.fileEdit.toPlainText()+linePrueba)
+    filePrueba.close()
+    

@@ -83,6 +83,7 @@ P3: x -> βx (P1)
 
 def correrAlgoritmo(self):
     #self.runButton.clicked.connect(self.printText.clear)
+    self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
     texto = self.lineEdit.text()
     grammar= self.grammarEdit.toPlainText()
@@ -126,3 +127,15 @@ def remplazarDebug(self, text, grammar):
 
 #Pruebas de Carolina-------------------------------------------------------------------------
 
+def correrAlgoritmoPruebas(self):
+    #self.runButton.clicked.connect(self.printText.clear)
+    self.clearRegistryButton.setEnabled(True)
+    self.saveRegistryButton.setEnabled(True)
+    grammar= self.grammarEdit.toPlainText()
+    pruebas = str(self.fileEdit.toPlainText()).split('\n')
+    self.printText.clear()
+
+    for line in pruebas:
+       self.printText.append("#PRUEBA"+ "\n")
+       self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
+       self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,line,extraerreglas(grammar)) + "\n")
