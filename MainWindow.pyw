@@ -90,10 +90,12 @@ class Ventana(QMainWindow):
   menuA_salir.triggered.connect(self.menuArchivoSalir)
   menuH_paleta.triggered.connect(self.abrirPaleta)
   menuA_abrir.triggered.connect(self.cargar)
+  menuA_guardar.triggered.connect(self.conjuntodevalidaciones)
 
   #invocacion funciones para guardar
   #self.saveButton.clicked.connect(self.guardar)
-  self.saveButton.clicked.connect(self.guardar)
+  self.saveButton.clicked.connect(self.conjuntodevalidaciones)
+
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.correrAlgoritmo)

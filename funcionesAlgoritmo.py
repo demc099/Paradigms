@@ -92,6 +92,12 @@ def correrAlgoritmo(self):
 
     self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,texto,extraerreglas(grammar1)))
 
+
+def debug(self):
+    texto = self.lineEdit.text()
+    grammar = self.grammarEdit.toPlainText()
+    self.printText.append(remplazarDebug(self, texto, extraerreglas(grammar)))
+
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
             for matchobj in re.finditer(syntaxre, grammar1)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
@@ -108,6 +114,14 @@ def remplazarReglas(self,text, grammar):
                 break
         else:
             return text# y si recorre el for y el pat no esta en la gramatica
+
+
+def remplazarDebug(self, text, grammar):
+    for pat, rep1, term in grammar:
+        if pat in text:
+            self.printText.append(text+"  ->  ")
+
+
 
 
 #Pruebas de Carolina-------------------------------------------------------------------------

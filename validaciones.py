@@ -1,7 +1,10 @@
 #Validar
 import re
-
 import inoutFile
+from PyQt5.QtGui import *
+from PyQt5 import *
+from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMessageBox, QDialog, QWidget,
+                               QGroupBox, QGridLayout, QVBoxLayout, QLineEdit, QPushButton, QLabel, QInputDialog)
 
 
 def validarSim(self):
@@ -107,6 +110,10 @@ def busqueda(linea):
 #           print(cont)
 #           return False
 
+def enviarMensError(self):
+    ret = QMessageBox.critical(self, "Error al guardar",
+                                     '''Usted a ingresado mal los valores, por favor ingreselos correctamente e inténtelo nuevamente!
+                                     ''', QMessageBox.Ok)
 
 def conjuntodevalidaciones(self):
     if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
@@ -115,4 +122,4 @@ def conjuntodevalidaciones(self):
             self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
             inoutFile.guardar(self)
     else:
-        print("noo")
+        enviarMensError(self)
