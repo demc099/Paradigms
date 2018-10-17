@@ -1,10 +1,11 @@
-#symbols abcdefghijklmnopqrstuvwxyz0123456789
-#vars abcrd
-#markers aABSTWκνp
+#symbols abcdefg0123456789
+#vars pqrs
+#markers ABSTWκν
+% ejemplo agarrado de internet
 A -> apple
 B -> bag
 S -> shop
 T -> the 
 W -> prueba
 the shop -> my brother
-
+% esto es un comentario

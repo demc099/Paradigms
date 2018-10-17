@@ -1,13 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <algoritmo>
 <symbols>abcdefghijklmnopqrstuvwxyz0123456789</symbols>
-<vars>abcda</vars>
-<markers>kbθηκaB</markers>
-<rules>A -> apple</rules>
-<rules>B -> bag</rules>
-<rules>S -> shop</rules>
-<rules>T -> the </rules>
-<rules>W -> prueba</rules>
-<rules>the shop -> my brother</rules>
-<rules></rules>
+<vars>wxyz</vars>
+<markers>αβγδ</markers>
+<comment># ejercicio tomado de internet</comment>
+<rules>a -> b</rules>
+<rules>b -> a</rules>
+<comment># esto es un comentario</comment>
+<comment># y esto tambien</comment>
 </algoritmo>

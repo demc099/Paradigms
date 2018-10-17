@@ -9,7 +9,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMessageBox, QD
 
 def validarSim(self):
   symbols= self.symbolsEdit.text()
-  validar = re.match('^[a-z0-9\sáéíóúàèìòùäëïöü]+$', symbols, re.I)
+  validar = re.match('^[a-z0-9áéíóúàèìòùäëïöü]+$', symbols, re.I)
   if symbols == "   ":
    self.symbolsEdit.setText("abcdefghijklmnopqrstuvwxyz0123456789")
    self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
@@ -23,7 +23,7 @@ def validarSim(self):
 
 def validarVars(self):
   vars = self.varsEdit.text()
-  validar = re.match('^[a-z0-9\sáéíóúàèìòùäëïöü]+$', vars, re.I)
+  validar = re.match('^[a-z0-9áéíóúàèìòùäëïöü]+$', vars, re.I)
   if vars == "   ":
    self.varsEdit.setText("wxyz")
    self.varsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
@@ -37,7 +37,7 @@ def validarVars(self):
 
 def validarMark(self):
   markers = self.markersEdit.text()
-  validar = re.match('^[a-z0-9\sáéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+$', markers, re.I)
+  validar = re.match('^[a-z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψω]+$', markers, re.I)
   if markers == "   ":
    self.markersEdit.setText("αβγδ")
    self.markersEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
@@ -55,26 +55,38 @@ def validarIgualdad(self):
   listaSim= list(self.symbolsEdit.text())
   listaVar = list(self.varsEdit.text())
   listaMar = list(self.markersEdit.text())
-  print(listaSim)
-  print(listaVar)
-  print(listaMar)
-  comparacion = [item for item in listaSim if item in listaMar]
-  if len(comparacion) > 0:
-   for item in comparacion:
-    print('I=> '+ '%s' % item)
-    self.markersEdit.setStyleSheet("color: blue; border: 1px solid red;")
-    return False
+  compSym = [item for item in listaMar if item in listaSim]
+  compVar = [item for item in listaMar if item in listaVar]
+  if len(compSym) > 0:
+      for item in compSym:
+          #print('I=> '+ '%s' % item + "se metio al primero")
+          self.markersEdit.setStyleSheet("color: blue; border: 1px solid red;")
+      return False
+  elif len(compVar) > 0:
+      for item in compVar:
+          #print('I=> ' + '%s' % item + "se metio al segundo")
+          self.markersEdit.setStyleSheet("color: blue; border: 1px solid red;")
+      return False
   else:
    print('No hay')
    return True
 
 def validarGramatica(self):
-  texto1= self.grammarEdit.toPlainText()
-  print(texto1)
-  linea = str(self.grammarEdit.toPlainText()).split('\n')
-  print(linea)
-  nuevaLinea= busqueda(linea)
-  return nuevaLinea
+  listaSim = list(self.symbolsEdit.text())
+  listaVar = list(self.varsEdit.text())
+  listaMar = list(self.markersEdit.text())
+  #print(texto1)
+  lineas = str(self.grammarEdit.toPlainText()).split('\n')
+  for linea in lineas:
+      for carac in linea:
+          if (carac != "-" and carac != ">"):
+              print(carac)
+
+
+
+  #print(linea)
+  #nuevaLinea= busqueda(linea)
+  #return nuevaLinea
   #print(len(linea))
   #print(linea[0])
 
@@ -110,16 +122,17 @@ def busqueda(linea):
 #           print(cont)
 #           return False
 
-def enviarMensError(self):
-    ret = QMessageBox.critical(self, "Error al guardar",
-                                     '''Usted a ingresado mal los valores, por favor ingreselos correctamente e inténtelo nuevamente!
-                                     ''', QMessageBox.Ok)
+def enviarMensError(self, msj):
+    ret = QMessageBox.critical(self, "Error",msj, QMessageBox.Ok)
 
 def conjuntodevalidaciones(self):
     if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
+        validarGramatica(self)
         if validarIgualdad(self) == True:
             #if validarGramatica(self) == True:
             self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
             inoutFile.guardar(self)
+        else:
+            enviarMensError(self, "Verifique que los marcadores ingresados no coincidan con los simbolos ni las variables ingresadas")
     else:
-        enviarMensError(self)
+        enviarMensError(self, "Usted a ingresado caracteres no permitidos, por favor ingreselos correctamente e inténtelo de nuevo!")
