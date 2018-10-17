@@ -26,6 +26,8 @@ class Ventana(QMainWindow):
   self.grammarEdit.setText("")
 
   #Poner imagenes a los botones
+  self.clearRegistryButton.setIcon(QIcon('image/cancelar.png'))
+  self.clearFileButton.setIcon(QIcon('image/cancelar.png'))
   self.clearButton.setIcon(QIcon('image/cancelar.png'))
   self.saveButton.setIcon(QIcon('image/guardar.png'))
   self.runButton.setIcon(QIcon('image/run.png'))
@@ -91,11 +93,12 @@ class Ventana(QMainWindow):
   menuH_paleta.triggered.connect(self.abrirPaleta)
   menuA_abrir.triggered.connect(self.cargar)
   menuA_guardar.triggered.connect(self.conjuntodevalidaciones)
+  menuH_cargarArchivo.triggered.connect(self.cargarPrueba)
 
   #invocacion funciones para guardar
   #self.saveButton.clicked.connect(self.guardar)
   self.saveButton.clicked.connect(self.conjuntodevalidaciones)
-
+  self.saveFileButton.clicked.connect(self.guardarPrueba)
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.correrAlgoritmo)
@@ -103,7 +106,9 @@ class Ventana(QMainWindow):
   # Enable campos
   self.fileEdit.setEnabled(False)
   self.nextButton.setEnabled(False)
+  self.clearFileButton.setEnabled(False)
   self.saveFileButton.setEnabled(False)
+  self.clearRegistryButton.setEnabled(False)
   self.saveRegistryButton.setEnabled(False)
 
   #Input
@@ -111,6 +116,11 @@ class Ventana(QMainWindow):
   self.clearButton.clicked.connect(self.varsEdit.clear)
   self.clearButton.clicked.connect(self.symbolsEdit.clear)
   self.clearButton.clicked.connect(self.grammarEdit.clear)
+  self.clearButton.clicked.connect(self.lineEdit.clear)
+
+  self.clearFileButton.clicked.connect(self.clearFileEdit)
+  self.clearRegistryButton.clicked.connect(self.clearPrintText)
+
 
   #self.saveButton.clicked.connect(self.validar)
   self.symbolsEdit.textChanged.connect(self.validarSim)
@@ -136,10 +146,20 @@ class Ventana(QMainWindow):
  def abrirPaleta(self):
      # Almacenaz el widget que tiene el focus
      self.varQLineEdit = QApplication.focusWidget ()
-
-     #child = Caracteres(self)
-     #self.children.append(child)
      Caracteres(self).exec_()
+
+# Declaración funcion Limpiar campos
+ def clearFileEdit(self):
+    self.fileEdit.setText("")
+    self.lineEdit.setEnabled(True)
+    self.fileEdit.setEnabled(False)
+    self.clearFileButton.setEnabled(False)
+    self.saveFileButton.setEnabled(False)
+
+ def clearPrintText(self):
+    self.printText.setText("")
+    self.clearRegistryButton.setEnabled(False)
+    self.saveRegistryButton.setEnabled(False)
 
 
 # Declaración funciones guardar y cargar
@@ -165,6 +185,24 @@ class Ventana(QMainWindow):
      inoutFile.cargar(self)
 
 
+# Declaración funciones guardar y cargar Pruebas
+ def guardarPrueba(self):
+  inoutFile.guardarPrueba(self)
+  self.fileEdit.setText("")
+  self.lineEdit.setEnabled(True)
+  self.fileEdit.setEnabled(False)
+  self.clearFileButton.setEnabled(False)
+  self.saveFileButton.setEnabled(False)
+
+ def cargarPrueba(self):
+  self.lineEdit.setEnabled(False)
+  self.fileEdit.setEnabled(True)
+  self.clearFileButton.setEnabled(True)
+  self.saveFileButton.setEnabled(True)
+  inoutFile.cargarPrueba(self)
+  self.lineEdit.setText("")
+
+
 # Declaración funciones algoritmo
  def aplicarAlgoritmo(self):
     linea= self.lineEdit.text()
@@ -172,8 +210,17 @@ class Ventana(QMainWindow):
     variables= self.varsEdit.text()
     funcionesAlgoritmo.algoritmo(self, linea, variables)
 
+
  def correrAlgoritmo(self):
   funcionesAlgoritmo.correrAlgoritmo(self)
+ 
+ def correrAlgoritmo(self):
+  if self.lineEdit.isEnabled():
+    funcionesAlgoritmo.correrAlgoritmo(self)
+  else:
+    if self.fileEdit.isEnabled():
+      funcionesAlgoritmo.correrAlgoritmoPruebas(self)
+
 
 #Debug
  def habilitarDebug(self):

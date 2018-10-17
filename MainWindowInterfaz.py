@@ -168,6 +168,12 @@ class Ui_MainWindow(object):
         self.verticalLayout_5.setObjectName("verticalLayout_5")
         spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_5.addItem(spacerItem2)
+        
+        self.clearRegistryButton = QtWidgets.QPushButton(self.widget)
+        self.clearRegistryButton.setText("")
+        self.clearRegistryButton.setObjectName("clearRegistryButton")
+        self.verticalLayout_5.addWidget(self.clearRegistryButton)
+
         self.saveRegistryButton = QtWidgets.QPushButton(self.widget)
         self.saveRegistryButton.setText("")
         self.saveRegistryButton.setObjectName("saveRegistryButton")
@@ -200,6 +206,10 @@ class Ui_MainWindow(object):
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         spacerItem4 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem4)
+        self.clearFileButton = QtWidgets.QPushButton(self.widget2)
+        self.clearFileButton.setText("")
+        self.clearFileButton.setObjectName("clearFileButton")
+        self.clearFileButton.addWidget(self.clearFileButton)
         self.saveFileButton = QtWidgets.QPushButton(self.widget2)
         self.saveFileButton.setText("")
         self.saveFileButton.setObjectName("saveFileButton")

@@ -1,48 +1,3 @@
-#http://edupython.blogspot.com/2016/06/combinaciones-permutaciones-y-otras.html
-
-# def permuta(c):
-#     """Calcula y devuelve una lista con todas las
-#        permutaciones posibles que se pueden hacer
-#        con los elementos contenidos en c.
-#     """
-#     if len(c) == 0:
-#         return [[]]
-#     return sum([inserta_multiple(c[0], s)
-#                 for s in permuta(c[1:])],
-#                [])
-import re
-
-def potencia(c):
-    """Calcula y devuelve el conjunto potencia del 
-       conjunto c.
-    """
-    if len(c) == 0:
-        return [[]]
-    r = potencia(c[:-1])
-    return r + [s + [c[-1]] for s in r]
-
-def imprime_ordenado(c):
-    
-    """Imprime en la salida estándar todos los
-       subconjuntos del conjunto c (una lista de
-       listas) ordenados primero por tamaño y
-       luego lexicográficamente. Cada subconjunto
-       se imprime en su propia línea. Los
-       elementos de los subconjuntos deben ser
-       comparables entre sí, de otra forma puede
-       ocurrir un TypeError.
-    """
-    for e in sorted(c, key=lambda s: (len(s), s)):
-        print(e)
-        
-
-def algoritmo(self, linea, variables):
-    c=linea+variables
-    imprime_ordenado(potencia(c))
-    
-def leng(cadena):
-    lenguaje= {'ab':'cd'}
-
 #^es el inicio de la linea y el $ es el final de la linea
 # el "." es cualquier caracter de la linea
 #/s cualquier espacio de la linea
@@ -56,6 +11,8 @@ def leng(cadena):
 #(?P<aaa>)nombrar grupos
 #prueba I bought a B of As W my Bgage from T S.
 #""" respetar lo de adentro
+import re
+
 syntaxre = r"""(?mx)
 ^(?: 
   (?: (?P<comment> \% .* ) ) |
@@ -83,6 +40,7 @@ P3: x -> βx (P1)
 
 def correrAlgoritmo(self):
     #self.runButton.clicked.connect(self.printText.clear)
+    self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
     texto = self.lineEdit.text()
     grammar= self.grammarEdit.toPlainText()
@@ -105,18 +63,24 @@ def extraerreglas(grammar):
 def remplazarReglas(self,text, grammar):
     while True:
         for pat, repl, term in grammar:
-            if pat in text:
-                if repl == "Λ":
-                    self.printText.append(text + "  ->  ")
-                    text = text.replace(pat,"", 1)
-                    self.printText.insertPlainText(text)
-                else:
-                    self.printText.append(text+"  ->  ")
-                    text = text.replace(pat, repl, 1)
-                    self.printText.insertPlainText(text)
-                    if term:
-                        return text
-                    break
+            if pat == "Λ":
+                t = list(text)
+                self.printText.append(text + "  ->  ")
+                text = text.replace(t[0], repl, 1)
+                self.printText.insertPlainText(text)
+            else:
+                if pat in text:
+                    if repl == "Λ":
+                        self.printText.append(text + "  ->  ")
+                        text = text.replace(pat,"", 1)
+                        self.printText.insertPlainText(text)
+                    else:
+                        self.printText.append(text+"  ->  ")
+                        text = text.replace(pat, repl, 1)
+                        self.printText.insertPlainText(text)
+                        if term:
+                            return text
+                        break
         else:
             return text# y si recorre el for y el pat no esta en la gramatica
 
@@ -131,3 +95,15 @@ def remplazarDebug(self, text, grammar):
 
 #Pruebas de Carolina-------------------------------------------------------------------------
 
+def correrAlgoritmoPruebas(self):
+    #self.runButton.clicked.connect(self.printText.clear)
+    self.clearRegistryButton.setEnabled(True)
+    self.saveRegistryButton.setEnabled(True)
+    grammar= self.grammarEdit.toPlainText()
+    pruebas = str(self.fileEdit.toPlainText()).split('\n')
+    self.printText.clear()
+
+    for line in pruebas:
+       self.printText.append("#PRUEBA"+ "\n")
+       self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
+       self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,line,extraerreglas(grammar)) + "\n")
