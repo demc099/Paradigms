@@ -146,6 +146,21 @@ class Ventana(QMainWindow):
  def guardar(self):
      inoutFile.guardar(self)
 
+ def verificar(self):
+  symbols = self.symbolsEdit.text()
+  vars = self.varsEdit.text()
+  markers = self.markersEdit.text()
+  print("El contenido es:"+symbols)
+  if symbols == "   ":
+   self.symbolsEdit.setText("abcdefghijklmnopqrstuvwxyz0123456789")
+   self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
+  if vars == "   ":
+   self.varsEdit.setText("wxyz")
+   self.varsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
+  if markers == "   ":
+   self.markersEdit.setText("αβγδ")
+   self.markersEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
+
  def cargar(self):
      inoutFile.cargar(self)
 
