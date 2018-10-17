@@ -11,6 +11,8 @@
 #(?P<aaa>)nombrar grupos
 #prueba I bought a B of As W my Bgage from T S.
 #""" respetar lo de adentro
+import re
+
 syntaxre = r"""(?mx)
 ^(?: 
   (?: (?P<comment> \% .* ) ) |
