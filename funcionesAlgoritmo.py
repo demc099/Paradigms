@@ -96,7 +96,7 @@ def correrAlgoritmo(self):
 def debug(self):
     texto = self.lineEdit.text()
     grammar = self.grammarEdit.toPlainText()
-    self.printText.append(remplazarDebug(self, texto, extraerreglas(grammar1)))
+    self.printText.append(remplazarDebug(self, texto, extraerreglas(grammar)))
 
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
