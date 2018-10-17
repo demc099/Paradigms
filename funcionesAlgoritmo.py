@@ -55,11 +55,12 @@ def leng(cadena):
 #Pruebas de Carolina-------------------------------------------------------------------------
 #(?P<aaa>)nombrar grupos
 #prueba I bought a B of As W my Bgage from T S.
+#""" respetar lo de adentro
 syntaxre = r"""(?mx)
 ^(?: 
   (?: (?P<comment> \% .* ) ) |
   (?: (?P<blank>   \s*  ) (?: \n | $ )  ) |
-  (?: (?P<rule>    (?P<pat> .+? ) \s+ -> \s+ (?P<term> \.)? (?P<repl> .+) ) )
+  (?: (?P<rule>    (?P<pat> .+? ) \s+ -> \s+ (?P<repl> .+[^.] ) (?P<term> \.)? ) )
 )$
 """
 
@@ -68,11 +69,10 @@ grammar1 = """\
 % http://en.wikipedia.org/wiki/Markov_Algorithm
 A -> apple
 B -> bag
-S -> shop
+S -> shop.
 T -> the
 W -> PRUE
 the shop -> my brother
-a never used -> .terminating rule
 """
 #abcd
 grammar2 = """\
@@ -107,7 +107,7 @@ def remplazarReglas(self,text, grammar):
                     return text
                 break
         else:
-            return text
+            return text# y si recorre el for y el pat no esta en la gramatica
 
 
 #Pruebas de Carolina-------------------------------------------------------------------------
