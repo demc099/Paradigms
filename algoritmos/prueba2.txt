@@ -1,0 +1,6 @@
+#symbols abcdefghijklmnopqrstuvwxyz0123456789
+#vars wxyz
+#markers αβγδ
+a -> b
+b -> a
+% esto es un comentario

@@ -2,12 +2,14 @@
 <algoritmo>
 <symbols>abcdefghijklmnopqrstuvwxyz0123456789</symbols>
 <vars>bcrdD</vars>
-<markers>ABSTaθηκ</markers>
+<markers>ABSTθηκ</markers>
+<comment>% texto agarrado de internet</comment>
 <rules>A -> apple</rules>
 <rules>B -> bag</rules>
 <rules>S -> shop</rules>
 <rules>T -> the </rules>
 <rules>W -> prueba</rules>
 <rules>the shop -> my brother</rules>
-<rules></rules>
+<comment>% esto es un comentario</comment>
+<comment>% otro comentario</comment>
 </algoritmo>
