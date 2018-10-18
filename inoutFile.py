@@ -150,6 +150,6 @@ def cargarTxtPrueba(self, fileNamePrueba):
     for linePrueba in linesPrueba:
         patronPrueba = re.search('^[\w]+', linePrueba, re.UNICODE)
         if patronPrueba:
-            self.fileEdit.setText(self.fileEdit.toPlainText()+linePrueba)
+            self.fileEdit.setText(self.fileEdit.toPlainText()+linePrueba.replace(' ', ''))
     filePrueba.close()
     
