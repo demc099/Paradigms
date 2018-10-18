@@ -10,15 +10,16 @@ def camposBlancos(self):
   symbols = self.symbolsEdit.text()
   vars = self.varsEdit.text()
   markers = self.markersEdit.text()
-  if symbols.isspace:
-    self.symbolsEdit.setText("abcdefghijklmnopqrstuvwxyz0123456789")
-    self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
-  if vars.isspace:
-    self.varsEdit.setText("wxyz")
-    self.varsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
-  if markers.isspace:
-    self.markersEdit.setText("αβγδ")
-    self.markersEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
+  if (symbols.isspace):
+    print("yes")
+    #self.symbolsEdit.setText("abcdefghijklmnopqrstuvwxyz0123456789")
+    #self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
+  #if vars.isspace:
+    #self.varsEdit.setText("wxyz")
+    #self.varsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
+  #if markers.isspace:
+    #self.markersEdit.setText("αβγδ")
+    #self.markersEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
 
 
 def validarSim(self):
@@ -89,9 +90,11 @@ def validarGramatica(self):
   rules = self.grammarEdit.toPlainText()
   lineas = str(self.grammarEdit.toPlainText()).split('\n')
   for linea in lineas:
-    for carac in linea:
-        if (carac != "-" and carac != ">"):
-            print(carac)
+      patronComment = re.search('^%[\w\s]+', linea, re.UNICODE)
+      if not patronComment:
+        for carac in linea:
+            if (carac != "-" and carac != ">" and carac != '"'):
+             print(carac)
 
 
 def busqueda(linea):
@@ -116,7 +119,7 @@ def enviarMensError(self, msj):
     ret = QMessageBox.critical(self, "Error",msj, QMessageBox.Ok)
 
 def conjuntodevalidaciones(self):
-    camposBlancos(self)
+    #camposBlancos(self)
     if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
         validarGramatica(self)
         if validarIgualdad(self) == True:
