@@ -144,14 +144,17 @@ def validarCargarPrueba(self, fileNamePrueba):
         cargarTxtPrueba(self, fileNamePrueba)
 
 def cargarTxtPrueba(self, fileNamePrueba):
-    filePrueba = open(fileNamePrueba, 'r', encoding='utf-8')
+    filePrueba  = open(fileNamePrueba, 'r', encoding='utf-8')
     linesPrueba = filePrueba.readlines()
 
     self.fileEdit.setText("")
 
     for linePrueba in linesPrueba:
         patronPrueba = re.search('^[\w]+', linePrueba, re.UNICODE)
-        if patronPrueba:
-            self.fileEdit.setText(self.fileEdit.toPlainText()+linePrueba.replace(' ', ''))
+        if patronPrueba and linePrueba != '\n':
+            self.fileEdit.setText(self.fileEdit.toPlainText()+linePrueba)
+            
+    self.fileEdit.setText(self.fileEdit.toPlainText().rstrip('\n'))
+
     filePrueba.close()
     
