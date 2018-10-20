@@ -6,8 +6,7 @@
 A -> apple
 B -> bag
 S -> shop
-T -> the
-W -> PRUE
-Y -> prue2
+"The a" -> "the arm"
+"W A" -> "PRUE"
 the shop -> my brother
 a never used -> .terminating rule

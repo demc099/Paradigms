@@ -22,7 +22,7 @@ def guardarTxt(self, fileName):
     file.write("#markers "+self.markersEdit.text()+"\n")
     lines = str(self.grammarEdit.toPlainText()).split('\n')
     for line in lines:
-        if (re.match("%[\w\s]+", line, re.I) or re.match("[\w\s]+\-\>[\w\s]", line, re.I)):
+        if (re.match("%[\w\s]+", line, re.I) or re.match("[\"?\w\s\"?]+\-\>[\"?\w\s\"?]", line, re.I)):
             file.write(line+ "\n")
     file.close()
 
@@ -37,7 +37,7 @@ def guardarXml(self, fileName):
     for line in lines:
         if re.match("%[\w\s]+", line, re.I):
             file.write("<comment>"+line+"</comment>"+"\n")
-        if re.match("[\w\s]+\-\>[\w\s]", line, re.I):
+        if re.match("[\"?\w\s\"?]+\-\>[\"?\w\s\"?]", line, re.I):
             file.write("<rules>"+line+"</rules>"+"\n")
     file.write('</algoritmo>')
 
@@ -59,12 +59,13 @@ def cargarTxt(self, fileName):
     lines = file.readlines()
     self.grammarEdit.setText("")
     for line in lines:
-        patronSym = re.search('^\#symbols\s[a-z0-9áéíóúàèìòùäëïöü]+', line, re.UNICODE)
+        #patronSym = re.search('^\#symbols\s[a-z0-9]+', line, re.I)
+        patronSym = re.search('^\#symbols\s[a-z0-9]+', line, re.UNICODE)
         patronVars = re.search('^\#vars\s[a-zA-Z0-9áéíóúàèìòùäëïöü]+', line, re.UNICODE)
         patronMark = re.search('^\#markers\s[a-zA-Z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+', line, re.UNICODE)
-        patronRules = re.search('^[\w+\-\>\w+]', line, re.UNICODE)
+        patronRules = re.search('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?', line,re.UNICODE)
+        # ^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$
         patronComment = re.search('^%[\w\s]+', line, re.UNICODE)
-        print(patronSym)
         if patronSym:
             pr = line.replace("#symbols ","")
             self.symbolsEdit.setText(pr.rstrip())
@@ -89,7 +90,7 @@ def cargarXml(self, fileName):
         patronSym = re.search('^\<symbols\>[a-z0-9áéíóúàèìòùäëïöü]+\<\/symbols\>', line, re.UNICODE)
         patronVars = re.search('^\<vars\>[a-zA-Z0-9áéíóúàèìòùäëïöü]+\<\/vars\>', line, re.UNICODE)
         patronMark = re.search('^\<markers\>[a-zA-Z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+\<\/markers\>', line, re.UNICODE)
-        patronRules = re.search('^\<rules\>[\w\s]+\-\>[\w\s]+\<\/rules\>', line,re.UNICODE)
+        patronRules = re.search('^\<rules\>(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?\<\/rules\>', line,re.UNICODE)
         patronComment = re.search('^\<comment\>%[\w\s]+\<\/comment\>', line, re.UNICODE)
         if patronSym:
             pr1 = line.replace("<symbols>","")
@@ -142,14 +143,17 @@ def validarCargarPrueba(self, fileNamePrueba):
         cargarTxtPrueba(self, fileNamePrueba)
 
 def cargarTxtPrueba(self, fileNamePrueba):
-    filePrueba = open(fileNamePrueba, 'r', encoding='utf-8')
+    filePrueba  = open(fileNamePrueba, 'r', encoding='utf-8')
     linesPrueba = filePrueba.readlines()
 
     self.fileEdit.setText("")
 
     for linePrueba in linesPrueba:
         patronPrueba = re.search('^[\w]+', linePrueba, re.UNICODE)
-        if patronPrueba:
+        if patronPrueba and linePrueba != '\n':
             self.fileEdit.setText(self.fileEdit.toPlainText()+linePrueba)
+            
+    self.fileEdit.setText(self.fileEdit.toPlainText().rstrip('\n'))
+
     filePrueba.close()
     
