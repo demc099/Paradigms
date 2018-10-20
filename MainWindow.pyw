@@ -129,7 +129,8 @@ class Ventana(QMainWindow):
   self.markersEdit.textChanged.connect(self.validarMark)
 
   #output
-  self.debugButton.clicked.connect(self.habilitarDebug)
+  #self.debugButton.clicked.connect(self.habilitarDebug)
+  self.nextButton.clicked.connect(self.contDebug)
 
   #Ventana Hija "Caraacteres"
   #self.children = []
@@ -212,8 +213,14 @@ class Ventana(QMainWindow):
     funcionesAlgoritmo.algoritmo(self, linea, variables)
 
  def debug(self):
-  self.debug = True
-  funcionesAlgoritmo.debug(self)
+  self.nextButton.setEnabled(True)
+  self.deb = True
+  self.texto = self.lineEdit.text()
+  funcionesAlgoritmo.debug(self, self.texto)
+
+ def contDebug(self):
+  self.deb = True
+  funcionesAlgoritmo.debug(self, self.texto)
 
  def correrAlgoritmo2(self):
   funcionesAlgoritmo.correrAlgoritmo(self)

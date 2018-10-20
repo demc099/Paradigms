@@ -59,6 +59,20 @@ xβ -> Λ.
 x -> βx
 """
 
+def debug(self, texto):
+    self.clearRegistryButton.setEnabled(True)
+    self.saveRegistryButton.setEnabled(True)
+    #texto = self.lineEdit.text()
+    grammar= self.grammarEdit.toPlainText()
+    variables = self.varsEdit.text()
+    #self.printText.clear()
+
+    self.printText.append(self.printText.toPlainText()+ remplazardebug(self,texto,extraerreglas(grammar), variables))
+
+    grammar= self.grammarEdit.toPlainText().replace('"', '')
+    grammar= grammar.replace('->', ' -> ')
+
+
 def correrAlgoritmo(self):
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
@@ -82,42 +96,51 @@ def correrAlgoritmo(self):
     #	self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,texto,extraerreglas(grammar)))
 
 
-
-def debug(self):
-    texto = self.lineEdit.text()
-    grammar = self.grammarEdit.toPlainText()
-    self.printText.append(remplazarDebug(self, texto, extraerreglas(grammar)))
-
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
             for matchobj in re.finditer(syntaxre, grammar)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
 
-def remplazardebug(self,text, grammar):
+def remplazardebug(self, text, grammar,vars):
+    print("entro")
     while True:
         for pat, repl, term in grammar:
-            if self.debug == True:
-                if pat == "Λ":
-                    t = list(text)
+            if self.deb == True:
+                te = hayVars(self,text,pat,repl,vars)
+                if te:
                     self.printText.append(text + "  ->  ")
-                    text = text.replace(t[0], repl, 1)
+                    text = te
                     self.printText.insertPlainText(text)
-                    self.debug == False
+                    self.deb = False
+                    self.texto = text
+                    print(self.texto + " uno")
+                    if term:
+                        return text
+                    break
                 else:
-                    if pat in text:
-                        if repl == "Λ":
-                            self.printText.append(text + "  ->  ")
-                            text = text.replace(pat,"", 1)
-                            self.printText.insertPlainText(text)
-                            self.debug == False
-                        else:
-                            self.printText.append(text+"  ->  ")
-                            text = text.replace(pat, repl, 1)
-                            self.printText.insertPlainText(text)
-                            self.debug == False
-                            if term:
-                                return text
-                            break
+                    if pat == "Λ":
+                        t = list(text)
+                        self.printText.append(text + "  ->  ")
+                        text = text.replace(t[0], repl, 1)
+                        self.printText.insertPlainText(text)
+                        self.deb = False
+                        self.texto = text
+                        print(self.texto + " dos")
+                    else:
+                        if pat in text:
+                            if repl == "Λ":
+                                res=espacioV(self, text, pat, repl)
+                                text=res
+                            else:
+                                self.printText.append(text+"  ->  ")
+                                text = text.replace(pat, repl, 1)
+                                self.printText.insertPlainText(text)
+                                self.deb = False
+                                self.texto = text
+                                print(self.texto + " tres")
+                                if term:
+                                    return text
+                                break
         else:
             return text# y si recorre el for y el pat no esta en la gramatica
 
@@ -149,15 +172,11 @@ def remplazarReglas(self, text, grammar,vars):
                             text = text.replace(pat, repl, 1)
                             self.printText.insertPlainText(text)
                             if term:
-                                return text
+                              return text
                             break
         else:
             return text# y si recorre el for y el pat no esta en la gramatica
 
-def remplazarDebug(self, text, grammar):
-    for pat, rep1, term in grammar:
-        if pat in text:
-            self.printText.append(text+"  ->  ")
 
 
 def cambiarX(pat, repl, text, vars):
@@ -202,6 +221,7 @@ def correrAlgoritmoPruebas(self):
        self.printText.append("#PRUEBA"+ "\n")
        self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
        self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,line,extraerreglas(grammar)) + "\n")
+
 
 def hayVars(self, text,pat,repl,vars):
     listaVar = list(self.varsEdit.text())
