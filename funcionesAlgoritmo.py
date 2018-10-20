@@ -70,7 +70,37 @@ def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
             for matchobj in re.finditer(syntaxre, grammar)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
-def remplazarReglas(self,text, grammar):
+
+def remplazarReglas(self,text,grammar):
+    while True:
+        for pat, repl, term in grammar:
+            if self.debug == True:
+                if pat == "Λ":
+                    t = list(text)
+                    self.printText.append(text + "  ->  ")
+                    text = text.replace(t[0], repl, 1)
+                    self.printText.insertPlainText(text)
+                    self.debug == False
+                else:
+                    if pat in text:
+                        if repl == "Λ":
+                            self.printText.append(text + "  ->  ")
+                            text = text.replace(pat,"", 1)
+                            self.printText.insertPlainText(text)
+                            self.debug == False
+                        else:
+                            self.printText.append(text+"  ->  ")
+                            text = text.replace(pat, repl, 1)
+                            self.printText.insertPlainText(text)
+                            self.debug == False
+                            if term:
+                                return text
+                            break
+        else:
+            return text# y si recorre el for y el pat no esta en la gramatica
+
+
+def remplazarDebug(self, text, grammar):
     while True:
         for pat, repl, term in grammar:
             if pat == "Λ":
@@ -82,10 +112,10 @@ def remplazarReglas(self,text, grammar):
                 if pat in text:
                     if repl == "Λ":
                         self.printText.append(text + "  ->  ")
-                        text = text.replace(pat,"", 1)
+                        text = text.replace(pat, "", 1)
                         self.printText.insertPlainText(text)
                     else:
-                        self.printText.append(text+"  ->  ")
+                        self.printText.append(text + "  ->  ")
                         text = text.replace(pat, repl, 1)
                         self.printText.insertPlainText(text)
                         if term:
@@ -93,12 +123,6 @@ def remplazarReglas(self,text, grammar):
                         break
         else:
             return text# y si recorre el for y el pat no esta en la gramatica
-
-
-def remplazarDebug(self, text, grammar):
-    for pat, rep1, term in grammar:
-        if pat in text:
-            self.printText.append(text+"  ->  ")
 
 
 

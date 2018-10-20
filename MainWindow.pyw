@@ -102,6 +102,7 @@ class Ventana(QMainWindow):
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.correrAlgoritmo)
+  self.debugButton.clicked.connect(self.debug)
 
   # Enable campos
   self.fileEdit.setEnabled(False)
@@ -210,8 +211,11 @@ class Ventana(QMainWindow):
     variables= self.varsEdit.text()
     funcionesAlgoritmo.algoritmo(self, linea, variables)
 
+ def debug(self):
+  self.debug = True
+  funcionesAlgoritmo.debug(self)
 
- def correrAlgoritmo(self):
+ def correrAlgoritmo2(self):
   funcionesAlgoritmo.correrAlgoritmo(self)
  
  def correrAlgoritmo(self):
