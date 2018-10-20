@@ -213,14 +213,17 @@ def correrAlgoritmoPruebas(self):
     self.saveRegistryButton.setEnabled(True)
 
     grammar= self.grammarEdit.toPlainText()
+    variables = self.varsEdit.text()
     pruebas = str(self.fileEdit.toPlainText()).split('\n')
 
     self.printText.clear()
 
     for line in pruebas:
-       self.printText.append("#PRUEBA"+ "\n")
-       self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
-       self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,line,extraerreglas(grammar)) + "\n")
+        if line != '\n' and line != '':
+            self.printText.append("#PRUEBA"+ "\n")
+            self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
+
+            self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,line,extraerreglas(grammar), variables)+ "\n")
 
 
 def hayVars(self, text,pat,repl,vars):
