@@ -36,22 +36,6 @@ syntaxre1 = r"""(?mx)
 )$
 """
 
-def debug(self, texto):
-    self.clearRegistryButton.setEnabled(True)
-    self.saveRegistryButton.setEnabled(True)
-    #texto = self.lineEdit.text()
-    grammar= self.grammarEdit.toPlainText()
-    variables = self.varsEdit.text()
-    #self.printText.clear()
-
-    #self.printText.append(remplazardebug(self,texto,extraerreglas(grammar), variables) + "\n")
-    self.debugButton.setEnabled(False)
-    self.printText.append(remplazardebug(self, texto, extraerreglas(grammar), variables))
-
-    grammar= self.grammarEdit.toPlainText().replace('"', '')
-    grammar= grammar.replace('->', ' -> ')
-
-
 def correrAlgoritmo(self):
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
@@ -167,57 +151,7 @@ def pruebaEx(self,pat,repl,text):
                     bool=False
                     cont += 1 # recorro el text de nuevo
 
-def remplazardebug(self, text, grammar,vars):
-    while True:
-        for pat, repl, term in grammar:
-            if (self.deb == True and self.texto != " "):
-                te = hayVars(self,text,pat,repl,vars)
-                if te:
-                    self.printText.append(text + "  ->  ")
-                    text = te
-                    self.printText.insertPlainText(text)
-                    self.deb = False
-                    self.texto = text
-                    if term:
-                        self.texto = " "
-                        self.nextButton.setEnabled(False)
-                        self.debugButton.setEnabled(True)
-                        QMessageBox.information(self, "Informacion", "Fin del debug", QMessageBox.Ok)
-                        return " "
-                    break
-                else:
-                    if pat == "Λ":
-                        t = list(text)
-                        self.printText.append(text + "  ->  ")
-                        text = text.replace(t[0], repl, 1)
-                        self.printText.insertPlainText(text)
-                        self.deb = False
-                        self.texto = text
-                        #print(self.texto + " dos")
-                    else:
-                        if pat in text:
-                            if repl == "Λ":
-                                res=espacioV(self, text, pat, repl)
-                                text=res
-                                self.deb = False
-                                self.texto = text
-                            else:
-                                self.printText.append(text+"  ->  ")
-                                text = text.replace(pat, repl, 1)
-                                self.printText.insertPlainText(text)
-                                self.deb = False
-                                self.texto = text
-                                #print(self.texto + " tres")
-                                if term:
-                                    self.texto = " "
-                                    self.nextButton.setEnabled(False)
-                                    self.debugButton.setEnabled(True)
-                                    QMessageBox.information(self, "Informacion", "Fin del debug", QMessageBox.Ok)
-                                    return " "
-                                break
-        else:
-            #print(text)
-            return " "# y si recorre el for y el pat no esta en la gramatica
+
 
 def cambiarX(pat, repl, text, vars):
     cp = 0
@@ -246,7 +180,91 @@ def espacioV(self,text,pat,rep1):
     text = text.replace(pat, "", 1)
     self.printText.insertPlainText(text)
 
-#Pruebas de Carolina-------------------------------------------------------------------------
+
+def debug(self, texto):
+    self.clearRegistryButton.setEnabled(True)
+    self.saveRegistryButton.setEnabled(True)
+    grammar= self.grammarEdit.toPlainText()
+    variables = self.varsEdit.text()
+    grammar = self.grammarEdit.toPlainText().replace('"', '')
+    #self.debugButton.setEnabled(False)
+    self.printText.append(remplazardebug(self, texto, extraerreglas(grammar), variables))
+
+
+
+def remplazardebug(self, text, grammar,vars):
+    print("entro "+ self.texto)
+    while True:
+        for pat, repl, term in grammar:
+            if (self.deb == True and self.texto != " "):
+                te = hayVars(self,text,pat,repl)
+                if te:
+                    self.printText.append("Paso " + str(self.cont) + ": " + text + "  ->  ")
+                    text = te
+                    self.printText.insertPlainText(text)
+                    self.deb = False
+                    self.texto = text
+                    print("fue el 1")
+                    if term:
+                        self.texto = " "
+                        self.nextButton.setEnabled(False)
+                        #QMessageBox.information(self, "Informacion", "Fin del debug", QMessageBox.Ok)
+                        return " "
+                        print("fue el 2")
+                    break
+                else:
+                    if pat == "Λ":
+                        t = list(text)
+                        self.printText.append("Paso " + str(self.cont) + ": " + text + "  ->  ")
+                        text = text.replace(t[0], repl+t[0], 1)
+                        self.printText.insertPlainText(text)
+                        self.deb = False
+                        self.texto = text
+                        print("fue el 3")
+                        if term:
+                            self.texto = " "
+                            self.nextButton.setEnabled(False)
+                            #QMessageBox.information(self, "Informacion", "Fin del debug", QMessageBox.Ok)
+                            return " "
+                            print("fue el 4")
+                        break
+                    else:
+                        if pat in text:
+                            if repl == "Λ":
+                                self.printText.append("Paso " + str(self.cont) + ": " + text + "  ->  ")
+                                text = text.replace(pat, "", 1)
+                                self.printText.insertPlainText(text)
+                                self.deb = False
+                                self.texto = text
+                                print("fue el 5")
+                                if term:
+                                    self.texto = " "
+                                    self.nextButton.setEnabled(False)
+                                    #QMessageBox.information(self, "Informacion", "Fin del debug", QMessageBox.Ok)
+                                    return " "
+                                    print("fue el 6")
+                                break
+                            else:
+                                self.printText.append("Paso "+ str(self.cont) + ": " +text+"  ->  ")
+                                print(self.cont)
+                                text = text.replace(pat, repl, 1)
+                                self.printText.insertPlainText(text)
+                                self.deb = False
+                                self.texto = text
+                                if term:
+                                    self.texto = " "
+                                    self.nextButton.setEnabled(False)
+                                    #QMessageBox.information(self, "Informacion", "Fin del debug", QMessageBox.Ok)
+                                    return " "
+                                    print("fue el 8")
+                                break
+        else:
+            #print(text)
+            return " "# y si recorre el for y el pat no esta en la gramatica
+
+
+
+# Aplica el algoritmo linea por linea a un archivo que contiene hileras de prueba -------------------------------------------------------------------------
 
 def correrAlgoritmoPruebas(self):
     self.clearRegistryButton.setEnabled(True)
