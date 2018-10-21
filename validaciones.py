@@ -1,5 +1,7 @@
 #Validar
 import re
+
+import funcionesAlgoritmo
 import inoutFile
 from PyQt5.QtGui import *
 from PyQt5 import *
@@ -129,3 +131,21 @@ def conjuntodevalidaciones(self):
             enviarMensError(self, "Verifique que los marcadores ingresados no coincidan con los simbolos ni las variables ingresadas")
     else:
         enviarMensError(self, "Usted a ingresado caracteres no permitidos, por favor ingreselos correctamente e inténtelo de nuevo!")
+
+def conjuntodevalidacionesdePrueba(self):
+    camposBlancos(self)
+    if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
+        if validarIgualdad(self) == True:
+            if self.grammarEdit.toPlainText() == "":
+                enviarMensError(self, "No hay reglas de producción")
+            else:
+                if validarGramatica(self) == True:
+                    self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
+                    funcionesAlgoritmo.correrAlgoritmo(self)
+                else:
+                    enviarMensError(self, "Asegurese de escribir correctamente las reglas")
+        else:
+            enviarMensError(self, "Verifique que los marcadores ingresados no coincidan con los simbolos ni las variables ingresadas")
+    else:
+        enviarMensError(self, "Usted a ingresado caracteres no permitidos, por favor ingreselos correctamente e inténtelo de nuevo!")
+

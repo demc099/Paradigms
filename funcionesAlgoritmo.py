@@ -20,6 +20,8 @@
 import re
 from PyQt5.QtWidgets import *
 
+import validaciones
+
 syntaxre = r"""(?mx)
 ^(?: 
   (?: (?P<comment> \% .* ) ) |
@@ -56,11 +58,14 @@ def correrAlgoritmo(self):
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
     texto = self.lineEdit.text()
-    grammar = self.grammarEdit.toPlainText().replace('"', '')
-    self.printText.clear()
-    self.printText.append("#PRUEBA"+ "\n")
-    self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
-    self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,texto,extraerreglas(grammar)))
+    if texto == "":
+        validaciones.enviarMensError(self, "Ingrese una hilera de prueba")
+    else:
+        grammar = self.grammarEdit.toPlainText().replace('"', '')
+        self.printText.clear()
+        self.printText.append("#PRUEBA"+ "\n")
+        self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
+        self.printText.append("RESULTADO:  "+ reemplazarReglas(self,texto,extraerreglas(grammar)))
 
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
@@ -72,34 +77,34 @@ def reemplazarReglas(self, text, grammar):
         for pat, repl, term in grammar:
             te = hayVars(self,text,pat,repl)
             if te:
-                self.printText.append(text + "  ->  ")
+                #self.printText.append(text + "  ->  ")
                 text = te
-                self.printText.insertPlainText(text)
+                #self.printText.insertPlainText(text)
                 if term:
                     return text
                 break
             else:
                 if pat == "Λ":
                     t = list(text)
-                    self.printText.append(text + "  ->  ")
+                    #self.printText.append(text + "  ->  ")
                     text = text.replace(t[0], repl+t[0], 1)
-                    self.printText.insertPlainText(text)
+                    #self.printText.insertPlainText(text)
                     if term:
                         return text
                     break
                 else:
                     if pat in text:
                         if repl == "Λ":
-                            self.printText.append(text + "  ->  ")
+                            #self.printText.append(text + "  ->  ")
                             text = text.replace(pat, "", 1)
-                            self.printText.insertPlainText(text)
+                            #self.printText.insertPlainText(text)
                             if term:
                                 return text
                             break
                         else:
-                            self.printText.append(text+"  ->  ")
+                            #self.printText.append(text+"  ->  ")
                             text = text.replace(pat, repl, 1)
-                            self.printText.insertPlainText(text)
+                            #self.printText.insertPlainText(text)
                             if term:
                               return text
                             break

@@ -12,7 +12,7 @@ import inoutFile
 import validaciones
 
 
-class Ventana(QMainWindow):   
+class Ventana(QMainWindow):
  def __init__(self):
   QMainWindow.__init__(self)
   uic.loadUi("MainWindowInterfaz.ui", self)
@@ -131,13 +131,15 @@ class Ventana(QMainWindow):
 
   #output
   #self.debugButton.clicked.connect(self.habilitarDebug)
-
+  #menuH_paleta.triggered.connect(self.abrirPl)
 
   #Ventana Hija "Caraacteres"
   #self.children = []
 
   #Variable para modificar el QLineEdit que tiene el focus "Cursor"
   self.varQLineEdit = []
+
+
   
  #----------------------------------------------------------------------------------------------------------------
 
@@ -148,7 +150,7 @@ class Ventana(QMainWindow):
 
  def abrirPaleta(self):
      # Almacenaz el widget que tiene el focus
-     self.varQLineEdit = QApplication.focusWidget ()
+     self.varQLineEdit = QApplication.focusWidget()
      Caracteres(self).exec_()
 
 # Declaración funcion Limpiar campos
@@ -229,7 +231,8 @@ class Ventana(QMainWindow):
  
  def correrAlgoritmo(self):
   if self.lineEdit.isEnabled():
-    funcionesAlgoritmo.correrAlgoritmo(self)
+    validaciones.conjuntodevalidacionesdePrueba(self)
+    #funcionesAlgoritmo.correrAlgoritmo(self)
   else:
     if self.fileEdit.isEnabled():
       funcionesAlgoritmo.correrAlgoritmoPruebas(self)
@@ -250,7 +253,6 @@ class Ventana(QMainWindow):
 
  def conjuntodevalidaciones(self):
   validaciones.conjuntodevalidaciones(self)
-
 
  #-----------------------------------------------------------------------------------------------------------------
 
