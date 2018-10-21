@@ -94,6 +94,16 @@ class Ventana(QMainWindow):
   menuA_abrir.triggered.connect(self.cargar)
   menuA_guardar.triggered.connect(self.conjuntodevalidaciones)
   menuH_cargarArchivo.triggered.connect(self.cargarPrueba)
+  menuP_1.triggered.connect(lambda:self.cargarAlgoritmoX("Invertir una hilera"))
+  menuP_2.triggered.connect(lambda: self.cargarAlgoritmoX("Duplicar hilera"))
+  menuP_3.triggered.connect(lambda: self.cargarAlgoritmoX("Palindromo"))
+  menuP_4.triggered.connect(lambda: self.cargarAlgoritmoX("Binario a unario"))
+  menuP_5.triggered.connect(lambda: self.cargarAlgoritmoX("Suma binarios"))
+  menuP_6.triggered.connect(lambda: self.cargarAlgoritmoX("Triplicar binarios"))
+  menuP_7.triggered.connect(lambda: self.cargarAlgoritmoX("Multiplicación binarios"))
+  menuP_8.triggered.connect(lambda: self.cargarAlgoritmoX("Suma decimales"))
+  menuP_9.triggered.connect(lambda: self.cargarAlgoritmoX("Eliminar caracteres repetidos consecutivos"))
+  menuP_10.triggered.connect(lambda: self.cargarAlgoritmoX("Paréntesis balanceados"))
 
   #invocacion funciones para guardar
   #self.saveButton.clicked.connect(self.guardar)
@@ -169,21 +179,6 @@ class Ventana(QMainWindow):
  def guardar(self):
      inoutFile.guardar(self)
 
- def verificar(self):
-  symbols = self.symbolsEdit.text()
-  vars = self.varsEdit.text()
-  markers = self.markersEdit.text()
-  print("El contenido es:"+symbols)
-  if symbols == "   ":
-   self.symbolsEdit.setText("abcdefghijklmnopqrstuvwxyz0123456789")
-   self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
-  if vars == "   ":
-   self.varsEdit.setText("wxyz")
-   self.varsEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
-  if markers == "   ":
-   self.markersEdit.setText("αβγδ")
-   self.markersEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
-
  def cargar(self):
      inoutFile.cargar(self)
 
@@ -226,8 +221,6 @@ class Ventana(QMainWindow):
   self.cont = self.cont + 1
   funcionesAlgoritmo.debug(self, self.texto)
 
- def correrAlgoritmo2(self):
-  funcionesAlgoritmo.correrAlgoritmo(self)
  
  def correrAlgoritmo(self):
   if self.lineEdit.isEnabled():
@@ -252,6 +245,12 @@ class Ventana(QMainWindow):
 
  def conjuntodevalidaciones(self):
   validaciones.conjuntodevalidaciones(self)
+
+
+ def cargarAlgoritmoX(self, nombre):
+     nombre = "./algoritmos/"+nombre+".txt"
+     inoutFile.cargarTxt(self, nombre)
+
 
 
  #-----------------------------------------------------------------------------------------------------------------

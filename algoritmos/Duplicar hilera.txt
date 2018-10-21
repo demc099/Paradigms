@@ -1,0 +1,8 @@
+#symbols abcdefghijklmnopqrstuvwxyz0123456789
+#vars xy
+#markers αβΛ
+αx -> xβxα
+β -> Λ
+α -> Λ.
+Λ -> α
+% este esta completo y probado

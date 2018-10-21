@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<algoritmo>
+<symbols>abcdefghijklmnopqrstuvwxyz0123456789</symbols>
+<vars>xy</vars>
+<markers>αβΛ</markers>
+<rules>αx -> xβxα</rules>
+<rules>β -> Λ</rules>
+<rules>α -> Λ.</rules>
+<rules>Λ -> α</rules>
+<comment>% este esta completo y probado</comment>
+</algoritmo>
