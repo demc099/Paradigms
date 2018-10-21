@@ -1,31 +1,5 @@
-#patronGram = re.match('^(\"\w+\s+\w*\"|[\w]+)\s\-\>\s(\"\w+\s\w*\"|[\w]+)$', linea, re.UNICODE)
-      #patronGram = re.match('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)$', linea, re.UNICODE)
-	  
-	  
-	  def remplazardebug(self,text, grammar):
-    while True:
-        for pat, repl, term in grammar:
-            if self.debug == True:
-                if pat == "Λ":
-                    t = list(text)
-                    self.printText.append(text + "  ->  ")
-                    text = text.replace(t[0], repl, 1)
-                    self.printText.insertPlainText(text)
-                    self.debug = False
-                else:
-                    if pat in text:
-                        if repl == "Λ":
-                            self.printText.append(text + "  ->  ")
-                            text = text.replace(pat,"", 1)
-                            self.printText.insertPlainText(text)
-                            self.debug = False
-                        else:
-                            self.printText.append(text+"  ->  ")
-                            text = text.replace(pat, repl, 1)
-                            self.printText.insertPlainText(text)
-                            self.debug = False
-                            if term:
-                                return text
-                            break
-        else:
-            return text# y si recorre el for y el pat no esta en la gramatica
+#symbols ()
+#vars x
+#markers SVF
+S() -> S
+S(( -> (S(

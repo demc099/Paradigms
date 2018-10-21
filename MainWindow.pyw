@@ -219,11 +219,13 @@ class Ventana(QMainWindow):
   self.printText.clear()
   self.nextButton.setEnabled(True)
   self.deb = True
+  self.cont = 1
   self.texto = self.lineEdit.text()
   funcionesAlgoritmo.debug(self, self.texto)
 
  def contDebug(self):
   self.deb = True
+  self.cont = self.cont + 1
   funcionesAlgoritmo.debug(self, self.texto)
 
  def correrAlgoritmo2(self):
