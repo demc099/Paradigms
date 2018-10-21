@@ -36,30 +36,6 @@ syntaxre1 = r"""(?mx)
 )$
 """
 
-
-grammar1 = """\
-% This rules file is extracted from Wikipedia:
-% http://en.wikipedia.org/wiki/Markov_Algorithm
-A -> apple
-B -> bag
-S -> Λ.
-T -> the
-W -> PRUE
-the shop -> my brother
-"""
-#abcd
-grammar2 = """\
-P1: βx -> xβ (P1)
-P2: xβ -> Λ.
-P3: x -> βx (P1)
-"""
-
-grammar2 = """\
-βx -> xβ
-xβ -> Λ.
-x -> βx
-"""
-
 def debug(self, texto):
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
@@ -80,29 +56,118 @@ def correrAlgoritmo(self):
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
     texto = self.lineEdit.text()
-    grammar= self.grammarEdit.toPlainText()
-    variables = self.varsEdit.text()
+    #grammar= self.grammarEdit.toPlainText()
+    grammar = self.grammarEdit.toPlainText().replace('"', '')
     self.printText.clear()
     self.printText.append("#PRUEBA"+ "\n")
     self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
-
-    self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,texto,extraerreglas(grammar), variables))
-
-    grammar= self.grammarEdit.toPlainText().replace('"', '')
-    grammar= grammar.replace('->', ' -> ')
-    
-   # if texto != '\n' and texto != '':
-    #	self.printText.clear()
-    #	self.printText.append("#PRUEBA"+ "\n")
-    #	self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
-
-    #	self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,texto,extraerreglas(grammar)))
-
+    self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,texto,extraerreglas(grammar)))
 
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
             for matchobj in re.finditer(syntaxre, grammar)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
+
+def reemplazarReglas(self, text, grammar):
+    while True:
+        for pat, repl, term in grammar:
+            te = hayVars(self,text,pat,repl)
+            if te:
+                self.printText.append(text + "  ->  ")
+                text = te
+                self.printText.insertPlainText(text)
+                if term:
+                    return text
+                break
+            else:
+                if pat == "Λ":
+                    t = list(text)
+                    self.printText.append(text + "  ->  ")
+                    text = text.replace(t[0], repl+t[0], 1)
+                    self.printText.insertPlainText(text)
+                    if term:
+                        return text
+                    break
+                else:
+                    if pat in text:
+                        if repl == "Λ":
+                            self.printText.append(text + "  ->  ")
+                            text = text.replace(pat, "", 1)
+                            self.printText.insertPlainText(text)
+                            if term:
+                                return text
+                            break
+                        else:
+                            self.printText.append(text+"  ->  ")
+                            text = text.replace(pat, repl, 1)
+                            self.printText.insertPlainText(text)
+                            if term:
+                              return text
+                            break
+        else:
+            return text# y si recorre el for y el pat no esta en la gramatica
+
+def hayVars(self, text,pat,repl):
+    listaVar = list(self.varsEdit.text())
+    listapat = list(pat)
+    comp = [item for item in listaVar if item in listapat]
+    if len(comp) > 0:
+        te = pruebaEx(self,pat,repl,text)
+        return te
+
+def pruebaEx(self,pat,repl,text):
+    rep2=list(repl)
+    listaVar = list(self.varsEdit.text())
+    listaMar = list(self.markersEdit.text())
+    listapat = list(pat)
+    listrem = []
+    comp = [listapat.index(item) for item in listapat if item in listaVar]
+    if len(comp) > 0:
+        text1 = text
+        cont=0
+        lista = []
+        bool=False
+        while len(comp)<len(text1) and cont<len(text1):
+            i=0
+            d=0
+            while i < len(comp):
+                if d in comp:
+                    if text1[comp[i]] in listaMar:
+                        bool = True
+                        break
+                    else:
+                     p1 = pat[comp[i]], text1[comp[i]]
+                     lista.append(p1[1])
+                     rep2= [w.replace(p1[0],p1[1]) for w in rep2]
+                     listrem.append(p1)
+                     i+=1
+                     d+=1
+                else:
+                    lista.append(listapat[d])
+                    d+=1
+                    if i+1 == len(pat):
+                        i+=1
+
+            pats = ''.join(map(str, lista))
+            f=len(pat)+1
+            if bool==True:
+                lista.clear()
+                text1 = text1[1:]
+                cont += 1
+                bool = False
+            else:
+                if pats in text[cont:cont+f]:
+                    rep1 = ''.join(map(str, rep2))
+                    if repl == "Λ":
+                        text = text.replace(pats, "")
+                    else:
+                        text = text.replace(pats, rep1)
+                    return text
+                else:
+                    text1 = text1[1:]
+                    lista.clear()
+                    bool=False
+                    cont += 1
 
 def remplazardebug(self, text, grammar,vars):
     while True:
@@ -156,41 +221,6 @@ def remplazardebug(self, text, grammar,vars):
             #print(text)
             return " "# y si recorre el for y el pat no esta en la gramatica
 
-
-def remplazarReglas(self, text, grammar,vars):
-    while True:
-        for pat, repl, term in grammar:
-            te = hayVars(self,text,pat,repl,vars)
-            if te:
-                self.printText.append(text + "  ->  ")
-                text = te
-                self.printText.insertPlainText(text)
-                if term:
-                    return text
-                break
-            else:
-                if pat == "Λ":
-                    t = list(text)
-                    self.printText.append(text + "  ->  ")
-                    text = text.replace(t[0], repl, 1)
-                    self.printText.insertPlainText(text)
-                else:
-                    if pat in text:
-                        if repl == "Λ":
-                            res=espacioV(self, text, pat, repl)
-                            text=res
-                        else:
-                            self.printText.append(text+"  ->  ")
-                            text = text.replace(pat, repl, 1)
-                            self.printText.insertPlainText(text)
-                            if term:
-                              return text
-                            break
-        else:
-            return text# y si recorre el for y el pat no esta en la gramatica
-
-
-
 def cambiarX(pat, repl, text, vars):
     cp = 0
 
@@ -235,19 +265,7 @@ def correrAlgoritmoPruebas(self):
             self.printText.append("#PRUEBA"+ "\n")
             self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
 
-            self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,line,extraerreglas(grammar), variables)+ "\n")
+            self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar), variables)+ "\n")
 
 
-def hayVars(self, text,pat,repl,vars):
-    listaVar = list(self.varsEdit.text())
-    listatext = list(pat)
-    comp = [item for item in listaVar if item in listatext]
-    if len(comp) > 0:
-        te = cambiarX(pat, repl, text, vars)
-        return te
-
-    	#if line =! '\n' and line =! '':
-    	#	self.printText.append("#PRUEBA"+ "\n")
-    	#	self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
-    	#	self.printText.append("\n"+"RESULTADO:  "+ remplazarReglas(self,line,extraerreglas(grammar)) + "\n")
 
