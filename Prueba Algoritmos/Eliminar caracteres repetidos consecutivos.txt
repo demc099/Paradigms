@@ -1,0 +1,11 @@
+#symbols abcd
+#vars x
+#markers α
+% Eliminar los caracteres repetidos en una hilera de manera consecutiva
+aSa -> aS
+bSb -> bS
+cSc -> cS
+dSd -> dS
+xSy -> xyS
+xS -> x.
+x -> Sx

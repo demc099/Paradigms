@@ -1,0 +1,10 @@
+#symbols Ax01
+#vars x01
+#markers A
+% Convertir un número binario en su equivalente unario
+% (se reemplaza un número binario por una secuencia de
+%  símbolos cuya longitud es igual al número)
+0 -> A
+xA -> Axx
+1 -> Ax
+A -> Λ

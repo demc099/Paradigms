@@ -1,0 +1,14 @@
+#symbols ()
+#vars x
+#markers SWF
+% Verificar la estructura de una hilera que contenga únicamente paréntesis,
+% que se encuentren
+% correctamente balanceados.
+
+S() -> S
+S(( -> (S(
+(S) -> S
+(S -> V.
+S) -> V.
+S -> F.
+x -> Sx
