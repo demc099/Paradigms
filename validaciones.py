@@ -1,5 +1,7 @@
 #Validar
 import re
+
+import funcionesAlgoritmo
 import inoutFile
 from PyQt5.QtGui import *
 from PyQt5 import *
@@ -98,7 +100,11 @@ def validarGramatica(self):
       if (linea != "" and  not patron2.match(linea)):
         if (patron1.match(linea)):
             for carac in linea:
+<<<<<<< HEAD
                 if (carac != "-" and carac != ">" and carac != '"' and carac !=" " and carac != "." and carac != "Λ"):
+=======
+                if (carac != "-" and carac != ">" and carac != '"' and carac !=" " and carac != "." and carac != "Λ" ):
+>>>>>>> origin/master
                     sym = [item for item in listaSim if carac in listaSim]
                     var = [item for item in listaVar if carac in listaVar]
                     mar = [item for item in listaMar if carac in listaMar]
@@ -130,6 +136,24 @@ def conjuntodevalidaciones(self):
                 inoutFile.guardar(self)
             else:
                 enviarMensError(self, "Asegurese de escribir correctamente las reglas")
+        else:
+            enviarMensError(self, "Verifique que los marcadores ingresados no coincidan con los simbolos ni las variables ingresadas")
+    else:
+        enviarMensError(self, "Por favor ingrese los caracteres correctamente e inténtelo de nuevo!")
+
+
+def conjuntodevalidacionesdePrueba(self):
+    camposBlancos(self)
+    if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
+        if validarIgualdad(self) == True:
+            if self.grammarEdit.toPlainText() == "":
+                enviarMensError(self, "No hay reglas de producción")
+            else:
+                if validarGramatica(self) == True:
+                    self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
+                    funcionesAlgoritmo.correrAlgoritmo(self)
+                else:
+                    enviarMensError(self, "Asegurese de escribir correctamente las reglas")
         else:
             enviarMensError(self, "Verifique que los marcadores ingresados no coincidan con los simbolos ni las variables ingresadas")
     else:
