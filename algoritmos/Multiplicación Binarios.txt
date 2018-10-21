@@ -1,0 +1,20 @@
+#symbols 01
+#vars 01*
+#markers αβεςθζ
+% Realizar una multiplicación de números binarios arbitrarios
+
++0 -> 0++
+1 -> 0+
+0 -> Λ
+α+ -> +α
+α* -> βα 
+α -> ε 
+ςθ -> +ς
+ςζ -> ς
++ζ -> ζθ+
++θ -> θ+
+β+ -> ζβ
++ε -> ε
+βε -> ε
+ςε -> Λ.
++ -> ςα

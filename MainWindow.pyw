@@ -104,6 +104,7 @@ class Ventana(QMainWindow):
   #invocacion funciones para guardar
   self.saveButton.clicked.connect(self.conjuntodevalidaciones)
   self.saveFileButton.clicked.connect(self.guardarPrueba)
+  self.saveRegistryButton.clicked.connect(self.guardarResultado)
 
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.correrAlgoritmo)
@@ -190,6 +191,9 @@ class Ventana(QMainWindow):
   self.clearFileButton.setEnabled(False)
   self.saveFileButton.setEnabled(False)
 
+ def guardarResultado(self):
+  inoutFile.guardarResultado(self)
+
  def cargarPrueba(self):
   self.lineEdit.setEnabled(False)
   self.fileEdit.setEnabled(True)
@@ -198,6 +202,10 @@ class Ventana(QMainWindow):
   inoutFile.cargarPrueba(self)
   self.lineEdit.setText("")
 
+
+ def cargarAlgoritmoX(self, nombre):
+  nombre = "./algoritmos/"+nombre+".txt"
+  inoutFile.cargarTxt(self, nombre)
 
 # Declaración funciones algoritmo
  def aplicarAlgoritmo(self):
@@ -245,10 +253,6 @@ class Ventana(QMainWindow):
  def conjuntodevalidaciones(self):
   validaciones.conjuntodevalidaciones(self)
 
-
- def cargarAlgoritmoX(self, nombre):
-     nombre = "./algoritmos/"+nombre+".txt"
-     inoutFile.cargarTxt(self, nombre)
 
 
 

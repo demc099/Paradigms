@@ -118,6 +118,17 @@ def cargarXml(self, fileName):
             self.grammarEdit.setText(self.grammarEdit.toPlainText() + pr5.replace("</comment>", ""))
     file.close()
 
+#-------------------- Guardar resultado que genera el algoritmo --------------------
+def guardarResultado(self):
+    fileName, _ = QFileDialog.getSaveFileName(self, "Guardar", "", "Text Files (*.txt)")
+    if fileName:
+        file = open(fileName, "w", encoding='utf-8')
+        resultado = self.printText.toPlainText()
+        if resultado != " ":
+            file.write(resultado)
+        else:
+            QMessageBox.critical(self, "Error", "No hay resultados que guardar", QMessageBox.Ok)
+
 
 #-------------------- Funciones Cargar y  Guardar Archivo de Pruebas --------------------
 def guardarPrueba(self):
