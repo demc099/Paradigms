@@ -11,7 +11,6 @@ import funcionesAlgoritmo
 import inoutFile
 import validaciones
 
-
 class Ventana(QMainWindow):
  def __init__(self):
   QMainWindow.__init__(self)
@@ -42,9 +41,6 @@ class Ventana(QMainWindow):
   menuPrueba = menu.addMenu("Algoritmos de prueba")
 
   #Agregar elementos a los menus principales
-  menuA_nuevo = QAction(QIcon(),"Nuevo",self)
-  menuArchivo.addAction(menuA_nuevo)
-
   menuA_abrir = QAction(QIcon(), "Abrir", self)
   menuA_abrir.setShortcut("Ctrl+a")
   menuArchivo.addAction(menuA_abrir)
@@ -106,7 +102,6 @@ class Ventana(QMainWindow):
   menuP_10.triggered.connect(lambda: self.cargarAlgoritmoX("Paréntesis balanceados"))
 
   #invocacion funciones para guardar
-  #self.saveButton.clicked.connect(self.guardar)
   self.saveButton.clicked.connect(self.conjuntodevalidaciones)
   self.saveFileButton.clicked.connect(self.guardarPrueba)
 
@@ -155,8 +150,9 @@ class Ventana(QMainWindow):
 
  #Funciones del menu
  def menuArchivoSalir(self):
-     QMessageBox.question(self, "Mensaje", "Seguro quiere salir", QMessageBox.Yes, QMessageBox.No)
-
+     req = QMessageBox.question(self, "Mensaje", "Seguro quiere salir", QMessageBox.Yes, QMessageBox.No)
+     if req == QMessageBox.Yes:
+      sys.exit(app.exec_())
 
  def abrirPaleta(self):
      # Almacenaz el widget que tiene el focus
@@ -261,4 +257,4 @@ class Ventana(QMainWindow):
 app = QApplication(sys.argv)
 _ventana = Ventana()
 _ventana.show()
-app.exec_()
+sys.exit(app.exec_())
