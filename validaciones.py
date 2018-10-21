@@ -100,11 +100,7 @@ def validarGramatica(self):
       if (linea != "" and  not patron2.match(linea)):
         if (patron1.match(linea)):
             for carac in linea:
-<<<<<<< HEAD
                 if (carac != "-" and carac != ">" and carac != '"' and carac !=" " and carac != "." and carac != "Λ"):
-=======
-                if (carac != "-" and carac != ">" and carac != '"' and carac !=" " and carac != "." and carac != "Λ" ):
->>>>>>> origin/master
                     sym = [item for item in listaSim if carac in listaSim]
                     var = [item for item in listaVar if carac in listaVar]
                     mar = [item for item in listaMar if carac in listaMar]

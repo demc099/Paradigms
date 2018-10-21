@@ -249,7 +249,6 @@ class Ventana(QMainWindow):
  def conjuntodevalidaciones(self):
   validaciones.conjuntodevalidaciones(self)
 
-<<<<<<< HEAD
 
  def cargarAlgoritmoX(self, nombre):
      nombre = "./algoritmos/"+nombre+".txt"
@@ -257,8 +256,6 @@ class Ventana(QMainWindow):
 
 
 
-=======
->>>>>>> origin/master
  #-----------------------------------------------------------------------------------------------------------------
 
 app = QApplication(sys.argv)
