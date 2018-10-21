@@ -1,7 +1,6 @@
 #symbols abcdefghijklmnopqrstuvwxyz0123456789
 #vars wxyz
 #markers αβγδ
-a -> b
-b -> a
-c -> d
-% esto es un comentario
+βx -> xβ
+xβ -> Λ.
+x -> βx

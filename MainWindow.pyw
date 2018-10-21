@@ -103,6 +103,7 @@ class Ventana(QMainWindow):
   #invocacion funciones para el algoritmo
   self.runButton.clicked.connect(self.correrAlgoritmo)
   self.debugButton.clicked.connect(self.debug)
+  self.nextButton.clicked.connect(self.contDebug)
 
   # Enable campos
   self.fileEdit.setEnabled(False)
@@ -130,7 +131,7 @@ class Ventana(QMainWindow):
 
   #output
   #self.debugButton.clicked.connect(self.habilitarDebug)
-  self.nextButton.clicked.connect(self.contDebug)
+
 
   #Ventana Hija "Caraacteres"
   #self.children = []
@@ -213,6 +214,7 @@ class Ventana(QMainWindow):
     funcionesAlgoritmo.algoritmo(self, linea, variables)
 
  def debug(self):
+  self.printText.clear()
   self.nextButton.setEnabled(True)
   self.deb = True
   self.texto = self.lineEdit.text()
@@ -232,16 +234,6 @@ class Ventana(QMainWindow):
     if self.fileEdit.isEnabled():
       funcionesAlgoritmo.correrAlgoritmoPruebas(self)
 
-
-#Debug
- def habilitarDebug(self):
-  self.ruleLabel.setEnabled(True)
-  self.afterLabel.setEnabled(True)
-  self.beforeLabel.setEnabled(True)
-  self.ruleEdit.setEnabled(True)
-  self.afterEdit.setEnabled(True)
-  self.beforeEdit.setEnabled(True)
-  self.nextButton.setEnabled(True)
 
 #Validar
  def validarSim(self):

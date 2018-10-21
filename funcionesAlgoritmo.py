@@ -18,6 +18,7 @@
 #             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
 
 import re
+from PyQt5.QtWidgets import *
 
 syntaxre = r"""(?mx)
 ^(?: 
@@ -67,7 +68,9 @@ def debug(self, texto):
     variables = self.varsEdit.text()
     #self.printText.clear()
 
-    self.printText.append(self.printText.toPlainText()+ remplazardebug(self,texto,extraerreglas(grammar), variables))
+    #self.printText.append(remplazardebug(self,texto,extraerreglas(grammar), variables) + "\n")
+    self.debugButton.setEnabled(False)
+    self.printText.append(remplazardebug(self, texto, extraerreglas(grammar), variables))
 
     grammar= self.grammarEdit.toPlainText().replace('"', '')
     grammar= grammar.replace('->', ' -> ')
@@ -102,10 +105,9 @@ def extraerreglas(grammar):
             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
 
 def remplazardebug(self, text, grammar,vars):
-    print("entro")
     while True:
         for pat, repl, term in grammar:
-            if self.deb == True:
+            if (self.deb == True and self.texto != " "):
                 te = hayVars(self,text,pat,repl,vars)
                 if te:
                     self.printText.append(text + "  ->  ")
@@ -113,9 +115,12 @@ def remplazardebug(self, text, grammar,vars):
                     self.printText.insertPlainText(text)
                     self.deb = False
                     self.texto = text
-                    print(self.texto + " uno")
                     if term:
-                        return text
+                        self.texto = " "
+                        self.nextButton.setEnabled(False)
+                        self.debugButton.setEnabled(True)
+                        QMessageBox.information(self, "Informacion", "Fin del debug", QMessageBox.Ok)
+                        return " "
                     break
                 else:
                     if pat == "Λ":
@@ -125,24 +130,31 @@ def remplazardebug(self, text, grammar,vars):
                         self.printText.insertPlainText(text)
                         self.deb = False
                         self.texto = text
-                        print(self.texto + " dos")
+                        #print(self.texto + " dos")
                     else:
                         if pat in text:
                             if repl == "Λ":
                                 res=espacioV(self, text, pat, repl)
                                 text=res
+                                self.deb = False
+                                self.texto = text
                             else:
                                 self.printText.append(text+"  ->  ")
                                 text = text.replace(pat, repl, 1)
                                 self.printText.insertPlainText(text)
                                 self.deb = False
                                 self.texto = text
-                                print(self.texto + " tres")
+                                #print(self.texto + " tres")
                                 if term:
-                                    return text
+                                    self.texto = " "
+                                    self.nextButton.setEnabled(False)
+                                    self.debugButton.setEnabled(True)
+                                    QMessageBox.information(self, "Informacion", "Fin del debug", QMessageBox.Ok)
+                                    return " "
                                 break
         else:
-            return text# y si recorre el for y el pat no esta en la gramatica
+            #print(text)
+            return " "# y si recorre el for y el pat no esta en la gramatica
 
 
 def remplazarReglas(self, text, grammar,vars):
