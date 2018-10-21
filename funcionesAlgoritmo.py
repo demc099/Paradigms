@@ -40,7 +40,6 @@ def correrAlgoritmo(self):
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
     texto = self.lineEdit.text()
-    #grammar= self.grammarEdit.toPlainText()
     grammar = self.grammarEdit.toPlainText().replace('"', '')
     self.printText.clear()
     self.printText.append("#PRUEBA"+ "\n")
@@ -96,24 +95,25 @@ def hayVars(self, text,pat,repl):
     listapat = list(pat)
     comp = [item for item in listaVar if item in listapat]
     if len(comp) > 0:
-        te = pruebaEx(self,pat,repl,text)
+        te = pruebaEx(self,pat,repl,text,listapat,listaVar)
         return te
 
-def pruebaEx(self,pat,repl,text):
+def pruebaEx(self,pat,repl,text,listapat,listaVar):
     rep2=list(repl) #crea una lista del remplazo
-    listaVar = list(self.varsEdit.text()) #lista de variables
     listaMar = list(self.markersEdit.text()) #lista de marcadores
-    listapat = list(pat) #lista del pat
     comp = [listapat.index(item) for item in listapat if item in listaVar] #comp es una lista que tiene la posicion de las variables en el pat
     if len(comp) > 0: # si el tamaño de com es mayor a 0 puede seguir, si no significa que no existen variables que comparar e intercambiar
         text1 = text #aqui igualo text1 a text xq ya que con forme pase el metodo a text1 se le va a ir eliminando el primer caracter
         cont=0 #contador de recorrer el text
         lista = [] #lista vacia para ingresar el orden del nuevo pat
         bool=False # variable booleana que sirve para ver si el comp que entra es un marcador
-        while len(comp)<len(text1) and cont<len(text1): #si el tamaño de comp y el contador sea menor al tamaño del texto1, en caso de que fuera mayor no entraria ya no habia suficiente text para ser remplazado
+        while len(pat)<=len(text1): #si el tamaño de comp y el contador sea menor al tamaño del texto1, en caso de que fuera mayor no entraria ya no habia suficiente text para ser remplazado
+            a = len(pat)
+            b = len(comp)
+            c = len(text1)
             i=0 #contador del recorrido del comp
             d=0 #contador para ver si existe ese espacio en el comp
-            while i < len(comp): # si i es menor a comp entonces entre
+            while i < len(pat): # si i es menor a comp entonces entre
                 if d in comp: # si d esta en el comp como una pos
                     if text1[comp[i]] in listaMar: #si el valor de text en la pos i es un marcador
                         bool = True
@@ -125,30 +125,39 @@ def pruebaEx(self,pat,repl,text):
                      i+=1 #me devuelvo a recorrer el comp
                      d+=1 #subo una pos
                 else: #si no esta el d en el comp, significa que aqui hay marcadores o variables, entonces se agregan de la siguiente forma para respetar el orden del pat
-                    lista.append(listapat[d]) #agrego a la lista el marcador
-                    d+=1 #subo una pos
-                    if i+1 == len(pat): # si es igual aumento uno para que no vuelva a recorrer el pat
+                    if d < len(pat):
+                        lista.append(listapat[d]) #agrego a la lista el marcador
+                        d+=1 #subo una pos
+                        if i+1 == len(pat): # si es igual aumento uno para que no vuelva a recorrer el pat
+                            i+=1
+                    else:
                         i+=1
 
-            pats = ''.join(map(str, lista)) #convierto la lista un string
-            f=len(pat)+1 # f es el tamaño del pat, se usa para obtener el texto de comparación
             if bool==True: #si se cumple se sale xq significa que no cumple la condicion pat
                 lista.clear() #limpio la lista
+                rep2 = list(repl)
                 text1 = text1[1:] #elimino el primer valor del text1
                 cont += 1 #recorro de nuevo el texto
                 bool = False # convierto otra vez el bool
+
             else: # si no probar si existe la sustitucion
+                pats = ''.join(map(str, lista))  # convierto la lista un string
+                f = len(pat) + 1  # f es el tamaño del pat, se usa para obtener el texto de comparación
+
                 if pats in text[cont:cont+f]: #existe el pat en el text
                     rep1 = ''.join(map(str, rep2)) # convierto la lista replazo un strirng
                     if repl == "Λ":
                         text = text.replace(pats, "")#si remplazo fuera lambda en el texto dode este el pat lo remplazo por nada
+
                     else:
                         text = text.replace(pats, rep1) # remplzo el pat por el patron de sustitucion
                     return text #retorno el texto completo ya con la sustitucion aplicada
+
                 else: # si no existe el pat en el texto
                     text1 = text1[1:]  # elimino el primer valor a texto1
                     lista.clear() #limpio la lista del pat
                     bool=False
+                    rep2 = list(repl)
                     cont += 1 # recorro el text de nuevo
 
 
