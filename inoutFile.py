@@ -66,6 +66,7 @@ def cargarTxt(self, fileName):
         patronMark = re.search('^\#markers\s[a-zA-Z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+', line, re.UNICODE)
         patronRules = re.search('^(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s?\-\>\s?(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+)\.?', line,re.UNICODE)
         patronComment = re.search('^%[\w\s]+', line, re.UNICODE)
+        print(patronSym)
         if patronSym:
             pr = line.replace("#symbols ","")
             self.symbolsEdit.setText(pr.rstrip())
