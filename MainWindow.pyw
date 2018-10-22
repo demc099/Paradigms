@@ -103,7 +103,7 @@ class Ventana(QMainWindow):
   menuP_10.triggered.connect(lambda: self.cargarAlgoritmoX("Paréntesis balanceados"))
 
   #invocacion funciones para guardar
-  self.saveButton.clicked.connect(self.conjuntodevalidaciones)
+  self.saveButton.clicked.connect(self.guardar)
   self.saveFileButton.clicked.connect(self.guardarPrueba)
   self.saveRegistryButton.clicked.connect(self.guardarResultado)
 
@@ -185,7 +185,8 @@ class Ventana(QMainWindow):
   self.saveFileButton.setEnabled(False)
 
  def guardarResultado(self):
-  inoutFile.guardarResultado(self)
+  if validaciones.conjuntodevalidacionesdePrueba():
+   inoutFile.guardarResultado(self)
 
  def cargarPrueba(self):
   self.lineEdit.setEnabled(False)
@@ -223,13 +224,13 @@ class Ventana(QMainWindow):
  
  def correrAlgoritmo(self):
   if self.lineEdit.isEnabled():
-    validaciones.conjuntodevalidacionesdePrueba(self)
-    #funcionesAlgoritmo.correrAlgoritmo(self)
+    #validaciones.conjuntodevalidacionesdePrueba(self)
+    funcionesAlgoritmo.correrAlgoritmo(self)
   else:
     if self.fileEdit.isEnabled():
       #validaciones.conjuntodevalidacionesdePrueba(self)
       funcionesAlgoritmo.correrAlgoritmoPruebas(self)
-      validaciones.conjuntodevalidacionesdePruebas(self)
+      #validaciones.conjuntodevalidacionesdePruebas(self)
 
 
 #Validar
@@ -246,7 +247,8 @@ class Ventana(QMainWindow):
   validaciones.validarGramatica(self)
 
  def conjuntodevalidaciones(self):
-  validaciones.conjuntodevalidaciones(self)
+  #validaciones.conjuntodevalidaciones(self)
+  validaciones.conjuntodevalidacionesdePrueba(self)
 
 
 

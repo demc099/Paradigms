@@ -2,11 +2,14 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import re
 
+import validaciones
+
 """Este es el método encargado de abrir el archivo txt o xml donde se desea guardar y pasarle la ruta de este al método validarFormatoGuardar"""
 def guardar(self):
-    fileName, _ = QFileDialog.getSaveFileName(self, "Guardar", "","Text Files (*.txt);;Xml Files (*.xml)")
-    if fileName:
-        validarFormatoGuardar(self, fileName)
+    if validaciones.conjuntodevalidacionesdePrueba(self):
+        fileName, _ = QFileDialog.getSaveFileName(self, "Guardar", "","Text Files (*.txt);;Xml Files (*.xml)")
+        if fileName:
+            validarFormatoGuardar(self, fileName)
 
 
 """Este método recibe la ruta del archivo donde se desea guardar y verifica por medio de expresiones regulares si se trata de un archivo .txt o de un archivo .xml 

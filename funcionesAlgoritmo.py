@@ -44,17 +44,18 @@ syntaxre1 = r"""(?mx)
 #El metodo correrALgoritmo limpia lo que hay en el campo de texto de resultas para volver a imprimir una nueva prueba
 #Valida que exita una hilera de prueba para aplicar las reglas y si se cumple aplica las reglas al texto de prueba.
 def correrAlgoritmo(self):
-    self.clearRegistryButton.setEnabled(True)
-    self.saveRegistryButton.setEnabled(True)
-    texto = self.lineEdit.text()
-    if texto == "":
-        validaciones.enviarMensError(self, "Ingrese una hilera de prueba")
-    else:
-        grammar = self.grammarEdit.toPlainText().replace('"', '')
-        self.printText.clear()
-        self.printText.append("#PRUEBA"+ "\n")
-        self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
-        self.printText.append("RESULTADO:  "+ reemplazarReglas(self,texto,extraerreglas(grammar)))
+    if validaciones.conjuntodevalidacionesdePrueba(self)==True:
+        self.clearRegistryButton.setEnabled(True)
+        self.saveRegistryButton.setEnabled(True)
+        texto = self.lineEdit.text()
+        if texto == "":
+            validaciones.enviarMensError(self, "Ingrese una hilera de prueba")
+        else:
+            grammar = self.grammarEdit.toPlainText().replace('"', '')
+            self.printText.clear()
+            self.printText.append("#PRUEBA"+ "\n")
+            self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
+            self.printText.append("RESULTADO:  "+ reemplazarReglas(self,texto,extraerreglas(grammar)))
 
 #Este metodo ingresa en una lista todas las reglas que se encuentre en el cuadro de texto de las reglas de producción, validando su sintaxis
 def extraerreglas(grammar):
@@ -176,13 +177,14 @@ def espacioV(self,text,pat,rep1):
 
 
 def debug(self, texto):
-    self.clearRegistryButton.setEnabled(True)
-    self.saveRegistryButton.setEnabled(True)
-    grammar= self.grammarEdit.toPlainText()
-    variables = self.varsEdit.text()
-    grammar = self.grammarEdit.toPlainText().replace('"', '')
-    #self.debugButton.setEnabled(False)
-    self.printText.append(remplazardebug(self, texto, extraerreglas(grammar), variables))
+    if validaciones.conjuntodevalidacionesdePrueba(self):
+        self.clearRegistryButton.setEnabled(True)
+        self.saveRegistryButton.setEnabled(True)
+        grammar= self.grammarEdit.toPlainText()
+        variables = self.varsEdit.text()
+        grammar = self.grammarEdit.toPlainText().replace('"', '')
+        #self.debugButton.setEnabled(False)
+        self.printText.append(remplazardebug(self, texto, extraerreglas(grammar), variables))
 
 
 
@@ -261,21 +263,22 @@ def remplazardebug(self, text, grammar,vars):
 # Aplica el algoritmo linea por linea a un archivo que contiene hileras de prueba -------------------------------------------------------------------------
 
 def correrAlgoritmoPruebas(self):
-    #habilita los botones para guardar y borrar el contenido de las pruebas
-    self.clearRegistryButton.setEnabled(True)
-    self.saveRegistryButton.setEnabled(True)
+    if validaciones.conjuntodevalidacionesdePrueba(self)==True:
+        #habilita los botones para guardar y borrar el contenido de las pruebas
+        self.clearRegistryButton.setEnabled(True)
+        self.saveRegistryButton.setEnabled(True)
 
-    grammar= self.grammarEdit.toPlainText()
-    grammar = self.grammarEdit.toPlainText().replace('"', '')
-    pruebas = str(self.fileEdit.toPlainText()).split('\n')
+        grammar= self.grammarEdit.toPlainText()
+        grammar = self.grammarEdit.toPlainText().replace('"', '')
+        pruebas = str(self.fileEdit.toPlainText()).split('\n')
 
-    self.printText.clear() #limpia la ventana para mostrar los resultados 
+        self.printText.clear() #limpia la ventana para mostrar los resultados
 
-    for line in pruebas:
-        if line == '\n' or line == '':
-            validaciones.enviarMensError(self, "Ingrese una hilera de prueba")
-        else:    
-            self.printText.append("#PRUEBA"+ "\n")
-            self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
+        for line in pruebas:
+            if line == '\n' or line == '':
+                validaciones.enviarMensError(self, "Ingrese una hilera de prueba")
+            else:
+                self.printText.append("#PRUEBA"+ "\n")
+                self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
 
-            self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar))+ "\n")
+                self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar))+ "\n")

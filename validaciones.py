@@ -122,6 +122,7 @@ def validarGramatica(self):
 
   return bandera
 
+
 """"Este método sirve para enviar un mensaje de error al usuario"""
 def enviarMensError(self, msj):
     ret = QMessageBox.critical(self, "Error",msj, QMessageBox.Ok)
@@ -144,6 +145,7 @@ def conjuntodevalidaciones(self):
         enviarMensError(self, "Por favor ingrese los caracteres correctamente e inténtelo de nuevo!")
 
 
+
 def conjuntodevalidacionesdePrueba(self):
     camposBlancos(self)
     if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
@@ -153,24 +155,8 @@ def conjuntodevalidacionesdePrueba(self):
             else:
                 if validarGramatica(self) == True:
                     self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
-                    funcionesAlgoritmo.correrAlgoritmo(self)
-                else:
-                    enviarMensError(self, "Asegurese de escribir correctamente las reglas")
-        else:
-            enviarMensError(self, "Verifique que los marcadores ingresados no coincidan con los simbolos ni las variables ingresadas")
-    else:
-        enviarMensError(self, "Por favor ingrese los caracteres correctamente e inténtelo de nuevo!")
-
-def conjuntodevalidacionesdePruebas(self):
-    camposBlancos(self)
-    if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
-        if validarIgualdad(self) == True:
-            if self.grammarEdit.toPlainText() == "":
-                enviarMensError(self, "No hay reglas de producción")
-            else:
-                if validarGramatica(self) == True:
-                    self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
-                    funcionesAlgoritmo.correrAlgoritmoPruebas(self)
+                    #funcionesAlgoritmo.correrAlgoritmo(self)
+                    return True
                 else:
                     enviarMensError(self, "Asegurese de escribir correctamente las reglas")
         else:
