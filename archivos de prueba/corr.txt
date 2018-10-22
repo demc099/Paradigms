@@ -1,0 +1,11 @@
+﻿#symbols 01
+#vars x01
+#markers ABS
+% Convertir un número binario en su equivalente unario
+Bx -> BA
+xA -> ABB
+S1 -> AB
+B -> +
+AA -> A
+A -> Λ.
+x -> Sx

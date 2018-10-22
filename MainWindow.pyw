@@ -227,6 +227,7 @@ class Ventana(QMainWindow):
     #funcionesAlgoritmo.correrAlgoritmo(self)
   else:
     if self.fileEdit.isEnabled():
+      validaciones.conjuntodevalidacionesdePrueba(self)
       funcionesAlgoritmo.correrAlgoritmoPruebas(self)
 
 
