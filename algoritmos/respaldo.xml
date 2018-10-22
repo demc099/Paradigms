@@ -3,6 +3,6 @@
 <symbols>()</symbols>
 <vars>x</vars>
 <markers>SVF</markers>
-<rules>S() -> S</rules>
+<rules>S() ->S</rules>
 <rules>S(( -> (S(</rules>
 </algoritmo>

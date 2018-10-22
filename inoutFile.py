@@ -64,7 +64,7 @@ def cargarTxt(self, fileName):
         patronSym = re.search('^\#symbols\s[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+', line, re.UNICODE)
         patronVars = re.search('^\#vars\s[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+', line, re.UNICODE)
         patronMark = re.search('^\#markers\s[a-zA-Z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+', line, re.UNICODE)
-        patronRules = re.search('^(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+)\.?', line,re.UNICODE)
+        patronRules = re.search('^(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s?\-\>\s?(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+)\.?', line,re.UNICODE)
         patronComment = re.search('^%[\w\s]+', line, re.UNICODE)
         if patronSym:
             pr = line.replace("#symbols ","")
@@ -93,7 +93,7 @@ def cargarXml(self, fileName):
         patronSym = re.search('^\<symbols\>[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+\<\/symbols\>', line, re.UNICODE)
         patronVars = re.search('^\<vars\>[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+\<\/vars\>', line, re.UNICODE)
         patronMark = re.search('^\<markers\>[a-zA-Z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+\<\/markers\>', line, re.UNICODE)
-        patronRules = re.search('^\<rules\>(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?\<\/rules\>', line,re.UNICODE)
+        patronRules = re.search('^\<rules\>(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s?\-\>\s?(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?\<\/rules\>', line,re.UNICODE)
         patronComment = re.search('^\<comment\>%[\w\s]+\<\/comment\>', line, re.UNICODE)
         if patronSym:
             pr1 = line.replace("<symbols>","")

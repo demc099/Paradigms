@@ -61,9 +61,12 @@ def reemplazarReglas(self, text, grammar):
         for pat, repl, term in grammar:
             te = hayVars(self,text,pat,repl)
             if te:
-                #self.printText.append(text + "  ->  ")
-                text = te
-                #self.printText.insertPlainText(text)
+                if te[1] == True:
+                    text = text.replace(te[0], "", 1)
+                else:
+                    #self.printText.append(text + "  ->  ")
+                    text = te
+                    #self.printText.insertPlainText(text)
                 if term:
                     return text
                 break
@@ -152,11 +155,11 @@ def pruebaEx(self,pat,repl,text,listapat,listaVar):
                 if pats in text[cont:cont+f]: #existe el pat en el text
                     rep1 = ''.join(map(str, rep2)) # convierto la lista replazo un strirng
                     if repl == "Λ":
-                        text = text.replace(pats, "")#si remplazo fuera lambda en el texto dode este el pat lo remplazo por nada
-
+                        t2= [pats, True]#pat = pats#text = text.replace(pats, "", 1)#si remplazo fuera lambda en el texto dode este el pat lo remplazo por nada
+                        return t2
                     else:
                         text = text.replace(pats, rep1) # remplzo el pat por el patron de sustitucion
-                    return text #retorno el texto completo ya con la sustitucion aplicada
+                        return text #retorno el texto completo ya con la sustitucion aplicada
 
                 else: # si no existe el pat en el texto
                     text1 = text1[1:]  # elimino el primer valor a texto1
