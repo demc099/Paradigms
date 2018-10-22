@@ -130,22 +130,6 @@ def enviarMensError(self, msj):
 
 """Este método se asegura que los simbolos, las variables, los marcadores y las reglas cumplan con el formato correcto para luego poder llamar al método guardar o
  correr el algoritmo sin temor a que hayan errores en estos y no funcione adecuadamente la resolución o que se guarde algo no permitido"""
-def conjuntodevalidaciones(self):
-    camposBlancos(self)
-    if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
-        if validarIgualdad(self) == True:
-            if validarGramatica(self) == True:
-                self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
-                inoutFile.guardar(self)
-            else:
-                enviarMensError(self, "Asegurese de escribir correctamente las reglas")
-        else:
-            enviarMensError(self, "Verifique que los marcadores ingresados no coincidan con los simbolos ni las variables ingresadas")
-    else:
-        enviarMensError(self, "Por favor ingrese los caracteres correctamente e inténtelo de nuevo!")
-
-
-
 def conjuntodevalidacionesdePrueba(self):
     camposBlancos(self)
     if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:

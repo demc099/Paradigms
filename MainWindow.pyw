@@ -175,7 +175,7 @@ class Ventana(QMainWindow):
      inoutFile.cargar(self)
 
 
-# Declaración funciones guardar y cargar Pruebas
+#Este metodo guarda el archivo que contiene hileras de prueba
  def guardarPrueba(self):
   inoutFile.guardarArchivoPrueba(self)
   self.fileEdit.setText("")
@@ -184,9 +184,11 @@ class Ventana(QMainWindow):
   self.clearFileButton.setEnabled(False)
   self.saveFileButton.setEnabled(False)
 
+#Este método guarda el resultado de ejecutar un algoritmo en un archivo
  def guardarResultado(self):
    inoutFile.guardarResultado(self)
 
+#Este método carga un archivo que contiene hileras de prueba
  def cargarPrueba(self):
   self.lineEdit.setEnabled(False)
   self.fileEdit.setEnabled(True)
@@ -195,17 +197,11 @@ class Ventana(QMainWindow):
   inoutFile.cargarArchivoPrueba(self)
   self.lineEdit.setText("")
 
-
+#Este metodo permite cargar los algoritmos de ejemplo del menú
  def cargarAlgoritmoX(self, nombre):
   nombre = "./algoritmos/"+nombre+".txt"
   inoutFile.cargarTxt(self, nombre)
 
-# Declaración funciones algoritmo
- def aplicarAlgoritmo(self):
-    linea= self.lineEdit.text()
-    simbaceptados= self.symbolsEdit.text()
-    variables= self.varsEdit.text()
-    funcionesAlgoritmo.algoritmo(self, linea, variables)
 
  def debug(self):
   self.printText.clear()
@@ -223,13 +219,10 @@ class Ventana(QMainWindow):
  
  def correrAlgoritmo(self):
   if self.lineEdit.isEnabled():
-    #validaciones.conjuntodevalidacionesdePrueba(self)
     funcionesAlgoritmo.correrAlgoritmo(self)
   else:
     if self.fileEdit.isEnabled():
-      #validaciones.conjuntodevalidacionesdePrueba(self)
       funcionesAlgoritmo.correrAlgoritmoPruebas(self)
-      #validaciones.conjuntodevalidacionesdePruebas(self)
 
 
 #Validar
