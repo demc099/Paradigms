@@ -2,7 +2,7 @@
 #vars x
 #markers BEQSαβΛ
 % Realizar una multiplicación de números binarios arbitrarios
-
+% Realizar una multiplicación de números binarios arbitrarios
 +0 -> 0++
 1 -> 0+
 0 -> Λ
@@ -17,5 +17,5 @@ SB -> S
 +E -> E
 αE -> E
 SE -> Λ.
-1 -> Sβ
-0 -> Sβ
++ -> Sβ+
+x -> Sβ
