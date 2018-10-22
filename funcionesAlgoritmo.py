@@ -275,10 +275,8 @@ def correrAlgoritmoPruebas(self):
         self.printText.clear() #limpia la ventana para mostrar los resultados
 
         for line in pruebas:
-            if line == '\n' or line == '':
-                validaciones.enviarMensError(self, "Ingrese una hilera de prueba")
-            else:
+            if line != '\n' and line != '':
                 self.printText.append("#PRUEBA"+ "\n")
                 self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
 
-                self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar))+ "\n")
+                self.printText.append("RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar))+ "\n\n")

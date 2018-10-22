@@ -1,0 +1,8 @@
+Integrantes:
+Carolina Mora Cordero Grupo 3pm
+Meribeth Zúñiga Zúñiga Grupo 3pm
+Gilberto Josué Román Barrantes Grupo 6pm
+Daniel Mora Cordero Grupo 1pm
+
+Nota: en la carpeta imagenes de pruebas se pueden ver imagenes 
+de los algoritmos funcionando.
