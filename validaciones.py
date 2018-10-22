@@ -24,7 +24,7 @@ def camposBlancos(self):
 
 def validarSim(self):
   symbols= self.symbolsEdit.text()
-  validar = re.match('^[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+$', symbols, re.I)
+  validar = re.match('^[\w\(\)\[\]\*\+\,\¿\?\!\#\¡\$\&\%\{\}]+$', symbols, re.I)
   #[a-z0-9áéíóúàèìòùäëïöü\(\)]+$
   if not validar:
    self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid red;")
@@ -95,7 +95,7 @@ def validarGramatica(self):
       #patronGram = re.match('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$', linea, re.UNICODE)
       # a-z0-9\sáéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ
       #patron1 = re.compile('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$')
-      patron1 = re.compile('^(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?$')
+      patron1 = re.compile('^(\"[\w\(\)\[\]\*\+\,\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?$')
       patron2 = re.compile('^%[\w\s]+')
       if (linea != "" and  not patron2.match(linea)):
         if (patron1.match(linea)):
