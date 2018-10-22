@@ -91,10 +91,6 @@ def validarGramatica(self):
   listaMar = list(self.markersEdit.text())
   lineas = str(self.grammarEdit.toPlainText()).split('\n')
   for linea in lineas:
-      #patronComment = re.search('^%[\w\s]+', linea, re.UNICODE)
-      #patronGram = re.match('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$', linea, re.UNICODE)
-      # a-z0-9\sáéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ
-      #patron1 = re.compile('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$')
       patron1 = re.compile('^(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?$')
       patron2 = re.compile('^%[\w\s]+')
       if (linea != "" and  not patron2.match(linea)):

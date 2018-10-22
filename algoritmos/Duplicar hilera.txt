@@ -1,4 +1,4 @@
-﻿#symbols abcdefghijklmnopqrstuvwxyz0123456789
+#symbols abcdefghijklmnopqrstuvwxyz0123456789
 #vars xy
 #markers αβΛ
 %Duplicar una Hilera

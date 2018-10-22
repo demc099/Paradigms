@@ -1,10 +1,24 @@
-#symbols abcdefghijklmnopqrstuvwxyz0123456789
-#vars xy
-#markers AB
-% Invertir una hilera
-Ax -> xA
-xAy -> yAx
-yAx -> yBx
-xA -> xAy
-x -> Ax
-B -> Λ
+#symbols abc
+#vars x
+#markers ABCMFP
+Pa -> aP
+Pb -> bP
+Pc -> cP
+P -> F
+MF -> Λ.
+Aa -> aA
+Ab -> bA
+Ac -> cA
+Ba -> aB
+Bb -> bB
+Bc -> cB
+Ca -> aC
+Cb -> bC
+Cc -> cC
+AF -> Fa
+BF -> Fb
+CF -> Fc
+Ma -> MA
+Mb -> MB
+Mc -> MC
+Λ -> MP

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<algoritmo>
+<symbols>10+</symbols>
+<vars>10+</vars>
+<markers>ABC</markers>
+<comment>% Realizar una suma de números binarios</comment>
+<rules>+B -> +</rules>
+<rules>+C -> A</rules>
+<rules>0A0 -> 00A</rules>
+<rules>0A1 -> 10A</rules>
+<rules>1A0 -> 01A</rules>
+<rules>1A1 -> 11A</rules>
+<rules>00A -> B0</rules>
+<rules>01A -> B1</rules>
+<rules>10A -> B1</rules>
+<rules>11A -> C1B0</rules>
+<rules>0+ -> +0A</rules>
+<rules>1+ -> +1A</rules>
+<rules>+C -> Λ</rules>
+<rules>C -> A</rules>
+<rules>B -> Λ</rules>
+<rules>+0 -> +</rules>
+<rules>0+ -> +</rules>
+<rules>+ -> Λ</rules>
+<rules>+B -> Λ</rules>
+<rules>A -> Λ</rules>
+</algoritmo>

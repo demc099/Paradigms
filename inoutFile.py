@@ -16,7 +16,7 @@ def validarFormatoGuardar(self, fileName):
         guardarXml(self, fileName)
 
 def guardarTxt(self, fileName):
-    file = open(fileName, "w", encoding='utf-8')
+    file = open(fileName, "w", encoding='utf-8-sig')
     file.write("#symbols "+self.symbolsEdit.text()+"\n")
     file.write("#vars "+self.varsEdit.text()+"\n")
     file.write("#markers "+self.markersEdit.text()+"\n")
@@ -28,7 +28,7 @@ def guardarTxt(self, fileName):
     file.close()
 
 def guardarXml(self, fileName):
-    file = open(fileName, "w", encoding='utf-8')
+    file = open(fileName, "w", encoding='utf-8-sig')
     file.write("<?xml version='1.0' encoding='UTF-8'?>"+"\n")
     file.write("<algoritmo>"+"\n")
     file.write("<symbols>"+self.symbolsEdit.text()+"</symbols>"+"\n")
@@ -56,12 +56,12 @@ def validarFormatoCargar(self, fileName):
         cargarXml(self, fileName)
 
 def cargarTxt(self, fileName):
-    file = open(fileName, 'r', encoding='utf-8')
+    file = open(fileName, 'r', encoding='utf-8-sig')
     lines = file.readlines()
     self.grammarEdit.setText("")
     for line in lines:
-        #patronSym = re.search('^\#symbols\s[a-z0-9]+', line, re.I)
-        patronSym = re.search('^\#symbols\s[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+', line, re.UNICODE)
+        #line = line.replace("\ufeff#symbols", "\#symbols")
+        patronSym = re.search('^\#symbols\s[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+', line, re.UNICODE)
         patronVars = re.search('^\#vars\s[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+', line, re.UNICODE)
         patronMark = re.search('^\#markers\s[a-zA-Z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+', line, re.UNICODE)
         patronRules = re.search('^(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s?\-\>\s?(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+)\.?', line,re.UNICODE)
@@ -86,7 +86,7 @@ def cargarTxt(self, fileName):
     
 
 def cargarXml(self, fileName):
-    file = open(fileName, 'r', encoding='utf-8')
+    file = open(fileName, 'r', encoding='utf-8-sig')
     lines = file.readlines()
     self.grammarEdit.setText("")
     for line in lines:
@@ -122,7 +122,7 @@ def cargarXml(self, fileName):
 def guardarResultado(self):
     fileName, _ = QFileDialog.getSaveFileName(self, "Guardar", "", "Text Files (*.txt)")
     if fileName:
-        file = open(fileName, "w", encoding='utf-8')
+        file = open(fileName, "w", encoding='utf-8-sig')
         resultado = self.printText.toPlainText()
         if resultado != " ":
             file.write(resultado)
@@ -143,7 +143,7 @@ def validarGuardarPrueba(self, fileNamePrueba):
 
 
 def guardarTxtPrueba(self, fileNamePrueba):
-    file = open(fileNamePrueba, "w", encoding='utf-8')
+    file = open(fileNamePrueba, "w", encoding='utf-8-sig')
     file.write(self.fileEdit.toPlainText()+ "\n")
     file.close()
 

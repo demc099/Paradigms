@@ -1,25 +1,19 @@
-﻿#symbols 10+ABC
+#symbols 10DEF
 #vars 10+
 #markers ABC
 % Realizar una suma de números binarios
 +B -> +
 +C -> A
-
 0A0 -> 00A
 0A1 -> 10A
-
 1A0 -> 01A
 1A1 -> 11A
-
 00A -> B0
 01A -> B1
-
 10A -> B1
 11A -> C1B0
-
 0+ -> +0A
 1+ -> +1A
-
 +C -> Λ
 C -> A
 B -> Λ

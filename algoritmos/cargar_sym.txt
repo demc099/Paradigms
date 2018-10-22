@@ -1,4 +1,4 @@
-#symbols 10+FG
+#symbols 10DE
 #vars 10+
 #markers ABC
 % Realizar una suma de números binarios

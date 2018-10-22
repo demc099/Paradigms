@@ -1,5 +1,5 @@
 ﻿#symbols ()
-#vars x
+#vars ()
 #markers SWF
 % Verificar la estructura de una hilera que contenga únicamente paréntesis,
 % que se encuentren
@@ -20,4 +20,3 @@ VF -> F
 FV -> F
 V -> V.
 x -> Sx
-
