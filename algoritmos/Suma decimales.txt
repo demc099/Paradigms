@@ -1,4 +1,4 @@
-#symbols 0123456789+,
+﻿#symbols 0123456789+,
 #vars xy
 #markers αβθςωε
 % Realizar una suma de números decimales
@@ -132,29 +132,3 @@ xαy -> yxα
 0ω -> ω
 + -> ε
 +β -> ε
-=======
-#symbols 10+FG
-#vars 10+
-#markers ABC
-% Realizar una suma de números binarios
-+B -> +
-+C -> A
-0A0 -> 00A
-0A1 -> 10A
-1A0 -> 01A
-1A1 -> 11A
-00A -> B0
-01A -> B1
-10A -> B1
-11A -> C1B0
-0+ -> +0A
-1+ -> +1A
-+C -> Λ
-C -> A
-B -> Λ
-+0 -> +
-0+ -> +
-+ -> Λ
-+B -> Λ
-A -> Λ
->>>>>>> origin/master
