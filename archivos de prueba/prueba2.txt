@@ -1,6 +1,0 @@
-#symbols abcdefghijklmnopqrstuvwxyz0123456789
-#vars wxyz
-#markers αβγδ
-βx -> xβ
-xβ -> Λ.
-x -> βx

@@ -1,5 +1,0 @@
-#PRUEBA
-
-LINEA DE ENTRADA: aabb
-
-RESULTADO:  aaaabbbb

@@ -1,5 +1,0 @@
-#symbols ()
-#vars x
-#markers SVF
-S() ->S
-S(( -> (S(

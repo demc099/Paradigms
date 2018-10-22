@@ -1,4 +1,0 @@
-﻿#symbols abcdefghijklmnopqrstuvwxyz0123456789
-#vars wxyzT
-#markers αβγδ
-T -> hola

@@ -1,8 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<algoritmo>
-<symbols>()</symbols>
-<vars>x</vars>
-<markers>SVF</markers>
-<rules>S() ->S</rules>
-<rules>S(( -> (S(</rules>
-</algoritmo>
