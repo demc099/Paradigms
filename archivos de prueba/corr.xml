@@ -1,0 +1,16 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<algoritmo>
+<symbols>01</symbols>
+<vars>x01</vars>
+<markers>ABS</markers>
+<comment>% Convertir un número binario en su equivalente unario</comment>
+<comment>% (se reemplaza un número binario por una secuencia de</comment>
+<comment>%  símbolos cuya longitud es igual al número)</comment>
+<rules>Bx -> BA</rules>
+<rules>xA -> ABB</rules>
+<rules>S1 -> AB</rules>
+<rules>B -> +</rules>
+<rules>AA -> A</rules>
+<rules>A -> Λ.</rules>
+<rules>x -> Sx</rules>
+</algoritmo>
