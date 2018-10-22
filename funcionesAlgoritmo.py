@@ -261,21 +261,21 @@ def remplazardebug(self, text, grammar,vars):
 # Aplica el algoritmo linea por linea a un archivo que contiene hileras de prueba -------------------------------------------------------------------------
 
 def correrAlgoritmoPruebas(self):
+    #habilita los botones para guardar y borrar el contenido de las pruebas
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
 
     grammar= self.grammarEdit.toPlainText()
-    variables = self.varsEdit.text()
+    grammar = self.grammarEdit.toPlainText().replace('"', '')
     pruebas = str(self.fileEdit.toPlainText()).split('\n')
 
-    self.printText.clear()
+    self.printText.clear() #limpia la ventana para mostrar los resultados 
 
     for line in pruebas:
-        if line != '\n' and line != '':
+        if line == '\n' or line == '':
+            validaciones.enviarMensError(self, "Ingrese una hilera de prueba")
+        else:    
             self.printText.append("#PRUEBA"+ "\n")
             self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
 
-            self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar), variables)+ "\n")
-
-
-
+            self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar))+ "\n")
