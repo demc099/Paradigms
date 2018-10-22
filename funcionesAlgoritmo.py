@@ -22,6 +22,8 @@ from PyQt5.QtWidgets import *
 
 import validaciones
 
+#Sitaxis que permite reglas de producción, done reconoce los espacios con el signo %,
+# espacios en blanco y y reglas <patron de busqueda> -> <patron de sustitución>
 syntaxre = r"""(?mx)
 ^(?: 
   (?: (?P<comment> \% .* ) ) |
@@ -30,6 +32,7 @@ syntaxre = r"""(?mx)
 )$
 """
 
+#Sitaxis que permite patrones de etiquetas
 syntaxre1 = r"""(?mx)
 ^(?: 
   (?: (?P<comment> \% .* ) ) |
@@ -38,6 +41,8 @@ syntaxre1 = r"""(?mx)
 )$
 """
 
+#El metodo correrALgoritmo limpia lo que hay en el campo de texto de resultas para volver a imprimir una nueva prueba
+#Valida que exita una hilera de prueba para aplicar las reglas y si se cumple aplica las reglas al texto de prueba.
 def correrAlgoritmo(self):
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
@@ -51,53 +56,47 @@ def correrAlgoritmo(self):
         self.printText.append("LINEA DE ENTRADA: "+ texto + "\n")
         self.printText.append("RESULTADO:  "+ reemplazarReglas(self,texto,extraerreglas(grammar)))
 
+#Este metodo ingresa en una lista todas las reglas que se encuentre en el cuadro de texto de las reglas de producción, validando su sintaxis
 def extraerreglas(grammar):
     return [(matchobj.group('pat'), matchobj.group('repl'), bool(matchobj.group('term')))
             for matchobj in re.finditer(syntaxre, grammar)#Encuentre todas las subcadenas donde coincida la RE, y las devuelve como un iterador.
             if matchobj.group('rule')]#va metiedo a la lista si cumple lo de la reglas Ejm:[('"A"',apple,False)] Devuelve la cadena emparejada por el RE
 
+#Recibe el texto y la regla con el fin de recorrer el texto buscando compatibilidad en los patrones
 def reemplazarReglas(self, text, grammar):
     while True:
         for pat, repl, term in grammar:
             te = hayVars(self,text,pat,repl)
             if te:
-                if te[1] == True:
-                    text = text.replace(te[0], "", 1)
+                if te[1] == True: # si es true significa que remplazo es lambda, por lo tanto se remplaza el pat por el lambda
+                    text = text.replace(te[0], "", 1) #se remplaza el pot por un espacio en blanco
                 else:
-                    #self.printText.append(text + "  ->  ")
-                    text = te
-                    #self.printText.insertPlainText(text)
-                if term:
+                    text = te # en caso contrario cambia el texto de entrada por la nueva sustitucion
+                if term: #si es terminal retorne el texto
                     return text
                 break
             else:
-                if pat == "Λ":
+                if pat == "Λ": # en caso que el pat sea lambda hace la sustitucion de lambda por el patron de sustitución
                     t = list(text)
-                    #self.printText.append(text + "  ->  ")
                     text = text.replace(t[0], repl+t[0], 1)
-                    #self.printText.insertPlainText(text)
-                    if term:
+                    if term: #Si es terminal retorna el texto resultante
                         return text
                     break
                 else:
-                    if pat in text:
+                    if pat in text: # si no cumple ninguna de las condiciones anteriores significa que no hay varialbes ni lambdas tanto en el pat como en el rep, sustituye los simbolos directamente
                         if repl == "Λ":
-                            #self.printText.append(text + "  ->  ")
                             text = text.replace(pat, "", 1)
-                            #self.printText.insertPlainText(text)
                             if term:
                                 return text
                             break
                         else:
-                            #self.printText.append(text+"  ->  ")
                             text = text.replace(pat, repl, 1)
-                            #self.printText.insertPlainText(text)
                             if term:
                               return text
                             break
         else:
-            return text# y si recorre el for y el pat no esta en la gramatica
-
+            return text # si ya no hay reglas por aplicar, retorna el texto
+#Este metodo tiene como funcio buscar variables en el pat, si encuentra pase al metodo prueba, si no siga con las condiciones del reemplazarReglas
 def hayVars(self, text,pat,repl):
     listaVar = list(self.varsEdit.text())
     listapat = list(pat)
@@ -106,6 +105,7 @@ def hayVars(self, text,pat,repl):
         te = pruebaEx(self,pat,repl,text,listapat,listaVar)
         return te
 
+#Este busca alguna parte del texto de prueba que coincida con el pat, en caso de encontrarlo lo sustituye y lo retorna
 def pruebaEx(self,pat,repl,text,listapat,listaVar):
     rep2=list(repl) #crea una lista del remplazo
     listaMar = list(self.markersEdit.text()) #lista de marcadores
@@ -168,29 +168,6 @@ def pruebaEx(self,pat,repl,text,listapat,listaVar):
                     rep2 = list(repl)
                     cont += 1 # recorro el text de nuevo
 
-
-
-def cambiarX(pat, repl, text, vars):
-    cp = 0
-
-    while cp < len(pat):
-        p = pat[cp]
-        if p in vars:
-            c = 0
-            while c < len(text):
-
-                if pat.replace(p, text[c]) in text:
-                    pat = pat.replace(p, text[c])
-                    repl = repl.replace(p, text[c])
-                    if repl == "Λ":
-                        text = text.replace(pat, "")
-                    else:
-                        text = text.replace(pat, repl)
-                    return text
-                else:
-                    c += 1
-
-        cp += 1
 
 def espacioV(self,text,pat,rep1):
     self.printText.append(text + "  ->  ")
@@ -284,21 +261,21 @@ def remplazardebug(self, text, grammar,vars):
 # Aplica el algoritmo linea por linea a un archivo que contiene hileras de prueba -------------------------------------------------------------------------
 
 def correrAlgoritmoPruebas(self):
+    #habilita los botones para guardar y borrar el contenido de las pruebas
     self.clearRegistryButton.setEnabled(True)
     self.saveRegistryButton.setEnabled(True)
 
     grammar= self.grammarEdit.toPlainText()
-    variables = self.varsEdit.text()
+    grammar = self.grammarEdit.toPlainText().replace('"', '')
     pruebas = str(self.fileEdit.toPlainText()).split('\n')
 
-    self.printText.clear()
+    self.printText.clear() #limpia la ventana para mostrar los resultados 
 
     for line in pruebas:
-        if line != '\n' and line != '':
+        if line == '\n' or line == '':
+            validaciones.enviarMensError(self, "Ingrese una hilera de prueba")
+        else:    
             self.printText.append("#PRUEBA"+ "\n")
             self.printText.append("LINEA DE ENTRADA: "+ line + "\n")
 
-            self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar), variables)+ "\n")
-
-
-
+            self.printText.append("\n"+"RESULTADO:  "+ reemplazarReglas(self,line,extraerreglas(grammar))+ "\n")

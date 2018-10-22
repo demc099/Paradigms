@@ -24,7 +24,7 @@ def camposBlancos(self):
 
 def validarSim(self):
   symbols= self.symbolsEdit.text()
-  validar = re.match('^[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+$', symbols, re.I)
+  validar = re.match('^[\w\(\)\[\]\*\+\,\¿\?\!\#\¡\$\&\%\{\}]+$', symbols, re.I)
   #[a-z0-9áéíóúàèìòùäëïöü\(\)]+$
   if not validar:
    self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid red;")
@@ -91,6 +91,11 @@ def validarGramatica(self):
   listaMar = list(self.markersEdit.text())
   lineas = str(self.grammarEdit.toPlainText()).split('\n')
   for linea in lineas:
+      #patronComment = re.search('^%[\w\s]+', linea, re.UNICODE)
+      #patronGram = re.match('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$', linea, re.UNICODE)
+      # a-z0-9\sáéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ
+      #patron1 = re.compile('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$')
+      patron1 = re.compile('^(\"[\w\(\)\[\]\*\+\,\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?$')
       patron1 = re.compile('^(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?$')
       patron2 = re.compile('^%[\w\s]+')
       if (linea != "" and  not patron2.match(linea)):
@@ -144,6 +149,23 @@ def conjuntodevalidacionesdePrueba(self):
                 if validarGramatica(self) == True:
                     self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
                     funcionesAlgoritmo.correrAlgoritmo(self)
+                else:
+                    enviarMensError(self, "Asegurese de escribir correctamente las reglas")
+        else:
+            enviarMensError(self, "Verifique que los marcadores ingresados no coincidan con los simbolos ni las variables ingresadas")
+    else:
+        enviarMensError(self, "Por favor ingrese los caracteres correctamente e inténtelo de nuevo!")
+
+def conjuntodevalidacionesdePruebas(self):
+    camposBlancos(self)
+    if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:
+        if validarIgualdad(self) == True:
+            if self.grammarEdit.toPlainText() == "":
+                enviarMensError(self, "No hay reglas de producción")
+            else:
+                if validarGramatica(self) == True:
+                    self.grammarEdit.setStyleSheet("color: blue; border: 1px solid green;")
+                    funcionesAlgoritmo.correrAlgoritmoPruebas(self)
                 else:
                     enviarMensError(self, "Asegurese de escribir correctamente las reglas")
         else:
