@@ -8,6 +8,9 @@ from PyQt5 import *
 from PyQt5.QtWidgets import (QApplication, QMainWindow, QAction, QMessageBox, QDialog, QWidget,
                                QGroupBox, QGridLayout, QVBoxLayout, QLineEdit, QPushButton, QLabel, QInputDialog)
 
+
+"""Este método revisa si los campos de simbolos, variables y marcadores están vacíos y si lo están agrega valores por defecto, siempre y cuando las reglas se hayan insertado
+las reglas"""
 def camposBlancos(self):
   symbols = self.symbolsEdit.text()
   vars = self.varsEdit.text()
@@ -22,10 +25,10 @@ def camposBlancos(self):
       self.markersEdit.setStyleSheet("color: blue; border: 1px solid yellow;")
 
 
+"""Este método verifica que los simbolos se hayan ingresado correctamente; que sean letras, números u otros carateres especiales"""
 def validarSim(self):
   symbols= self.symbolsEdit.text()
   validar = re.match('^[\w\(\)\[\]\*\+\,\¿\?\!\#\¡\$\&\%\{\}]+$', symbols, re.I)
-  #[a-z0-9áéíóúàèìòùäëïöü\(\)]+$
   if not validar:
    self.symbolsEdit.setStyleSheet("color: blue; border: 1px solid red;")
    return False
@@ -34,6 +37,7 @@ def validarSim(self):
    return True
 
 
+"""Este método verifica que las variables se hayan ingresado correctamente; que sean letras, números u otros carateres especiales"""
 def validarVars(self):
   vars = self.varsEdit.text()
   validar = re.match('^[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+$', vars, re.I)
@@ -45,6 +49,7 @@ def validarVars(self):
    return True
 
 
+"""Este método verifica que los marcadores se hayan ingresado correctamente; que sean letras, números o letras del alfabeto griego"""
 def validarMark(self):
   markers = self.markersEdit.text()
   validar = re.match('^[a-z0-9\sáéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+$', markers, re.I)
@@ -62,7 +67,7 @@ def validarMark(self):
    return True
 
 
-
+"""Este método verifica que los marcadores no tengan los mismos caracteres que los simbolos ni las variables"""
 def validarIgualdad(self):
   listaSim= list(self.symbolsEdit.text())
   listaVar = list(self.varsEdit.text())
@@ -84,18 +89,16 @@ def validarIgualdad(self):
    return True
 
 
-
+""""Este método verifica que las reglas ingresadas cumplan con lo siguiente:
+1) Que cada una de las reglas cumpla con un patron dado (por ejemplo tiene que ir a -> b es decir, espacios entre flecha
+2) Que cada caracter ingresado se encuentre en simbolos, variables o marcadores (debe estar en al menos 1) """
 def validarGramatica(self):
   listaSim = list(self.symbolsEdit.text())
   listaVar = list(self.varsEdit.text())
   listaMar = list(self.markersEdit.text())
   lineas = str(self.grammarEdit.toPlainText()).split('\n')
   for linea in lineas:
-      #patronComment = re.search('^%[\w\s]+', linea, re.UNICODE)
-      #patronGram = re.match('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$', linea, re.UNICODE)
-      # a-z0-9\sáéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ
-      #patron1 = re.compile('^(\"[\w+\s+]+\"|[\w]+)\s\-\>\s(\"[\w+\s+]+\"|[\w]+)\.?$')
-      patron1 = re.compile('^(\"[\w\(\)\[\]\*\+\,\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?$')
+      #patron1 = re.compile('^(\"[\w\(\)\[\]\*\+\,\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?$')
       patron1 = re.compile('^(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\s\-\>\s(\"[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+\"|[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+)\.?$')
       patron2 = re.compile('^%[\w\s]+')
       if (linea != "" and  not patron2.match(linea)):
@@ -119,11 +122,13 @@ def validarGramatica(self):
 
   return bandera
 
-
+""""Este método sirve para enviar un mensaje de error al usuario"""
 def enviarMensError(self, msj):
     ret = QMessageBox.critical(self, "Error",msj, QMessageBox.Ok)
 
 
+"""Este método se asegura que los simbolos, las variables, los marcadores y las reglas cumplan con el formato correcto para luego poder llamar al método guardar o
+ correr el algoritmo sin temor a que hayan errores en estos y no funcione adecuadamente la resolución o que se guarde algo no permitido"""
 def conjuntodevalidaciones(self):
     camposBlancos(self)
     if validarSim(self) == True and validarVars(self) == True and validarMark(self) == True:

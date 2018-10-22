@@ -81,7 +81,6 @@ def cargarTxt(self, fileName):
     lines = file.readlines()
     self.grammarEdit.setText("")
     for line in lines:
-        #line = line.replace("\ufeff#symbols", "\#symbols")
         patronSym = re.search('^\#symbols\s[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}\s]+', line, re.UNICODE)
         patronVars = re.search('^\#vars\s[\w\(\)\[\]\*\+\¿\?\!\#\¡\$\&\%\{\}]+', line, re.UNICODE)
         patronMark = re.search('^\#markers\s[a-zA-Z0-9áéíóúàèìòùäëïöüαβγδεζηθικλμνξοπρσςτυφχψωΛ]+', line, re.UNICODE)
