@@ -184,7 +184,7 @@ class Ventana(QMainWindow):
 
 # Declaración funciones guardar y cargar Pruebas
  def guardarPrueba(self):
-  inoutFile.guardarPrueba(self)
+  inoutFile.guardarArchivoPrueba(self)
   self.fileEdit.setText("")
   self.lineEdit.setEnabled(True)
   self.fileEdit.setEnabled(False)
@@ -199,7 +199,7 @@ class Ventana(QMainWindow):
   self.fileEdit.setEnabled(True)
   self.clearFileButton.setEnabled(True)
   self.saveFileButton.setEnabled(True)
-  inoutFile.cargarPrueba(self)
+  inoutFile.cargarArchivoPrueba(self)
   self.lineEdit.setText("")
 
 
@@ -234,7 +234,7 @@ class Ventana(QMainWindow):
     #funcionesAlgoritmo.correrAlgoritmo(self)
   else:
     if self.fileEdit.isEnabled():
-      validaciones.conjuntodevalidacionesdePrueba(self)
+      #validaciones.conjuntodevalidacionesdePrueba(self)
       funcionesAlgoritmo.correrAlgoritmoPruebas(self)
 
 

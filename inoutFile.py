@@ -2,11 +2,15 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 import re
 
+"""Este es el método encargado de abrir el archivo txt o xml donde se desea guardar y pasarle la ruta de este al método validarFormatoGuardar"""
 def guardar(self):
     fileName, _ = QFileDialog.getSaveFileName(self, "Guardar", "","Text Files (*.txt);;Xml Files (*.xml)")
     if fileName:
         validarFormatoGuardar(self, fileName)
 
+
+"""Este método recibe la ruta del archivo donde se desea guardar y verifica por medio de expresiones regulares si se trata de un archivo .txt o de un archivo .xml 
+para luego pasar esta ruta al método que según corresponda; ya que el proceso de guardar un .txt se realiza diferente al de guardar un .xml"""
 def validarFormatoGuardar(self, fileName):
     patronTxt = re.match('^(\w):\/[(\w+\s?\w+)(áéíóúñ\_\#\-)+\/?]+\.txt$', fileName, re.I)
     patronXml = re.match('^(\w):\/[(\w+\s?\w+)(áéíóúñ\_\#\-)+\/?]+\.xml$', fileName, re.I)
@@ -15,6 +19,11 @@ def validarFormatoGuardar(self, fileName):
     if (patronXml):
         guardarXml(self, fileName)
 
+
+"""Este método recibe la ruta del archivo donde se desea guardar, lo abre y guarda los simbolos (que los toma del TextLine para ingresar simbolos), variables (que los toma del 
+TextLine para ingresar variables), marcadores (que los toma del TextLine para ingresar marcadores), reglas (que los toma del TextLine para ingresar reglas) y comentarios (si existen
+los toma del TextEdit para ingresar reglas) en el archivo. Se guardan los simbolos con la palabra #symbols, las variables con la palabra #vars y los marcadores con la palabra 
+#markers. En el caso de las reglas y los comentarios se guarda de uno por uno, respetando los saltos de línea"""
 def guardarTxt(self, fileName):
     file = open(fileName, "w", encoding='utf-8-sig')
     file.write("#symbols "+self.symbolsEdit.text()+"\n")
@@ -27,6 +36,10 @@ def guardarTxt(self, fileName):
             file.write(line+ "\n")
     file.close()
 
+
+"""Este método recibe la ruta del archivo donde se desea guardar, lo abre y guarda los simbolos, variables, marcadores, reglas y comentarios (si existen) en el archivo. 
+Se guardan los simbolos entre las etiquetas <symbols> </symbols>, las variables entre las etiquetas <vars></vars>, los marcadores entre las etiquetas <markers></markers>, las reglas entre las
+ etiquetas <rules></rules> y los comentarios entre las etiquetas <comment></comment>."""
 def guardarXml(self, fileName):
     file = open(fileName, "w", encoding='utf-8-sig')
     file.write("<?xml version='1.0' encoding='UTF-8'?>"+"\n")
@@ -42,11 +55,16 @@ def guardarXml(self, fileName):
             file.write("<rules>"+line+"</rules>"+"\n")
     file.write('</algoritmo>')
 
+
+"""Este es el método encargado de abrir el archivo txt o xml de donde se desea cargar y pasarle la ruta de este al método validarFormatoCargar"""
 def cargar(self):
     fileName, _ = QFileDialog.getOpenFileName(self, "Abrir como", "","Text Files (*.txt);;Xml Files (*.xml)")
     if fileName:
         validarFormatoCargar(self, fileName)
 
+
+"""Este método recibe la ruta del archivo a cargar y verifica por medio de expresiones regulares si se trata de un archivo .txt o de un archivo .xml 
+para luego pasar esta ruta al método que según corresponda; ya que el proceso de cargar un .txt se realiza diferente al de cargar un .xml"""
 def validarFormatoCargar(self, fileName):
     patronTxt = re.match('^(\w):\/[(\w+\s?\w+)(áéíóúñ\_\#\-)+\/?]+\.txt$', fileName, re.I)
     patronXml = re.match('^(\w):\/[(\w+\s?\w+)(áéíóúñ\_\#\-)+\/?]+\.xml$', fileName, re.I)
@@ -55,6 +73,9 @@ def validarFormatoCargar(self, fileName):
     if(patronXml):
         cargarXml(self, fileName)
 
+
+"""Este metodo se encarga de extraer cada línea del archivo .txt de donde se desea cargar la información, y se verifica por medio de expresiones regulares cual línea
+pertence al alfabeto (simbolos), variables, marcadores, reglas y comentarios."""
 def cargarTxt(self, fileName):
     file = open(fileName, 'r', encoding='utf-8-sig')
     lines = file.readlines()
@@ -85,6 +106,8 @@ def cargarTxt(self, fileName):
     file.close()
     
 
+"""Este metodo se encarga de extraer cada línea del archivo .xml de donde se desea cargar la información, y se verifica por medio de expresiones regulares cual línea
+pertenece al alfabeto (simbolos), variables, marcadores, reglas y comentarios."""
 def cargarXml(self, fileName):
     file = open(fileName, 'r', encoding='utf-8-sig')
     lines = file.readlines()
@@ -119,6 +142,8 @@ def cargarXml(self, fileName):
     file.close()
 
 #-------------------- Guardar resultado que genera el algoritmo --------------------
+
+"""Este metodo permite guardar los resultados de la o las hileras luego de aplicar el algoritmo sobre ellas """
 def guardarResultado(self):
     fileName, _ = QFileDialog.getSaveFileName(self, "Guardar", "", "Text Files (*.txt)")
     if fileName:
@@ -131,46 +156,30 @@ def guardarResultado(self):
 
 
 #-------------------- Funciones Cargar y  Guardar Archivo de Pruebas --------------------
-def guardarPrueba(self):
+
+"""Este método permite guardar un archivo con hileras de prueba, esto debido a que si el usuario desea modificar las hileras para luego correrlas luego 
+se pueden volver a guardar """
+def guardarArchivoPrueba(self):
     fileNamePrueba, _ = QFileDialog.getSaveFileName(self, "Guardar", "","Text Files (*.txt)")
     if fileNamePrueba:
-        validarGuardarPrueba(self, fileNamePrueba)
+        fileNamePrueba = open(fileNamePrueba, "w", encoding='utf-8-sig')
+        fileNamePrueba.write(self.fileEdit.toPlainText() + "\n")
+    fileNamePrueba.close()
 
-def validarGuardarPrueba(self, fileNamePrueba):
-    patronTxtPrueba = re.match('^(\w):\/[(\w+\s?\w+)(áéíóúñ\_\#\-)+\/?]+\.txt$', fileNamePrueba, re.I)
-    if (patronTxtPrueba):
-        guardarTxtPrueba(self, fileNamePrueba)
-
-
-def guardarTxtPrueba(self, fileNamePrueba):
-    file = open(fileNamePrueba, "w", encoding='utf-8-sig')
-    file.write(self.fileEdit.toPlainText()+ "\n")
-    file.close()
-
-
-
-def cargarPrueba(self):
+"""Este método permite cargar un archivo con hileras de prueba para luego poder aplicar sobre cada una de ellas un algoritmo"""
+def cargarArchivoPrueba(self):
     fileNamePrueba, _ = QFileDialog.getOpenFileName(self, "Abrir Documento de Pruebas", "","Text Files (*.txt)")
     if fileNamePrueba:
-        validarCargarPrueba(self, fileNamePrueba)
+        file = open(fileNamePrueba, 'r', encoding='utf-8-sig')
+        lines = file.readlines()
+        self.fileEdit.setText("")
+        for line in lines:
+            if line != " ":
+                patronPrueba = re.search('^[\w]+', line, re.UNICODE)
+                if patronPrueba and line != '\n':
+                    self.fileEdit.setText(self.fileEdit.toPlainText() + line)
 
-def validarCargarPrueba(self, fileNamePrueba):
-    patronTxtPrueba = re.match('^(\w):\/[(\w+\s?\w+)(áéíóúñ\_\#\-)+\/?]+\.txt$', fileNamePrueba, re.I)
-    if(patronTxtPrueba):
-        cargarTxtPrueba(self, fileNamePrueba)
+        #self.fileEdit.setText(self.fileEdit.toPlainText().rstrip('\n'))
 
-def cargarTxtPrueba(self, fileNamePrueba):
-    filePrueba  = open(fileNamePrueba, 'r', encoding='utf-8')
-    linesPrueba = filePrueba.readlines()
+        file.close()
 
-    self.fileEdit.setText("")
-
-    for linePrueba in linesPrueba:
-        patronPrueba = re.search('^[\w]+', linePrueba, re.UNICODE)
-        if patronPrueba and linePrueba != '\n':
-            self.fileEdit.setText(self.fileEdit.toPlainText()+linePrueba)
-            
-    self.fileEdit.setText(self.fileEdit.toPlainText().rstrip('\n'))
-
-    filePrueba.close()
-    
