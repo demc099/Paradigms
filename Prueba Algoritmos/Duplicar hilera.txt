@@ -1,9 +1,0 @@
-﻿#symbols abcdefghijklmnopqrstuvwxyz0123456789
-#vars xy
-#markers αβΛ
-%Duplicar una Hilera
-αx -> xβxα
-βxy -> xβy
-β -> Λ
-α -> Λ
-Λ -> α

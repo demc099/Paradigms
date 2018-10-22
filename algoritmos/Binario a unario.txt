@@ -1,10 +1,13 @@
-#symbols Ax01
+#symbols 01
 #vars x01
-#markers A
+#markers ABS
 % Convertir un número binario en su equivalente unario
 % (se reemplaza un número binario por una secuencia de
 %  símbolos cuya longitud es igual al número)
-0 -> A
-xA -> Axx
-1 -> Ax
-A -> Λ
+Bx -> BA
+xA -> ABB
+S1 -> AB
+B -> +
+AA -> A
+A -> Λ.
+x -> Sx
