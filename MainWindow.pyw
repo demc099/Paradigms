@@ -11,6 +11,7 @@ import funcionesAlgoritmo
 import inoutFile
 import validaciones
 
+#clase de la ventana principal
 class Ventana(QMainWindow):
  def __init__(self):
   QMainWindow.__init__(self)
@@ -135,14 +136,6 @@ class Ventana(QMainWindow):
   self.varsEdit.textChanged.connect(self.validarVars)
   self.markersEdit.textChanged.connect(self.validarMark)
 
-  #output
-  #self.debugButton.clicked.connect(self.habilitarDebug)
-  #menuH_paleta.triggered.connect(self.abrirPl)
-
-  #Ventana Hija "Caraacteres"
-  #self.children = []
-
-  #Variable para modificar el QLineEdit que tiene el focus "Cursor"
   self.varQLineEdit = []
 
 
@@ -150,7 +143,7 @@ class Ventana(QMainWindow):
  #----------------------------------------------------------------------------------------------------------------
 
  #Funciones del menu
- def menuArchivoSalir(self):
+ def menuArchivoSalir(self):#si en el menu selecciona salir, cierra la ventana
      req = QMessageBox.question(self, "Mensaje", "Seguro quiere salir", QMessageBox.Yes, QMessageBox.No)
      if req == QMessageBox.Yes:
       sys.exit(app.exec_())
@@ -184,7 +177,7 @@ class Ventana(QMainWindow):
 
 # Declaración funciones guardar y cargar Pruebas
  def guardarPrueba(self):
-  inoutFile.guardarPrueba(self)
+  inoutFile.guardarArchivoPrueba(self)
   self.fileEdit.setText("")
   self.lineEdit.setEnabled(True)
   self.fileEdit.setEnabled(False)
@@ -199,7 +192,7 @@ class Ventana(QMainWindow):
   self.fileEdit.setEnabled(True)
   self.clearFileButton.setEnabled(True)
   self.saveFileButton.setEnabled(True)
-  inoutFile.cargarPrueba(self)
+  inoutFile.cargarArchivoPrueba(self)
   self.lineEdit.setText("")
 
 
@@ -234,6 +227,8 @@ class Ventana(QMainWindow):
     #funcionesAlgoritmo.correrAlgoritmo(self)
   else:
     if self.fileEdit.isEnabled():
+      #validaciones.conjuntodevalidacionesdePrueba(self)
+      funcionesAlgoritmo.correrAlgoritmoPruebas(self)
       validaciones.conjuntodevalidacionesdePruebas(self)
 
 
