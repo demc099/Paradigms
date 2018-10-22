@@ -1,30 +1,28 @@
-﻿#symbols 10+ABC
-#vars 10+
-#markers ABC
+﻿#symbols 01
+#vars x10+
+#markers QFWZPΛ
 % Realizar una suma de números binarios
-+B -> +
-+C -> A
+xP -> FP
+Ax -> AB
 
-0A0 -> 00A
-0A1 -> 10A
+QA -> AQ
+QB -> BQ
 
-1A0 -> 01A
-1A1 -> 11A
+Q -> W
 
-00A -> B0
-01A -> B1
+BBW -> WB
+BAW -> WA
+ABW -> WA
+AAW -> WAB
 
-10A -> B1
-11A -> C1B0
+01 -> 10
+10 -> 01
+00 -> 00
+11 -> 11
+0F -> F0
+1F -> F1
 
-0+ -> +0A
-1+ -> +1A
 
-+C -> Λ
-C -> A
-B -> Λ
-+0 -> +
-0+ -> +
-+ -> Λ
-+B -> Λ
-A -> Λ
+PFW -> Λ.
+W -> Λ.
+x -> PQA
