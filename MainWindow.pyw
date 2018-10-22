@@ -89,7 +89,7 @@ class Ventana(QMainWindow):
   menuA_salir.triggered.connect(self.menuArchivoSalir)
   menuH_paleta.triggered.connect(self.abrirPaleta)
   menuA_abrir.triggered.connect(self.cargar)
-  menuA_guardar.triggered.connect(self.conjuntodevalidaciones)
+  menuA_guardar.triggered.connect(self.guardar)
   menuH_cargarArchivo.triggered.connect(self.cargarPrueba)
   menuP_1.triggered.connect(lambda:self.cargarAlgoritmoX("Invertir una hilera"))
   menuP_2.triggered.connect(lambda: self.cargarAlgoritmoX("Duplicar hilera"))
@@ -185,7 +185,6 @@ class Ventana(QMainWindow):
   self.saveFileButton.setEnabled(False)
 
  def guardarResultado(self):
-  if validaciones.conjuntodevalidacionesdePrueba():
    inoutFile.guardarResultado(self)
 
  def cargarPrueba(self):
@@ -246,9 +245,6 @@ class Ventana(QMainWindow):
  def validarGramatica(self):
   validaciones.validarGramatica(self)
 
- def conjuntodevalidaciones(self):
-  #validaciones.conjuntodevalidaciones(self)
-  validaciones.conjuntodevalidacionesdePrueba(self)
 
 
 
